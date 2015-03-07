@@ -4,6 +4,7 @@ import os
 import md5
 
 dir_with_script = 'utils'
+release_dir = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), 'zip')
 
 class Generator:
 	"""
@@ -50,14 +51,14 @@ class Generator:
 		# clean and add closing tag
 		addons_xml = addons_xml.strip() + u"\n</addons>\n"
 		# save file
-		self._save_file( addons_xml.encode( "UTF-8" ), file="addons.xml" )
+		self._save_file( addons_xml.encode( "UTF-8" ), file=os.path.join(release_dir, "addons.xml") )
 
 	def _generate_md5_file( self ):
 		try:
 			# create a new md5 hash
-			m = md5.new( open( "addons.xml" ).read() ).hexdigest()
+			m = md5.new( open( os.path.join(release_dir,"addons.xml") ).read() ).hexdigest()
 			# save file
-			self._save_file( m, file="addons.xml.md5" )
+			self._save_file( m, file=os.path.join(release_dir, "addons.xml.md5") )
 		except Exception, e:
 			# oops
 			print "An error occurred creating addons.xml.md5 file!\n%s" % ( e, )

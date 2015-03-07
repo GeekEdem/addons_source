@@ -3,13 +3,21 @@
 
 import os
 import xml.etree.ElementTree
+import shutil
 from zipfile import ZipFile
 
-#dir_with_repository = 'repository.evolution'
+release_dir = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), 'zip')
 dir_with_script = 'utils'
 
 def get_plugin_version(addon_dir):
-	addon_file = os.path.join(addon_dir, 'addon.xml') 
+	addon_file = os.path.join(addon_dir, 'addon.xml')
+	if not os.path.exists(release_dir + os.sep + addon_dir):
+		os.mkdir(release_dir + os.sep + addon_dir)
+	shutil.copyfile(addon_file, os.path.join(release_dir, addon_dir, 'addon.xml'))
+	if os.path.exists(os.path.join(addon_dir, "icon.png")):
+		shutil.copyfile(os.path.join(addon_dir, "icon.png"), os.path.join(release_dir, addon_dir, "icon.png"))
+	if os.path.exists(os.path.join(addon_dir, "fanart.jpg")):
+		shutil.copyfile(os.path.join(addon_dir, "fanart.jpg"), os.path.join(release_dir, addon_dir, "fanart.jpg"))
 	try:
 		data = open(addon_file, 'r').read()
 		node = xml.etree.ElementTree.XML(data)
@@ -23,7 +31,7 @@ def create_zip_file(addon_dir):
 	version = get_plugin_version(addon_dir)
 	if not version:
 		return
-	with ZipFile(addon_dir + os.sep + addon_dir + '-' + version + '.zip',
+	with ZipFile(release_dir + os.sep + addon_dir + os.sep + addon_dir + '-' + version + '.zip',
 							 'w') as addonzip:
 		for root, dirs, files in os.walk(addon_dir):
 			for file_path in files:
