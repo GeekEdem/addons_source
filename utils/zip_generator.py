@@ -18,6 +18,8 @@ def get_plugin_version(addon_dir):
 		shutil.copyfile(os.path.join(addon_dir, "icon.png"), os.path.join(release_dir, addon_dir, "icon.png"))
 	if os.path.exists(os.path.join(addon_dir, "fanart.jpg")):
 		shutil.copyfile(os.path.join(addon_dir, "fanart.jpg"), os.path.join(release_dir, addon_dir, "fanart.jpg"))
+	if os.path.exists(os.path.join(addon_dir, "changelog.txt")):
+		shutil.copyfile(os.path.join(addon_dir, "changelog.txt"), os.path.join(release_dir, addon_dir, "changelog.txt"))
 	try:
 		data = open(addon_file, 'r').read()
 		node = xml.etree.ElementTree.XML(data)
