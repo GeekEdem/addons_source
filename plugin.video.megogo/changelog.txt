@@ -1,0 +1,12 @@
+v1.0.2
+- Added information window, when no internet connection.
+
+v1.0.1
+- Now work:
+	- Main menu;
+	- Information about video;
+	- Save last focus position;
+	- Free video play
+
+v1.0.0
+- Initial version

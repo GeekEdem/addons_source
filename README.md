@@ -1,4 +1,4 @@
 Studio-Evolution
 ==========
 
-Addons repository
+Source of addons repository
