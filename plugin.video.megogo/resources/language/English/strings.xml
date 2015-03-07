@@ -101,5 +101,7 @@
   <string id="01030">Add to favorites MEGOGO</string>
   <string id="01031">Failed connection to service.</string>
   <string id="01032">Please, check your Internet connection or try again later.</string>
+  <string id="01033">New version of the addon</string>
+  <string id="01034">A new version of the application is available, please update.</string>
   
 </strings>

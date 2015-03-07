@@ -1,3 +1,9 @@
+v1.0.4
+- Added check for a new version of addon
+
+v1.0.3
+- Small bug fixes
+
 v1.0.2
 - Added information window, when no internet connection.
 
