@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+	<!-- Вкладки -->
+	<string id="00001">Визуальные настройки</string>
+	<string id="00002">Настройки MEGOGO</string>
+
+	<!-- Пункты меню-->
+	<string id="00021">Цвет текста</string>
+	<string id="00022">Логин</string>
+	<string id="00023">Пароль</string>
+	<string id="00024">Качаство видео (по умолчанию)</string>
+	<string id="00025">Язык дорожки (по умолчанию)</string>
+	<string id="00026">Язык субтитров (по умолчанию)</string>
+
+	<!-- Разделители -->
+	<string id="00091">Настройки цвета</string>
+	<string id="00092">Аккаунт</string>
+	<string id="00093">Настройки видео</string>
+
+	<!-- Цвета -->
+	<string id="00101">[COLOR ff00ff00]Зеленый[/COLOR]</string>
+	<string id="00102">[COLOR ff0000ff]Синий[/COLOR]</string>
+	<string id="00103">[COLOR ffff0000]Красный[/COLOR]</string>
+	<string id="00104">[COLOR ff800080]Фиолетовый[/COLOR]</string>
+	<string id="00105">[COLOR ffffa500]Оранжевый[/COLOR]</string>
+	<string id="00106">[COLOR ffffff00]Жёлтый[/COLOR]</string>
+	<string id="00107">[COLOR ffffd700]Золотой[/COLOR]</string>
+	<string id="00108">[COLOR fff5deb3]Wheat[/COLOR]</string>
+	<string id="00109">[COLOR ffe6e6fa]Lavender[/COLOR]</string>
+	<string id="00110">[COLOR ff800000]Maroon[/COLOR]</string>
+	<string id="00111">[COLOR ffb22222]Красный кирпич[/COLOR]</string>
+	<string id="00112">[COLOR ff696969]Dim Gray[/COLOR]</string>
+	<string id="00113">[COLOR fffaebd7]Antique White[/COLOR]</string>
+	<string id="00114">[COLOR ff8a2be2]Blue Violet[/COLOR]</string>
+	<string id="00115">[COLOR ffdc143c]Crimson[/COLOR]</string>
+	<string id="00116">[COLOR ff6495ed]Corn Flower Blue[/COLOR]</string>
+	<string id="00117">[COLOR ffff7f50]Coral[/COLOR]</string>
+	<string id="00118">[COLOR ffd2b48c]Tan[/COLOR]</string>
+	<string id="00119">[COLOR ff9370d8]Medium Purple[/COLOR]</string>
+	<string id="00120">[COLOR ffffc0cb]Розовый[/COLOR]</string>
+	<string id="00121">[COLOR ffff1493]Deep Pink[/COLOR]</string>
+	<string id="00122">[COLOR ffdeb887]Burly Wood[/COLOR]</string>
+	<string id="00123">[COLOR ffffffff]Белый[/COLOR]</string>
+	<string id="00124">[COLOR ff000000]Чёрный[/COLOR]</string>
+
+	<!-- Качество видео -->
+	<string id="00200">Автоматическое</string>
+	<string id="00201">Низкое 240p (448x252)</string>
+	<string id="00202">Среднее 320p (576x324)</string>
+	<string id="00203">Обычное 360p (640x360)</string>
+	<string id="00204">Хорошее 480p (832x468)</string>
+	<string id="00205">Высокое 720p (1280x720)</string>
+	<string id="00206">Наилучшее 1080p (1920x1080)</string>
+
+	<!-- Язык видео -->
+	<string id="00300">Русский (ru)</string>
+	<string id="00301">Українська (ua)</string>
+	<string id="00302">Литовский (lt)</string>
+	<string id="00303">Грузинский (ge)</string>
+
+	<!-- Субтитры -->
+	<string id="00400">Отключены</string>
+	<string id="00401">Русский (ru)</string>
+	<string id="00402">Українська (ua)</string>
+	<string id="00403">Литовский (lt)</string>
+	<string id="00404">Латвийский (lv)</string>
+	<string id="00405">Эстонский (ee)</string>
+	<string id="00406">Грузинский (ge)</string>
+
+	<!-- Текст -->
+	<string id="01000">Смотреть</string>
+	<string id="01001">Смотрите за</string>
+	<string id="01002">MEGOGO</string>
+	<string id="01003">Рекомендуемое</string>
+	<string id="01004">Сюжет</string>
+	<string id="01005">Ограничения по возрасту</string>
+	<string id="01006">Доступные языки аудио-дорожки:</string>
+	<string id="01007">Доступные языки субтитров:</string>
+	<string id="01008">МЕНЮ</string>
+	<string id="01009">Профиль</string>
+	<string id="01010">MEGOGO+</string>
+	<string id="01011">Премьеры</string>
+	<string id="01012">Фильмы</string>
+	<string id="01013">Сериалы</string>
+	<string id="01014">TV</string>
+	<string id="01015">Подборки</string>
+	<string id="01016">Мультфильмы</string>
+	<string id="01017">Передачи и шоу</string>
+	<string id="01018">Избранное</string>
+	<string id="01019">Дополнительно</string>
+	<string id="01020">Поиск</string>
+	<string id="01021">В ролях</string>
+	<string id="01022">Назад</string>
+	<string id="01023">Отзывы</string>
+	<string id="01024">Похожие видео</string>
+	<string id="01025">Ошибка входа</string>
+	<string id="01026">Вы хотите сейчас ввести правильный логин и пароль?</string>
+	<string id="01027">Ввод логина</string>
+	<string id="01028">Ввод пароля</string>
+	<string id="01029">Поле не может быть пустым!</string>
+  <string id="01030">Добавить в избранное MEGOGO</string>
+  <string id="01031">Ошибка подключения к сервису.</string>
+  <string id="01032">Пожалуйста, проверьте соединение с интернетом или попробуйте позже.</string>
+
+</strings>

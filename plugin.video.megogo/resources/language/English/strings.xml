@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+	<!-- Tabs -->
+	<string id="00001">Visual Settings</string>
+	<string id="00002">Settings MEGOGO</string>
+
+	<!-- Menu items -->
+	<string id="00021">Text color</string>
+	<string id="00022">Login</string>
+	<string id="00023">Password</string>
+	<string id="00024">Video quality (default)</string>
+	<string id="00025">Audio language (default)</string>
+	<string id="00026">Subtitle language (default)</string>
+
+	<!-- Separators -->
+	<string id="00091">Color Settings</string>
+	<string id="00092">Account</string>
+	<string id="00093">Video settings</string>
+
+	<!-- Colors -->
+	<string id="00101">[COLOR ff00ff00]Green[/COLOR]</string>
+	<string id="00102">[COLOR ff0000ff]Blue[/COLOR]</string>
+	<string id="00103">[COLOR ffff0000]Red[/COLOR]</string>
+	<string id="00104">[COLOR ff800080]Purple[/COLOR]</string>
+	<string id="00105">[COLOR ffffa500]Orange[/COLOR]</string>
+	<string id="00106">[COLOR ffffff00]Yellow[/COLOR]</string>
+	<string id="00107">[COLOR ffffd700]Gold[/COLOR]</string>
+	<string id="00108">[COLOR fff5deb3]Wheat[/COLOR]</string>
+	<string id="00109">[COLOR ffe6e6fa]Lavender[/COLOR]</string>
+	<string id="00110">[COLOR ff800000]Maroon[/COLOR]</string>
+	<string id="00111">[COLOR ffb22222]Fire Brick[/COLOR]</string>
+	<string id="00112">[COLOR ff696969]Dim Gray[/COLOR]</string>
+	<string id="00113">[COLOR fffaebd7]Antique White[/COLOR]</string>
+	<string id="00114">[COLOR ff8a2be2]Blue Violet[/COLOR]</string>
+	<string id="00115">[COLOR ffdc143c]Crimson[/COLOR]</string>
+	<string id="00116">[COLOR ff6495ed]Corn Flower Blue[/COLOR]</string>
+	<string id="00117">[COLOR ffff7f50]Coral[/COLOR]</string>
+	<string id="00118">[COLOR ffd2b48c]Tan[/COLOR]</string>
+	<string id="00119">[COLOR ff9370d8]Medium Purple[/COLOR]</string>
+	<string id="00120">[COLOR ffffc0cb]Pink[/COLOR]</string>
+	<string id="00121">[COLOR ffff1493]Deep Pink[/COLOR]</string>
+	<string id="00122">[COLOR ffdeb887]Burly Wood[/COLOR]</string>
+	<string id="00123">[COLOR ffffffff]White[/COLOR]</string>
+	<string id="00124">[COLOR ff000000]Black[/COLOR]</string>
+
+	<!-- Video quality -->
+	<string id="00200">Auto</string>
+	<string id="00201">Low 240p (448x252)</string>
+	<string id="00202">Middle 320p (576x324)</string>
+	<string id="00203">Normal 360p (640x360)</string>
+	<string id="00204">Good 480p (832x468)</string>
+	<string id="00205">Hight 720p (1280x720)</string>
+	<string id="00206">Best 1080p (1920x1080)</string>
+
+	<!-- Video Language -->
+	<string id="00300">Russian (ru)</string>
+	<string id="00301">Ukrainian (ua)</string>
+	<string id="00302">Lithuanian (lt)</string>
+	<string id="00406">Georgian (ge)</string>
+
+	<!-- Subtitles Language -->
+	<string id="00400">Off</string>
+	<string id="00401">Russian (ru)</string>
+	<string id="00402">Ukrainian (ua)</string>
+	<string id="00403">Lithuanian (lt)</string>
+	<string id="00404">Latvian (lv)</string>
+	<string id="00405">Estonian (ee)</string>
+	<string id="00406">Georgian (ge)</string>
+
+	<!-- TEXT -->
+	<string id="01000">Watch</string>
+	<string id="01001">Buy for</string>
+	<string id="01002">MEGOGO</string>
+	<string id="01003">Recomended</string>
+	<string id="01004">Plot</string>
+	<string id="01005">Age limit</string>
+	<string id="01006">Available languages audio tracks:</string>
+	<string id="01007">Available subtitles languages:</string>
+	<string id="01008">MENU</string>
+	<string id="01009">Account</string>
+	<string id="01010">MEGOGO+</string>
+	<string id="01011">Premieres</string>
+	<string id="01012">Movies</string>
+	<string id="01013">Serials</string>
+	<string id="01014">TV</string>
+	<string id="01015">Collections</string>
+	<string id="01016">Cartoons</string>
+	<string id="01017">Programs and shows</string>
+	<string id="01018">Favorites</string>
+	<string id="01019">Additionally</string>
+	<string id="01020">Search</string>
+	<string id="01021">Cast</string>
+	<string id="01022">Back</string>
+	<string id="01023">Reviews</string>
+	<string id="01024">Related Videos</string>
+	<string id="01025">Login error</string>
+	<string id="01026">You want to enter now right login and password?</string>
+	<string id="01027">Enter login</string>
+	<string id="01028">Enter password</string>
+	<string id="01029">Field can not be empty!</string>
+  <string id="01030">Add to favorites MEGOGO</string>
+  <string id="01031">Failed connection to service.</string>
+  <string id="01032">Please, check your Internet connection or try again later.</string>
+  
+</strings>

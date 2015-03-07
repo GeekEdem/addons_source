@@ -1,0 +1,1182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1c423e5d-c366-4e56-b332-276cc23e7afb" name="Default" comment="" />
+    <list id="57646c54-0c95-43b2-b6e2-8d83a8eabfd2" name="New changelist" comment="">
+      <change type="DELETED" beforePath="C:\Users\locadmin\AppData\Roaming\XBMC\addons\plugin.video.megogo\.gitattributes" afterPath="" />
+    </list>
+    <ignored path="plugin.video.megogo.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <ignored path=".idea/vcs.xml" />
+    <ignored path=".idea/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/plugin.video.megogo$default.coverage" NAME="default Coverage Results" MODIFIED="1424867005859" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="plugin.video.megogo" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="start.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="986">
+              <caret line="52" column="73" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
+              <folding>
+                <element signature="e#43#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/default.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="806" max-vertical-offset="2040">
+              <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+              <folding>
+                <element signature="e#263#294#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeScreen.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="3808">
+              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoInfo.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2992" max-vertical-offset="3842">
+              <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoList.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/VideoList.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2669">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+              <folding>
+                <element signature="e#268#299#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="megogo2xbmc.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.058194775" vertical-offset="4201" max-vertical-offset="12869">
+              <caret line="250" column="23" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
+              <folding>
+                <element signature="e#248#291#0" expanded="true" />
+                <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+                <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+                <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+                <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+                <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+                <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+                <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+                <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+                <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+                <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+                <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+                <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+                <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+                <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+                <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+                <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+                <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+                <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+                <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5627" max-vertical-offset="6290">
+              <caret line="333" column="12" selection-start-line="333" selection-start-column="12" selection-end-line="334" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HomeScreen.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6285" max-vertical-offset="10098">
+              <caret line="394" column="81" selection-start-line="394" selection-start-column="81" selection-end-line="394" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="17947" max-vertical-offset="23154">
+              <caret line="1081" column="91" selection-start-line="1081" selection-start-column="91" selection-end-line="1081" selection-end-column="91" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoList.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1338" max-vertical-offset="7327">
+              <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="GeekEdem" />
+        <option value="Studio-Evolution" />
+      </list>
+    </option>
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
+    <option name="WARN_ABOUT_DETACHED_HEAD" value="false" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml" />
+        <option value="$PROJECT_DIR$/default.py" />
+        <option value="$PROJECT_DIR$/addon.xml" />
+        <option value="$PROJECT_DIR$/resources/lib/VideoInfo.py" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml" />
+        <option value="$PROJECT_DIR$/resources/lib/Utils.py" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml" />
+        <option value="$PROJECT_DIR$/resources/lib/VideoList.py" />
+        <option value="$PROJECT_DIR$/resources/lib/default.py" />
+        <option value="$PROJECT_DIR$/start.py" />
+        <option value="$PROJECT_DIR$/resources/lib/HomeScreen.py" />
+        <option value="$PROJECT_DIR$/resources/lib/megogo2xbmc.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1014" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="1080i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugin.video.megogo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
+    <property name="recentsLimit" value="5" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="plugin.video.megogo" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="plugin.video.megogo" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\locadmin\AppData\Roaming\XBMC\addons\plugin.video.megogo\resources\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.default">
+    <configuration default="false" name="default" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/default.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="plugin.video.megogo" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Python.default" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.default" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\locadmin\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c423e5d-c366-4e56-b332-276cc23e7afb" name="Default" comment="" />
+      <changelist id="57646c54-0c95-43b2-b6e2-8d83a8eabfd2" name="New changelist" comment="" />
+      <created>1424865878013</created>
+      <option name="number" value="Default" />
+      <updated>1424865878013</updated>
+    </task>
+    <task id="LOCAL-00001" summary="First worked commit&#10;&#10;Added Video information window&#10;">
+      <created>1425646698505</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1425646698505</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1014" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21002132" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39909297" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Test commit" />
+    <MESSAGE value="First worked commit&#10;&#10;Added Video information window&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="First worked commit&#10;&#10;Added Video information window&#10;" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="10712" max-vertical-offset="12665">
+          <caret line="639" column="12" selection-start-line="639" selection-start-column="12" selection-end-line="639" selection-end-column="12" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3400" max-vertical-offset="6307">
+          <caret line="224" column="26" selection-start-line="224" selection-start-column="26" selection-end-line="224" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6285" max-vertical-offset="10098">
+          <caret line="394" column="81" selection-start-line="394" selection-start-column="81" selection-end-line="394" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="17947" max-vertical-offset="23154">
+          <caret line="1081" column="91" selection-start-line="1081" selection-start-column="91" selection-end-line="1081" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1100" max-vertical-offset="6953">
+          <caret line="87" column="31" selection-start-line="87" selection-start-column="31" selection-end-line="87" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4318">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9673">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14477" max-vertical-offset="16881">
+          <caret line="863" column="42" selection-start-line="863" selection-start-column="42" selection-end-line="863" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1780" max-vertical-offset="2686">
+          <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2907">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9500" max-vertical-offset="11594">
+          <caret line="596" column="42" selection-start-line="596" selection-start-column="33" selection-end-line="596" selection-end-column="42" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4318">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6086" max-vertical-offset="9673">
+          <caret line="384" column="51" selection-start-line="384" selection-start-column="51" selection-end-line="384" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14477" max-vertical-offset="16881">
+          <caret line="863" column="42" selection-start-line="863" selection-start-column="42" selection-end-line="863" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1611" max-vertical-offset="2465">
+          <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1900" max-vertical-offset="2754">
+          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9500" max-vertical-offset="11594">
+          <caret line="596" column="42" selection-start-line="596" selection-start-column="33" selection-end-line="596" selection-end-column="42" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4318">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6212" max-vertical-offset="9673">
+          <caret line="404" column="26" selection-start-line="388" selection-start-column="16" selection-end-line="404" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15759">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="2788">
+          <caret line="34" column="103" selection-start-line="34" selection-start-column="103" selection-end-line="34" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9500" max-vertical-offset="11594">
+          <caret line="596" column="42" selection-start-line="596" selection-start-column="33" selection-end-line="596" selection-end-column="42" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4318">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="822" max-vertical-offset="9316">
+          <caret line="72" column="27" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9787" max-vertical-offset="14416">
+          <caret line="621" column="26" selection-start-line="621" selection-start-column="26" selection-end-line="621" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2193">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1340" max-vertical-offset="2720">
+          <caret line="100" column="34" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9500" max-vertical-offset="11594">
+          <caret line="596" column="42" selection-start-line="596" selection-start-column="33" selection-end-line="596" selection-end-column="42" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4318">
+          <caret line="0" column="77" selection-start-line="0" selection-start-column="77" selection-end-line="0" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="5644">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6734" max-vertical-offset="11424">
+          <caret line="349" column="65" selection-start-line="349" selection-start-column="65" selection-end-line="349" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_pluginbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6513944" vertical-offset="7289" max-vertical-offset="8143">
+          <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="854">
+          <caret line="0" column="17" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/+Work+/PLUGINS/plugin.video.megogo/addon.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="854">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addon.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6285" max-vertical-offset="10098">
+          <caret line="394" column="81" selection-start-line="394" selection-start-column="81" selection-end-line="394" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="17947" max-vertical-offset="23154">
+          <caret line="1081" column="91" selection-start-line="1081" selection-start-column="91" selection-end-line="1081" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3021" max-vertical-offset="3859">
+          <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1338" max-vertical-offset="7327">
+          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/VideoList.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2669">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding>
+            <element signature="e#268#299#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5125" max-vertical-offset="6324">
+          <caret line="333" column="12" selection-start-line="333" selection-start-column="12" selection-end-line="334" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="986">
+          <caret line="52" column="73" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
+          <folding>
+            <element signature="e#43#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/default.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="806" max-vertical-offset="2040">
+          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+          <folding>
+            <element signature="e#263#294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/HomeScreen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="3842">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.058194775" vertical-offset="4201" max-vertical-offset="12869">
+          <caret line="250" column="23" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
+          <folding>
+            <element signature="e#248#291#0" expanded="true" />
+            <marker date="1425581186000" expanded="true" signature="1916:1928" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="2273:2313" placeholder="SELECT time ..." />
+            <marker date="1425581186000" expanded="true" signature="2371:2412" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="2834:2869" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="3079:3119" placeholder="SELECT data ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3448:3484" placeholder="SELECT time ..cache..." />
+            <marker date="1425581186000" expanded="true" signature="3715:3750" placeholder="DELETE FROM ..." />
+            <marker date="1425581186000" expanded="true" signature="4134:4175" placeholder="CREATE TABLE..cache..." />
+            <marker date="1425581186000" expanded="true" signature="4291:4343" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="4709:4744" placeholder="CREATE TABLE..genres..." />
+            <marker date="1425581186000" expanded="true" signature="4976:5019" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="5272:5308" placeholder="SELECT title..genres..." />
+            <marker date="1425581186000" expanded="true" signature="5651:5698" placeholder="CREATE TABLE..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6019:6077" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="6359:6399" placeholder="SELECT title..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6678:6718" placeholder="SELECT id FR..categories..." />
+            <marker date="1425581186000" expanded="true" signature="6982:7020" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1425581186000" expanded="true" signature="7274:7324" placeholder="INSERT INTO ..." />
+            <marker date="1425581186000" expanded="true" signature="7529:7576" placeholder="SELECT title..MemberTypes..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
