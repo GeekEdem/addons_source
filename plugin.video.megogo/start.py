@@ -22,19 +22,18 @@ splash = xbmcgui.WindowXML('splash.xml', addon_path)
 splash.show()
 
 xbmc.log('[%s]: Trying to get new version...' % addon_name)
-try:
-    request = urllib2.Request(url=source, headers={'User-Agent': 'MEGOGO Addon for XBMC/Kodi'})
-    request = urllib2.urlopen(request)
-    http = request.read()
-    request.close()
+request = urllib2.Request(url=source, headers={'User-Agent': 'MEGOGO Addon for XBMC/Kodi'})
+request = urllib2.urlopen(request)
+http = request.read()
+request.close()
 
-    p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
-    branch_release = re.search(p, http).group(1)
+p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
+branch_release = re.search(p, http).group(1)
 
-    if addon_version != branch_release:
-        dialog = xbmcgui.Dialog()
-        dialog.ok(language(1033), language(1034))
-except:
+if addon_version != branch_release:
+    dialog = xbmcgui.Dialog()
+    dialog.ok(language(1033), language(1034))
+else:
     xbmc.log('[%s]: No new version addon available.' % addon_name)
     pass
 
