@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #############################################################################
 #
 #	Copyright (C) 2015 Studio-Evolution
@@ -7,7 +8,7 @@
 #############################################################################
 
 import xbmc, xbmcgui, xbmcaddon, xbmcvfs
-import urllib, urllib2, os
+import urllib2, os
 import megogo2xbmc
 
 addon			= xbmcaddon.Addon()
@@ -26,11 +27,6 @@ windowstack = []
 
 global ids
 ids = []
-
-
-# Set setting to addon 
-def SettingS(setting, value):
-    addon.setSetting(id=setting, value=value)
 
 
 # Open file
@@ -232,20 +228,26 @@ def fetch_data(force=False, page=False, section=False, offset=0):
     else:
         response = megogo2xbmc.get_page(force, page, offset)
 
-    xbmc.log('!!! RESPONSE !!!' % response)
-
     if len(response) == 0 or response['result'] != 'ok':
         return False
     elif page == 'Main' and section == 'recommended':
         return megogo2xbmc.HandleMainPage(response['data'], 'recommended')  # TODO pages!
     elif page == 'Main' and section == 'slider':
         return megogo2xbmc.HandleMainPage(response['data'], 'sliders')	    # TODO pages!
-    elif page == 'subscription' or page == 'premieres' or page.startswith('video?category_id=') or page.startswith('user/favorites'):
+    elif page == 'subscription' or page == 'premieres' or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection'):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page == 'collections':
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
     else:
         return megogo2xbmc.HandleVideoResult(response['data'])
+
+
+def get_title(page):
+    response = megogo2xbmc.get_page(False, page)
+    if len(response) == 0 or response['result'] != 'ok':
+        return False
+    else:
+        return response['data']['title']
 
 
 def Get_File(url):
@@ -341,7 +343,7 @@ def open_keyboard(name):
             del dialog
             open_keyboard(name)
         elif name != 'search':
-            SettingS(name, text)
+            addon.setSetting(name, text)
 
         return text
 

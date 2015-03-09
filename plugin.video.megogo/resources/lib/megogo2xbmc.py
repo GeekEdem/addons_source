@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ##########################################################################
 #
 #	Copyright (C) 2015 Studio-Evolution
@@ -118,12 +119,12 @@ def set_page_to_db(url, time, result):
         cu.execute("CREATE TABLE cache (link, time int, data)")
         c.commit()
         xbmc.log('[%s]: table "CACHE" was created' % addon_name)
-    try:
-        cu.execute("INSERT INTO cache(link, time, data) VALUES (?, ?, ?)", (url, time, result.decode('utf-8')))
-        c.commit()
-        xbmc.log('[%s]: %s was writen to db' % (addon_name, url))
-    except:
-        xbmc.log('[%s]: Cannot write data from %s to db' % (addon_name, url))
+    #try:
+    cu.execute("INSERT INTO cache(link, time, data) VALUES (?, ?, ?)", (url, time, result))
+    c.commit()
+    xbmc.log('[%s]: %s was writen to db' % (addon_name, url))
+    #except:
+    #    xbmc.log('[%s]: Cannot write data from %s to db' % (addon_name, url))
 
 
 # Write to db list of genres
@@ -270,13 +271,13 @@ def Get_JSON_response(url="", cache_days=7):
     if not response:
         xbmc.log("[%s]: %s is not in cache, trying download data" % (addon_name, url))
         response = GET(url)
-        try:
-            result = simplejson.loads(response)
-            xbmc.log("[%s]: %s download  in %f seconds" % (addon_name, url, time.time() - now))
-            set_page_to_db(hashed_url, int(time.time()), response)
-        except:
-            xbmc.log("[%s]: Exception: Could not get new JSON data. %s" % (addon_name, response))
-            result = []
+        #try:
+        result = simplejson.loads(response)
+        xbmc.log("[%s]: %s download  in %f seconds" % (addon_name, url, time.time() - now))
+        set_page_to_db(hashed_url, int(time.time()), response)
+        #except:
+        #    xbmc.log("[%s]: Exception: Could not get new JSON data. %s" % (addon_name, response))
+        #    result = []
     else:
         result = simplejson.loads(response.encode('utf-8'))
         xbmc.log("[%s]: %s loaded from cache in %f seconds" % (addon_name, url, time.time() - now))
@@ -288,7 +289,7 @@ def Get_JSON_response(url="", cache_days=7):
 # Function for sending GET requsts to megogo.net
 # req_p1 used for keeping urlencoded parameters
 # req_p2 used for keeping md5-sign of parameters+API_Public_Key_MEGOGO, that send in end of each request 
-def GET(url, usr=addon.getSetting('user'), pwd=addon.getSetting('password')):
+def GET(url, usr=addon.getSetting('user'), pwd=addon.getSetting('password'), old_url=None):
     try:
         dicParams = {}
         linkParams = []
@@ -333,7 +334,7 @@ def GET(url, usr=addon.getSetting('user'), pwd=addon.getSetting('password')):
         # log in account in megogo.net
         elif usr and pwd:
             if not url.startswith('auth/login?login='):
-                GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd))
+                GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), old_url=target)
             else:
                 session = requests.session()
                 request = session.get(target)
@@ -342,9 +343,8 @@ def GET(url, usr=addon.getSetting('user'), pwd=addon.getSetting('password')):
                     cookies = requests.utils.dict_from_cookiejar(session.cookies)
                     addon.setSetting('cookie', "%s" % str(cookies).replace("'", '"'))
                     xbmc.log('[%s]: NEW COOKIE - %s' % (addon_name, cookies))
-                    return http
-                else:
-                    return ''
+                    xbmc.log('[%s]: http - %s' % (addon_name, http))
+                    GET(old_url)
 
         else:
             request = urllib2.Request(url=target, data=None, headers={'User-Agent': UA})
@@ -408,9 +408,9 @@ def HandleVideoResult(item):
     except: vid = video['id']
 
     try:
-        if video["slider_type"]=="feature":
+        if video["slider_type"] == "feature":
             video_type = 'collection'
-        elif video["slider_type"]=="object":
+        elif video["slider_type"] == "object":
             video_type = 'video'
     except:
         video_type = 'video'
@@ -437,7 +437,8 @@ def HandleVideoResult(item):
 
     try:
         poster = video['image']['big']
-        poster = ':'.join(poster.split(':')[:-1])[:-1]+'2:'+poster.split(':')[-1]
+        if poster.count(':') > 1:
+            poster = ':'.join(poster.split(':')[:-1])[:-1]+'2:'+poster.split(':')[-1]
     except: poster = ''
 
     try: country = video['country']
@@ -446,7 +447,7 @@ def HandleVideoResult(item):
     try: year = video['year']
     except: year = ''
 
-    try: description = video['description'].replace('<p>','').replace('</p>','').replace('<i>','').replace('</i>','').replace('\r\n\r\n','\r\n').replace('&#151;','-').replace('&raquo;','"').replace('&laquo;','"')
+    try: description = video['description'].replace('<p>','').replace('</p>','').replace('<i>','').replace('</i>','').replace('\r\n\r\n','\r\n').replace('&#151;','-').replace('&raquo;','"').replace('&laquo;','"').replace('<BR>','')
     except: description = ''
 
     try: genre = get_genres_from_db(video['genres'])
@@ -576,7 +577,7 @@ def getconfiguration():
         else:
             return False
     except:
-        return None
+        return False
     
 
 

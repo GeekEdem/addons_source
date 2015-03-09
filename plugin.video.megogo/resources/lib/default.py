@@ -30,39 +30,38 @@ class Main:
     def __init__(self, **kwargs):
         splash = kwargs.get('splash')
 
-        from Utils import SettingS, FileDoOpen, FileDoSave
+        from Utils import FileDoOpen, FileDoSave
 
         ####################################		First run		#########################################
         if addon.getSetting('firstrun') == '0' or addon.getSetting('firstrun') == '':
             addon.openSettings()
-            SettingS('firstrun', '1')
+            addon.setSetting('firstrun', '1')
 
         ####################################		User name		#########################################
         if addon.getSetting('user') == '':
-            SettingS('user', '')
+            addon.setSetting('user', '')
 
         ####################################		Password		#########################################
         if addon.getSetting('password') == '':
-            SettingS('password', '')
+            addon.setSetting('password', '')
 
-        ####################################	 Cookie	Update		#########################################
-        SettingS('cookie', '')
+        xbmc.log('default\n USR - %s\n PASS - %s\n COOKIE - %s' % (addon.getSetting('user'), addon.getSetting('password'), addon.getSetting('cookie')))
 
         ####################################  Get quality settings  #########################################
         if addon.getSetting('quality') == '':
-            SettingS('quality', language(206))
+            addon.setSetting('quality', language(206))
 
         ####################################    Get audio language	#########################################
         if addon.getSetting('audio_language') == '':
-            SettingS('audio_language', language(300))
+            addon.setSetting('audio_language', language(300))
 
         ####################################  Get subtitle language #########################################
         if addon.getSetting('subtitle_language') == '':
-            SettingS('subtitle_language', language(400))
+            addon.setSetting('subtitle_language', language(400))
 
         ####################################	Work with colors	#########################################
         if addon.getSetting('last-text-color') == '':
-            SettingS('last-text-color', 'FFFAFAFA')
+            addon.setSetting('last-text-color', 'FFFAFAFA')
 
         value = addon.getSetting('text-color')
         try:
@@ -94,7 +93,7 @@ class Main:
 
                         if current_color_text != TextColor.upper() and current_color_text != '':
                             Fil = Fil.replace('<textcolor>%s</textcolor>' % current_color_text, '<textcolor>%s</textcolor>' % TextColor.upper())		# Find and replace color text in skin
-                            SettingS('last-text-color', TextColor.upper())
+                            addon.setSetting('last-text-color', TextColor.upper())
                             xbmc.log('[%s]: text color changed' % addon_name)
                         FileDoSave(os.path.join(SkinFolder, name), Fil)
             except:

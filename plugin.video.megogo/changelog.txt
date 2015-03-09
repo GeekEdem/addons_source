@@ -1,3 +1,8 @@
+v1.0.5
+- Fixed bug with images
+- Collections now work
+- Small fixes
+
 v1.0.4
 - Added check for a new version of addon
 
@@ -8,11 +13,11 @@ v1.0.2
 - Added information window, when no internet connection.
 
 v1.0.1
-- Now work:
-	- Main menu;
-	- Information about video;
-	- Save last focus position;
-	- Free video play
+Now work:
+- Main menu;
+- Information about video;
+- Save last focus position;
+- Free video play.
 
 v1.0.0
 - Initial version

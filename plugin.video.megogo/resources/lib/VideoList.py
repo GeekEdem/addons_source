@@ -7,7 +7,7 @@
 #
 #############################################################################
 
-import xbmc, xbmcgui, xbmcaddon
+import xbmc, xbmcgui, xbmcaddon, urllib
 from Utils import *
 import VideoInfo
 
@@ -28,9 +28,11 @@ class VideoList(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
         self.page = kwargs.get('page')
         self.offset = kwargs.get('offset', 0)
-        self.name = kwargs.get('name')
+        self.name = kwargs.get('name', '')
         self.old_id = kwargs.get('wid')
         xbmc.executebuiltin("ActivateWindow(busydialog)")
+        if self.page.startswith('video/collection'):
+            self.name = get_title(self.page)
         self.listitems = update_content(page=self.page, offset=self.offset)
         xbmcgui.WindowXMLDialog.__init__(self)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
@@ -89,8 +91,12 @@ class VideoList(xbmcgui.WindowXMLDialog):
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
             xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
-            if video_type == 'video':
+            if video_type == 'video' and self.page != 'collections':
                 dialog = VideoInfo.VideoInfo(u'VideoInfo.xml', addon_path, id=video_id, vtype=video_type)
+                dialog.doModal()
+            elif self.page == 'collections':
+                link = 'video/collection?id=%s' % video_id
+                dialog = VideoList(u'VideoList.xml', addon_path, page=link)
                 dialog.doModal()
 
         elif controlID in [8000]:
@@ -142,11 +148,28 @@ class VideoList(xbmcgui.WindowXMLDialog):
                 link = 'video?category_id=%d&limit=100' % megogo2xbmc.get_category_from_db_by_name("'Передачи и шоу'")
 
             elif controlID == 7010:
-                page_name = language(1018)
-                link = 'user/favorites'
+                if megogo2xbmc.checkLogin():
+                    page_name = language(1018)
+                    link = 'user/favorites'
+                else:
+                    self.login()
 
             xbmc.executebuiltin("Control.SetFocus(6000)")
             AddToWindowStack(self, controlID)
             self.close()
             dialog = VideoList(u'VideoList.xml', addon_path, page=link, name=page_name, wid=controlID)
             dialog.doModal()
+
+    def login(self):
+        if self.logged_in:
+            xbmc.executebuiltin("Control.SetFocus(9999)")
+        else:
+            xbmc.executebuiltin("Control.SetFocus(6000)")
+            dialog = xbmcgui.Dialog()
+            if dialog.yesno(language(1025), language(1026)) == 1:
+                usr = open_keyboard('user')
+                pwd = open_keyboard('password')
+                if not megogo2xbmc.checkLogin(usr=usr, pwd=pwd):
+                    self.login()
+            else:
+                xbmc.executebuiltin("Control.SetFocus(7001)")

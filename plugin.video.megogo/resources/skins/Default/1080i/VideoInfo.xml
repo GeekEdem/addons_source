@@ -41,8 +41,19 @@
 				<texture diffuse="thumbs/movieposter_mask.png">$INFO[Image]</texture>
 			</control>
 
-			<control type="image" id="33009">
-				<description> SVOD POSTER </description>
+            <control type="image" id="33010">
+				<description> SVOD OR TVOD POSTER MASK </description>
+				<posy>65</posy>
+				<posx>0</posx>
+				<width>800</width>
+				<height>1015</height>
+				<!--aspectratio scalediffuse="false">scale</aspectratio-->
+				<texture diffuse="thumbs/movieposter_mask.png">dialogs/mask.png</texture>
+				<visible>!IsEmpty(Window.Property(SVOD)) | !IsEmpty(Window.Property(TVOD))</visible>
+			</control>
+
+            <control type="image" id="33009">
+				<description> SVOD ICON </description>
 				<posx>322</posx>
 				<posy>420</posy>
 				<width>156</width>
@@ -52,36 +63,14 @@
 				<visible>!IsEmpty(Window.Property(SVOD))</visible>
 			</control>
 
-			<control type="image" id="33010">
-				<description> SVOD POSTER MASK </description>
-				<posy>65</posy>
-				<posx>0</posx>
-				<width>800</width>
-				<height>1015</height>
-				<!--aspectratio scalediffuse="false">scale</aspectratio-->
-				<texture diffuse="thumbs/movieposter_mask.png">thumbs/mask.png</texture>
-				<visible>!IsEmpty(Window.Property(SVOD))</visible>
-			</control>
-
 			<control type="image" id="33011">
-				<description> TVOD POSTER </description>
+				<description> TVOD ICON </description>
 				<posx>322</posx>
 				<posy>420</posy>
 				<width>156</width>
 				<height>156</height>
 				<!--aspectratio scalediffuse="false">scale</aspectratio-->
 				<texture>$INFO[Window.Property(TVOD)]</texture>
-				<visible>!IsEmpty(Window.Property(TVOD))</visible>
-			</control>
-
-			<control type="image" id="33012">
-				<description> TVOD POSTER MASK </description>
-				<posy>65</posy>
-				<posx>0</posx>
-				<width>800</width>
-				<height>1015</height>
-				<!--aspectratio scalediffuse="false">scale</aspectratio-->
-				<texture diffuse="thumbs/movieposter_mask.png">thumbs/mask.png</texture>
 				<visible>!IsEmpty(Window.Property(TVOD))</visible>
 			</control>
 

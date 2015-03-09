@@ -11,13 +11,8 @@ import xbmc, xbmcgui, xbmcaddon, time
 from Utils import *
 
 addon			= xbmcaddon.Addon()
-#addon_id		= addon.getAddonInfo('id')
 addon_name		= addon.getAddonInfo('name')
-#addon_icon		= addon.getAddonInfo('icon')
-#addon_fanart	= addon.getAddonInfo('fanart')
-#addon_type		= addon.getAddonInfo('type')
 addon_path		= addon.getAddonInfo('path').decode("utf-8")
-#addon_version	= addon.getAddonInfo('version')
 language		= addon.getLocalizedString
 quality_logo	= os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'FullHD_logo.png')
 icon_svod		= os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_plus.png')
@@ -58,7 +53,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
         try:
             self.actors = self.data['crew']
             del self.data['crew']
-            xbmc.log('CREW: - %s' % self.actors)
+            #xbmc.log('CREW: - %s' % self.actors)
         except:
             self.actors = None
         try:

@@ -17,23 +17,31 @@ from Utils import fetch_data
 
 xbmc.log('[%s]: Start plugin! Version: %s' % (addon_name, addon_version))
 
-####################################		Start Splash	#########################################
+####################################	  Cookie Update		#########################################
+addon.setSetting('cookie', '')
+
+####################################	  Start Splash	    #########################################
 splash = xbmcgui.WindowXML('splash.xml', addon_path)
 splash.show()
 
+#xbmc.executebuiltin("XBMC.UpdateAddonRepos()")
+
 xbmc.log('[%s]: Trying to get new version...' % addon_name)
-request = urllib2.Request(url=source, headers={'User-Agent': 'MEGOGO Addon for XBMC/Kodi'})
-request = urllib2.urlopen(request)
-http = request.read()
-request.close()
+try:
+    request = urllib2.Request(url=source, headers={'User-Agent': 'MEGOGO Addon for XBMC/Kodi'})
+    request = urllib2.urlopen(request)
+    http = request.read()
+    request.close()
 
-p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
-branch_release = re.search(p, http).group(1)
+    p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
+    branch_release = re.search(p, http).group(1)
+    xbmc.log('[%s]: Available version - %s' % (addon_name, branch_release))
 
-if addon_version != branch_release:
-    dialog = xbmcgui.Dialog()
-    dialog.ok(language(1033), language(1034))
-else:
+    if addon_version != branch_release:
+        dialog = xbmcgui.Dialog()
+        dialog.ok(language(1033), language(1034))
+        del dialog
+except:
     xbmc.log('[%s]: No new version addon available.' % addon_name)
     pass
 
@@ -43,7 +51,7 @@ if fetch_data(page='configuration'):    # Get config from MEGOGO
 else:
     dialog = xbmcgui.Dialog()
     dialog.ok(language(1025), language(1031), language(1032))
-    dialog.close()
+    del dialog
 
 splash.close()
 

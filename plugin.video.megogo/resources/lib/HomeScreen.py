@@ -8,7 +8,7 @@
 #############################################################################
 
 import xbmc, xbmcgui, xbmcaddon
-import VideoInfo, VideoList, megogo2xbmc
+import VideoInfo, VideoList, megogo2xbmc, urllib
 from Utils import *
 
 addon			= xbmcaddon.Addon()
@@ -116,8 +116,14 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             video_id = self.getControl(controlID).getListItem(pos).getProperty("id")
             video_type = self.getControl(controlID).getListItem(pos).getProperty("type")
 
+            xbmc.log('[%s]: 500 id - %s, type - %s' % (addon_name, video_id, video_type))
+
             if video_type == 'video':
                 dialog = VideoInfo.VideoInfo(u'VideoInfo.xml', addon_path, id=video_id, vtype=video_type)
+                dialog.doModal()
+            elif video_type == 'collection':
+                link = 'video/collection?id=%s' % video_id
+                dialog = VideoList.VideoList(u'VideoList.xml', addon_path, page=link)
                 dialog.doModal()
 
         elif controlID in [501]:
@@ -126,9 +132,14 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             self.close()
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
-            xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
+            xbmc.log('[%s]: 501 id - %s, type - %s' % (addon_name, video_id, video_type))
+
             if video_type == 'video':
                 dialog = VideoInfo.VideoInfo(u'VideoInfo.xml', addon_path, id=video_id, vtype=video_type)
+                dialog.doModal()
+            elif video_type == 'collection':
+                link = 'video/collection?id=%s' % video_id
+                dialog = VideoList.VideoList(u'VideoList.xml', addon_path, page=link)
                 dialog.doModal()
 
         elif controlID in [5001, 5002]:
