@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<window id="13002">
+<window id="13003">
 	<!--onload>Control.SetFocus(33003)</onload>
 	<onunload>UnloadSkin()</onunload-->
 	<defaultcontrol always="true">33003</defaultcontrol>

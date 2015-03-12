@@ -141,21 +141,28 @@ def GET(url, old_url=None, login=False):
 def checkLogin():
     dic = a.get_login_from_db()
     if dic['cookie']:
-        xbmc.log('[%s]: Check_login cookie - %s' % (addon_name, dic['cookie']))
+        xbmc.log('[%s]: Log in success. Cookie - %s' % (addon_name, dic['cookie']))
         return True
     else:
         if dic['login'] and dic['password']:
-            xbmc.log('[%s]: Try to login with {usr: %s, pass: %s}' % (addon_name, dic['login'], dic['password']))
-            data = GET('auth/login?login=%s&password=%s&remember=1' % (dic['login'], dic['password']), login=True)
-            xbmc.log('[%s]: checkLogin, if usr and pwd, data - %s' % (addon_name, data))
-            if data:
+            if log_in(dic['login'], dic['password']):
                 return True
             else:
-                xbmc.log('[%s]: Check_login usr, pass NOT EMPTY, but GET false. data - %s' % (addon_name, data))
                 return False
         else:
-            xbmc.log('[%s]: Check_login usr, pass EMPTY.' % addon_name)
+            xbmc.log('[%s]: Cannot log in account! login and pass EMPTY.' % addon_name)
             return False
+
+
+def log_in(usr, pwd):
+    xbmc.log('[%s]: Try to login with {usr: %s, pass: %s}' % (addon_name, usr, pwd))
+    data = GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), login=True)
+    xbmc.log('[%s]: login, if usr and pwd, data - %s' % (addon_name, data))
+    if data:
+        return simplejson.loads(data)
+    else:
+        xbmc.log('[%s]: Cannot log in account! Error retrieving data.' % addon_name)
+        return False
 
 
 # Clear user, password and session_id from addon settings

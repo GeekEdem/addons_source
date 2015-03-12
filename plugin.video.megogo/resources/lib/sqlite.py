@@ -239,25 +239,28 @@ class DataBase:
         if self.table_exist('account'):
             self.clear_table('account')
         else:
-            self.cu.execute("CREATE TABLE account (login, password, cookie)")
-            self.c.commit()
-            xbmc.log('[%s]: table "account" was created' % addon_name)
+            self.create_login_table()
 
-        self.cu.execute("INSERT INTO account(login, password) VALUES (?, ?)", (usr, pwd))
+        self.cu.execute("INSERT INTO account(id, login, password) VALUES (1, ?, ?)", (usr, pwd))
         self.c.commit()
         xbmc.log('[%s]: account was writen to db' % addon_name)
 
     # Write cookies to DB
     def cookie_to_db(self, cookies):
         if self.table_exist('account'):
-            self.cu.execute("UPDATE account SET cookie = '%s'" % cookies)
+            self.cu.execute("UPDATE account SET cookie = '%s' WHERE id = 1" % cookies)
             self.c.commit()
             xbmc.log('[%s]: cookie was writen to db' % addon_name)
 
     # Update account in DB
     def update_account_in_db(self, field, data):
-        if self.table_exist('account'):
-            self.cu.execute("UPDATE account SET %s = '%s'" % (field, data))
+        if not self.table_exist('account'):
+            self.create_login_table()
+        else:
+            self.cu.execute("SELECT * FROM account")
+            if len(self.cu.fetchall()) == 0:
+                self.cu.execute("INSERT INTO account(id) VALUES (1)")
+            self.cu.execute("UPDATE account SET %s = '%s' WHERE id = 1" % (field, data))
             self.c.commit()
             xbmc.log('[%s]: %s was updated in db' % (addon_name, field))
 
@@ -269,6 +272,14 @@ class DataBase:
         except:
             var = None
         if var:
-            return {'login': var[0], 'password': var[1], 'cookie': var[2]}
+            return {'login': var[1], 'password': var[2], 'cookie': var[3]}
         else:
             return {'login': '', 'password': '', 'cookie': ''}
+
+    # Create Table
+    def create_login_table(self):
+        self.cu.execute("CREATE TABLE account (id, login, password, cookie)")
+        self.c.commit()
+        self.cu.execute("INSERT INTO account(id) VALUES (1)")
+        self.c.commit()
+        xbmc.log('[%s]: table "account" was created' % addon_name)

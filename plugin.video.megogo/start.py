@@ -9,7 +9,7 @@ addon_name		= __addon__.getAddonInfo('name')
 addon_version	= __addon__.getAddonInfo('version')
 addon_path 		= xbmc.translatePath(__addon__.getAddonInfo('path'))
 language        = __addon__.getLocalizedString
-source          = 'http://raw.github.com/GeekEdem/zip/master/plugin.video.megogo/__addon__.xml'
+source          = 'http://raw.github.com/GeekEdem/zip/master/plugin.video.megogo/addon.xml'
 
 sys.path.append(os.path.join(addon_path, 'resources', 'lib'))
 from megogo2xbmc import getconfiguration
@@ -29,6 +29,8 @@ if __addon__.getSetting('firstrun') == '0' or __addon__.getSetting('firstrun') =
 
 usr = __addon__.getSetting('login')
 pwd = __addon__.getSetting('password')
+if not db.table_exist('account'):
+    db.create_login_table()
 if not usr and not pwd:
     db.clear_table('account')
 else:

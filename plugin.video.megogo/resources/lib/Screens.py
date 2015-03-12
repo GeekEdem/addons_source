@@ -9,10 +9,10 @@
 
 import xbmc, xbmcgui, xbmcaddon
 import urllib, time, re, megogo2xbmc
-from sqlite import DataBase as db
+from sqlite import DataBase
 from Utils import *
 
-a = db()
+db = DataBase()
 
 __addon__			    = xbmcaddon.Addon(id='plugin.video.megogo')
 addon_id                = __addon__.getAddonInfo('id')
@@ -26,6 +26,7 @@ LibFolder		        = os.path.join(addon_path, 'resources', 'lib')
 quality_logo	        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'FullHD_logo.png')
 icon_svod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_plus.png')
 icon_tvod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_payment.png')
+unknown_person	        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'unknown_person.png')
 flag_en			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'en.png')
 flag_ru			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'ru.png')
 flag_ua			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'ua.png')
@@ -238,12 +239,7 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             dialog.doModal()
 
         elif controlID in MENU_IDS:
-            if controlID == 7001:
-                focus = login()
-                xbmc.executebuiltin("Control.SetFocus(%s)" % focus)
-                return
-            else:
-                menu_chooser(self, controlID)
+            menu_chooser(self, controlID)
 
 
 #####################################################################################################
@@ -341,12 +337,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
             xbmc.executebuiltin("Control.SetFocus(7000)")
 
         elif controlID in MENU_IDS and controlID != self.old_id:
-            if controlID == 7001:
-                focus = login()
-                xbmc.executebuiltin("Control.SetFocus(%s)" % focus)
-                return
-            else:
-                menu_chooser(self, controlID)
+            menu_chooser(self, controlID)
 
 
 #####################################################################################################
@@ -539,11 +530,93 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
 
 
 #####################################################################################################
+# ##################################	  ACCOUNT  INFO	    ####################################### #
+#####################################################################################################
+class Account(xbmcgui.WindowXMLDialog):
+
+    def __init__(self, *args, **kwargs):
+        xbmc.executebuiltin("ActivateWindow(busydialog)")
+        dic = db.get_login_from_db()
+        account_data = megogo2xbmc.log_in(dic['login'], dic['password'])
+        if account_data['result'] == 'ok':
+            self.user_id = account_data['data']['user_id']
+            # self.credit_card = account_data['data']['credit_card']
+            # self.card_type = account_data['data']['card_type']
+            self.avatar = account_data['data']['avatar']
+            self.nickname = account_data['data']['nickname']
+            self.email = account_data['data']['email']
+        else:
+            dialog = xbmcgui.Dialog()
+            dialog.ok(language(1025), language(1031))
+            del dialog
+            self.close()
+            PopWindowStack(self)
+
+        if not self.avatar:
+            self.avatar = unknown_person
+        else:
+            Get_File(self.avatar)
+
+        xbmcgui.WindowXMLDialog.__init__(self)
+        xbmc.executebuiltin("Dialog.Close(busydialog)")
+
+    def onInit(self):
+        self.windowid = xbmcgui.getCurrentWindowDialogId()
+        self.window = xbmcgui.Window(self.windowid)
+
+        self.getControl(33000).setText(language(1009))
+        self.getControl(33001).setImage(self.avatar)
+        self.getControl(33002).setText(self.nickname)
+        self.getControl(33003).setText(self.email)
+        self.getControl(33004).setText('Megogo ID: %s' % self.user_id)
+
+        # control = getids()
+        # if control:
+        #    xbmc.executebuiltin("Control.SetFocus(%s)" % control)
+
+    def onAction(self, action):
+        xbmc.log('[%s]: Account onAction id - %s' % (addon_name, action.getId()))
+        if action in ACTION_PREVIOUS_MENU:
+            self.close()
+            PopWindowStack(self)
+
+        elif action in ACTION_EXIT_SCRIPT:
+            closer(self)
+
+        # elif action in ACTION_CONTEX_MENU or action in ACTION_MOUSE_RIGHT_CLICK:
+
+    def onClick(self, controlID):
+        if controlID in [33005]:
+            db.clear_table('account')
+            __addon__.setSetting(id='login', value='')
+            __addon__.setSetting(id='password', value='')
+            self.close()
+            PopWindowStack(self)
+
+        elif controlID in [33006]:
+            listitems = [language(201), language(202), language(203), language(204), language(205), language(206)]
+            index = xbmcgui.Dialog().select(language(24), listitems)
+            if index == -1:
+                pass
+            elif index == 0:
+                __addon__.setSetting(id='quality', value="0")
+            elif index == 1:
+                __addon__.setSetting(id='quality', value="1")
+            elif index == 2:
+                __addon__.setSetting(id='quality', value="2")
+            elif index == 3:
+                __addon__.setSetting(id='quality', value="3")
+            elif index == 4:
+                __addon__.setSetting(id='quality', value="4")
+            elif index == 5:
+                __addon__.setSetting(id='quality', value="5")
+
+#####################################################################################################
 # ##################################	    FUNCTIONS		####################################### #
 #####################################################################################################
 def login():
     if megogo2xbmc.checkLogin():
-        return 9999
+        return True
     else:
         xbmc.executebuiltin("Control.SetFocus(6000)")
         dialog = xbmcgui.Dialog()
@@ -552,8 +625,10 @@ def login():
             open_keyboard('password')
             if not megogo2xbmc.checkLogin():
                 login()
+            else:
+                return True
         else:
-            return 7001
+            return False
 
 
 def open_keyboard(name):
@@ -582,7 +657,7 @@ def open_keyboard(name):
             del dialog
             open_keyboard(name)
         elif name != 'search':
-            a.update_account_in_db(field=name, data=text)
+            db.update_account_in_db(field=name, data=text)
 
         return text
 
@@ -590,6 +665,20 @@ def open_keyboard(name):
 def menu_chooser(window, controlID):
     link = ''
     page_name = ''
+
+    if controlID == 7001:
+        if login():
+            xbmc.executebuiltin("Control.SetFocus(6000)")
+            AddToWindowStack(window, controlID)
+            window.close()
+            dialog = Account(u'Account.xml', addon_path)
+            dialog.doModal()
+        else:
+            dialog = xbmcgui.Dialog()
+            dialog.ok(language(1025), language(1031))
+            del dialog
+            xbmc.executebuiltin("Control.SetFocus(7001)")
+            return
 
     if controlID == 7002:
         page_name = language(1010)
@@ -601,15 +690,15 @@ def menu_chooser(window, controlID):
 
     elif controlID == 7004:
         page_name = language(1012)
-        link = 'video?category_id=%d&limit=100' % a.get_category_from_db_by_name("'Фильмы'")
+        link = 'video?category_id=%d&limit=100' % db.get_category_from_db_by_name("'Фильмы'")
 
     elif controlID == 7005:
         page_name = language(1013)
-        link = 'video?category_id=%d&limit=100' % a.get_category_from_db_by_name("'Сериалы'")
+        link = 'video?category_id=%d&limit=100' % db.get_category_from_db_by_name("'Сериалы'")
 
     elif controlID == 7006:
         page_name = language(1014)
-        link = 'video?category_id=%d&limit=100' % a.get_category_from_db_by_name("'TV'")
+        link = 'video?category_id=%d&limit=100' % db.get_category_from_db_by_name("'TV'")
 
     elif controlID == 7007:
         page_name = language(1015)
@@ -617,17 +706,22 @@ def menu_chooser(window, controlID):
 
     elif controlID == 7008:
         page_name = language(1016)
-        link = 'video?category_id=%d&limit=100' % a.get_category_from_db_by_name("'Мультфильмы'")
+        link = 'video?category_id=%d&limit=100' % db.get_category_from_db_by_name("'Мультфильмы'")
 
     elif controlID == 7009:
         page_name = language(1017)
-        link = 'video?category_id=%d&limit=100' % a.get_category_from_db_by_name("'Передачи и шоу'")
+        link = 'video?category_id=%d&limit=100' % db.get_category_from_db_by_name("'Передачи и шоу'")
 
     elif controlID == 7010:
-        if not megogo2xbmc.checkLogin():
-            login()
-        link = 'user/favorites'
-        page_name = language(1018)
+        if login():
+            link = 'user/favorites'
+            page_name = language(1018)
+        else:
+            dialog = xbmcgui.Dialog()
+            dialog.ok(language(1025), language(1031))
+            del dialog
+            xbmc.executebuiltin("Control.SetFocus(7010)")
+            return
 
     xbmc.executebuiltin("Control.SetFocus(6000)")
     AddToWindowStack(window, controlID)
@@ -639,5 +733,5 @@ def menu_chooser(window, controlID):
 def closer(window):
     dialog = xbmcgui.Dialog()
     if dialog.yesno(language(1035), language(1036)) == 1:
-        a.close_db()
+        db.close_db()
         window.close()
