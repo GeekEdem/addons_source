@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #############################################################################
 #
-#	Copyright (C) 2015 Studio-Evolution
+# Copyright (C) 2015 Studio-Evolution
 #
-#	Utilites for MEGOGO.NET on XBMC
+# Utilites for MEGOGO.NET on XBMC
 #
 #############################################################################
 
@@ -298,6 +298,18 @@ def Get_File(url):
             return None
 
 
+def get_quality(value):
+    return language(int(value)+201)
+
+
+def get_language(value):
+    return language(int(value)+300)
+
+
+def get_subtitle(value):
+    return language(int(value)+400)
+
+
 def AddToWindowStack(window, controlID):
     windowstack.append({'window': window, 'id': controlID})
 
@@ -317,37 +329,6 @@ def getids():
         return ids.pop()
 
 
-def open_keyboard(name):
-    if name == 'user':
-        header = language(1027)
-        default_value = addon.getSetting(name)
-    elif name == 'password':
-        header = language(1028)
-        default_value = ''
-    else:
-        header = language(1020)
-        default_value = ''
-
-    kbd = xbmc.Keyboard()
-    kbd.setHeading(header)
-    kbd.setDefault(default_value)
-    if name == 'password':
-        kbd.setHiddenInput(True)
-    kbd.doModal()
-    if kbd.isConfirmed():
-        text = kbd.getText()
-        del kbd
-        if text == '':
-            dialog = xbmcgui.Dialog()
-            dialog.ok(header, language(1029))
-            del dialog
-            open_keyboard(name)
-        elif name != 'search':
-            addon.setSetting(name, text)
-
-        return text
-
-
 class VideoPlayer(xbmc.Player):
     def __init__(self, *args, **kwargs):
         xbmc.Player.__init__(self)
@@ -364,10 +345,13 @@ class VideoPlayer(xbmc.Player):
         self.stopped = False
 
     def play_item(self, stream_url, listitem, subtitle=None, popstack=True):
-        self.play(stream_url, listitem)
         if subtitle:
-            self.setSubtitles(subtitle)
+            try:
+                listitem.setSubtitles([subtitle])
+            except Exception as e:
+                xbmc.log('[%s]: NOT KODI. SUBTITLE EXCEPTION: %s' % (addon_name, e))
             xbmc.log('SUBTITILE - %s' % subtitle)
+        self.play(stream_url, listitem)
 
     def WaitForVideoEnd(self):
         while not self.stopped:

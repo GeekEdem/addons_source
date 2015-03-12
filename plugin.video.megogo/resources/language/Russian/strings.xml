@@ -10,7 +10,7 @@
 	<string id="00023">Пароль</string>
 	<string id="00024">Качаство видео (по умолчанию)</string>
 	<string id="00025">Язык дорожки (по умолчанию)</string>
-	<string id="00026">Язык субтитров (по умолчанию)</string>
+	<string id="00026">Язык субтитров (работает только в KODI)</string>
 
 	<!-- Разделители -->
 	<string id="00091">Настройки цвета</string>
@@ -56,8 +56,15 @@
 	<string id="00300">Русский (ru)</string>
 	<string id="00301">Українська (ua)</string>
 	<string id="00302">Литовский (lt)</string>
-	<string id="00303">Грузинский (ge)</string>
-
+  <string id="00303">Латвийский (lv)</string>
+  <string id="00304">Эстонский (ee)</string>
+	<string id="00305">Грузинский (ge)</string>
+  <string id="00306">Английский (en)</string>
+  <string id="00307">Казахский (kz)</string>
+  <string id="00308">Белорусский (be)</string>
+  <string id="00309">Киргизский (kg)</string>
+  <string id="00310">Чешский (cz)</string>
+  
 	<!-- Субтитры -->
 	<string id="00400">Отключены</string>
 	<string id="00401">Русский (ru)</string>
@@ -66,6 +73,11 @@
 	<string id="00404">Латвийский (lv)</string>
 	<string id="00405">Эстонский (ee)</string>
 	<string id="00406">Грузинский (ge)</string>
+  <string id="00407">Английский (en)</string>
+  <string id="00408">Казахский (kz)</string>
+  <string id="00409">Белорусский (be)</string>
+  <string id="00410">Киргизский (kg)</string>
+  <string id="00411">Чешский (cz)</string>
 
 	<!-- Текст -->
 	<string id="01000">Смотреть</string>
@@ -103,5 +115,7 @@
   <string id="01032">Пожалуйста, проверьте соединение с интернетом или попробуйте позже.</string>
   <string id="01033">Новая версия приложения</string>
   <string id="01034">Доступная новая версия приложения, пожалуйста обновите.</string>
+  <string id="01035">Выход</string>
+  <string id="01036">Вы действительно хотите выйти?</string>
 
 </strings>

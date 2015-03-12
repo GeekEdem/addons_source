@@ -257,7 +257,7 @@
             </animation>
             <control type="label">
                 <description> RECOMENDED LABEL </description>
-                <posy>471</posy>
+                <posy>474</posy>
                 <posx>0</posx>
                 <align>center</align>
                 <width>1920</width>

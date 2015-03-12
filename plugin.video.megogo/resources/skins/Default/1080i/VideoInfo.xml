@@ -850,11 +850,11 @@
 
 		<control type="group">
 			<posy>65</posy>
-			<animation type="Conditional" condition="!Control.HasFocus(7051) + !ControlGroup(7000).HasFocus + !Control.HasFocus(7050) + !ControlGroup(50000).HasFocus  + !ControlGroup(50001).HasFocus + !ControlGroup(50002).HasFocus">
+			<animation type="Conditional" condition="!Control.HasFocus(17051) + !ControlGroup(17000).HasFocus + !Control.HasFocus(17050) + !ControlGroup(50000).HasFocus  + !ControlGroup(50001).HasFocus + !ControlGroup(50002).HasFocus">
 				<effect type="slide" end="-1920" time="620" easing="in" tween="cubic" />
 			</animation>
 
-            <control type="button" id="7051">
+            <control type="button" id="17051">
                 <posx>0</posx>
                 <posy>0</posy>
                 <width>1920</width>
@@ -878,10 +878,10 @@
 				<width>28</width>
 				<height>28</height>
 				<texture>icons/arrowdown.png</texture>
-				<visible>Control.HasFocus(7001) | Control.HasFocus(7002) | Control.HasFocus(7050) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus | ControlGroup(50002).HasFocus</visible>
+				<visible>Control.HasFocus(7001) | Control.HasFocus(7002) | Control.HasFocus(17050) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus | ControlGroup(50002).HasFocus</visible>
 			</control>
 
-			<control type="button" id="7050">
+			<control type="button" id="17050">
 				<posx>10</posx>
 				<posy>10</posy>
 				<label>$ADDON[plugin.video.megogo 1022]</label>
@@ -896,11 +896,11 @@
 				<texturenofocus border="40">buttons/Off.png</texturenofocus>
 				<font>font13</font>
 				<textcolor>FF999999</textcolor>
-				<ondown>7001</ondown>
+				<ondown>17001</ondown>
 				<focusedcolor>FFFAFAFA</focusedcolor>
 			</control>
 
-			<control type="grouplist" id="7000">
+			<control type="grouplist" id="17000">
 				<posx>40</posx>
 				<posy>400</posy>
 				<width>400</width>
@@ -908,8 +908,8 @@
 				<orientation>vertical</orientation>
 				<scroll>true</scroll>
 				<itemgap>1</itemgap>
-				<onup>7050</onup>
-				<control type="button" id="7001">
+				<onup>17050</onup>
+				<control type="button" id="17001">
 					<label>$ADDON[plugin.video.megogo 1021]</label>
 					<width>400</width>
 					<height>90</height>
@@ -922,11 +922,11 @@
 					<texturenofocus border="40">buttons/Off.png</texturenofocus>
 					<font>font13</font>
 					<textcolor>FF999999</textcolor>
-					<ondown>7002</ondown>
+					<ondown>17002</ondown>
                     <onright>5000</onright>
 					<focusedcolor>FFFAFAFA</focusedcolor>
 				</control>
-				<control type="button" id="7002">
+				<control type="button" id="17002">
 					<label>$ADDON[plugin.video.megogo 1023]</label>
 					<width>400</width>
 					<height>90</height>
@@ -939,12 +939,12 @@
 					<texturenofocus border="40">buttons/Off.png</texturenofocus>
 					<font>font13</font>
 					<textcolor>FF999999</textcolor>
-					<onup>7001</onup>
-					<ondown>7003</ondown>
+					<onup>17001</onup>
+					<ondown>17003</ondown>
                     <onright>5001</onright>
 					<focusedcolor>FFFAFAFA</focusedcolor>
 				</control>
-				<control type="button" id="7003">
+				<control type="button" id="17003">
 					<label>$ADDON[plugin.video.megogo 1024]</label>
 					<width>400</width>
 					<height>90</height>
@@ -957,15 +957,15 @@
 					<texturenofocus border="40">buttons/Off.png</texturenofocus>
 					<font>font13</font>
 					<textcolor>FF999999</textcolor>
-					<onup>7002</onup>
-					<ondown>7050</ondown>
+					<onup>17002</onup>
+					<ondown>17050</ondown>
                     <onright>5002</onright>
 					<focusedcolor>FFFAFAFA</focusedcolor>
 				</control>
 			</control>
 
 			<control type="group" id="50000">
-				<visible>Control.HasFocus(7001) | Control.HasFocus(7050) | ControlGroup(50000).HasFocus | Control.HasFocus(7051)</visible>
+				<visible>Control.HasFocus(17001) | Control.HasFocus(17050) | ControlGroup(50000).HasFocus | Control.HasFocus(17051)</visible>
 				<posx>500</posx>
 				<posy>155</posy>
 				<control type="image">
@@ -1005,7 +1005,7 @@
 					<posx>-45</posx>
 					<width>1400</width>
 					<height>600</height>
-					<onleft>7001</onleft>
+					<onleft>17001</onleft>
 					<scrolltime>200</scrolltime>
 					<orientation>horizontal</orientation>
 					<animation type="WindowOpen" reversible="false">
@@ -1089,7 +1089,7 @@
 			</control>
 
             <control type="group" id="50001">
-				<visible>Control.HasFocus(7002) | ControlGroup(50001).HasFocus</visible>
+				<visible>Control.HasFocus(17002) | ControlGroup(50001).HasFocus</visible>
 				<posx>500</posx>
 				<posy>105</posy>
 
@@ -1127,7 +1127,7 @@
 					<posx>50</posx>
 					<width>1300</width>
 					<height>800</height>
-					<onleft>7002</onleft>
+					<onleft>17002</onleft>
 					<scrolltime>200</scrolltime>
 					<orientation>vertical</orientation>
 					<animation type="WindowOpen" reversible="false">
@@ -1221,7 +1221,7 @@
             </control>
 
             <control type="group" id="50002">
-				<visible>Control.HasFocus(7003) | ControlGroup(50002).HasFocus</visible>
+				<visible>Control.HasFocus(17003) | ControlGroup(50002).HasFocus</visible>
 				<posx>500</posx>
 				<posy>105</posy>
 
@@ -1241,7 +1241,7 @@
 					<posx>90</posx>
 					<width>1400</width>
 					<height>800</height>
-					<onleft>7003</onleft>
+					<onleft>17003</onleft>
 					<scrolltime>200</scrolltime>
 					<orientation>vertical</orientation>
 					<animation type="WindowOpen" reversible="false">

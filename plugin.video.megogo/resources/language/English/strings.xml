@@ -10,7 +10,7 @@
 	<string id="00023">Password</string>
 	<string id="00024">Video quality (default)</string>
 	<string id="00025">Audio language (default)</string>
-	<string id="00026">Subtitle language (default)</string>
+	<string id="00026">Subtitle language (only work in KODI)</string>
 
 	<!-- Separators -->
 	<string id="00091">Color Settings</string>
@@ -56,7 +56,14 @@
 	<string id="00300">Russian (ru)</string>
 	<string id="00301">Ukrainian (ua)</string>
 	<string id="00302">Lithuanian (lt)</string>
-	<string id="00406">Georgian (ge)</string>
+	<string id="00303">Georgian (ge)</string>
+  <string id="00304">Estonian (ee)</string>
+	<string id="00305">Georgian (ge)</string>
+  <string id="00306">English (en)</string>
+  <string id="00307">Kazakh (kz)</string>
+  <string id="00308">Belorussian (be)</string>
+  <string id="00309">Kyrgyz (kg)</string>
+  <string id="00310">Czech (cz)</string>
 
 	<!-- Subtitles Language -->
 	<string id="00400">Off</string>
@@ -66,6 +73,11 @@
 	<string id="00404">Latvian (lv)</string>
 	<string id="00405">Estonian (ee)</string>
 	<string id="00406">Georgian (ge)</string>
+  <string id="00407">English (en)</string>
+  <string id="00408">Kazakh (kz)</string>
+  <string id="00409">Belorussian (be)</string>
+  <string id="00410">Kyrgyz (kg)</string>
+  <string id="00411">Czech (cz)</string>
 
 	<!-- TEXT -->
 	<string id="01000">Watch</string>
@@ -103,5 +115,7 @@
   <string id="01032">Please, check your Internet connection or try again later.</string>
   <string id="01033">New version of the addon</string>
   <string id="01034">A new version of the application is available, please update.</string>
+  <string id="01035">Exit</string>
+  <string id="01036">Are you sure you want to quit?</string>
   
 </strings>
