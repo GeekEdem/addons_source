@@ -4,7 +4,7 @@
        version="0.13.2"
        provider-name="kennethreitz">
   <requires>
-    <import addon="xbmc.python" version="2.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
   </requires>
   <extension point="xbmc.python.module"
              library="lib" />

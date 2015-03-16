@@ -177,6 +177,7 @@ class Homescreen(xbmcgui.WindowXMLDialog):
         elif action in ACTION_CONTEX_MENU:
             item_id = self.getControl(focusid).getSelectedItem().getProperty("id")
             xbmc.log('[%s]: ACTION_CONTEXT_MENU item id - %s' % (addon_name, item_id))
+            closer(self)
 
     def onClick(self, controlID):
         if controlID in [500]:
@@ -611,6 +612,63 @@ class Account(xbmcgui.WindowXMLDialog):
             elif index == 5:
                 __addon__.setSetting(id='quality', value="5")
 
+        elif controlID in [33007]:
+            listitems = [language(300), language(301), language(302), language(303), language(304), language(305),
+                         language(306), language(307), language(308), language(309), language(310)]
+            index = xbmcgui.Dialog().select(language(25), listitems)
+            if index == -1:
+                pass
+            elif index == 0:
+                __addon__.setSetting(id='audio_language', value="0")
+            elif index == 1:
+                __addon__.setSetting(id='audio_language', value="1")
+            elif index == 2:
+                __addon__.setSetting(id='audio_language', value="2")
+            elif index == 3:
+                __addon__.setSetting(id='audio_language', value="3")
+            elif index == 4:
+                __addon__.setSetting(id='audio_language', value="4")
+            elif index == 5:
+                __addon__.setSetting(id='audio_language', value="5")
+            elif index == 6:
+                __addon__.setSetting(id='audio_language', value="6")
+            elif index == 7:
+                __addon__.setSetting(id='audio_language', value="7")
+            elif index == 8:
+                __addon__.setSetting(id='audio_language', value="8")
+            elif index == 9:
+                __addon__.setSetting(id='audio_language', value="9")
+
+        elif controlID in [33008]:
+            listitems = [language(400), language(300), language(301), language(302), language(303), language(304),
+                         language(305), language(306), language(307), language(308), language(309), language(310)]
+            index = xbmcgui.Dialog().select(language(26), listitems)
+            if index == -1:
+                pass
+            elif index == 0:
+                __addon__.setSetting(id='subtitle_language', value="0")
+            elif index == 1:
+                __addon__.setSetting(id='subtitle_language', value="1")
+            elif index == 2:
+                __addon__.setSetting(id='subtitle_language', value="2")
+            elif index == 3:
+                __addon__.setSetting(id='subtitle_language', value="3")
+            elif index == 4:
+                __addon__.setSetting(id='subtitle_language', value="4")
+            elif index == 5:
+                __addon__.setSetting(id='subtitle_language', value="5")
+            elif index == 6:
+                __addon__.setSetting(id='subtitle_language', value="6")
+            elif index == 7:
+                __addon__.setSetting(id='subtitle_language', value="7")
+            elif index == 8:
+                __addon__.setSetting(id='subtitle_language', value="8")
+            elif index == 9:
+                __addon__.setSetting(id='subtitle_language', value="9")
+            elif index == 10:
+                __addon__.setSetting(id='subtitle_language', value="10")
+
+
 #####################################################################################################
 # ##################################	    FUNCTIONS		####################################### #
 #####################################################################################################
@@ -673,6 +731,9 @@ def menu_chooser(window, controlID):
             window.close()
             dialog = Account(u'Account.xml', addon_path)
             dialog.doModal()
+            del dialog
+            xbmc.executebuiltin("Control.SetFocus(7001)")
+            return
         else:
             dialog = xbmcgui.Dialog()
             dialog.ok(language(1025), language(1031))
@@ -731,7 +792,9 @@ def menu_chooser(window, controlID):
 
 
 def closer(window):
+    xbmc.executebuiltin("Control.SetFocus(6000)")
     dialog = xbmcgui.Dialog()
     if dialog.yesno(language(1035), language(1036)) == 1:
+        del dialog
         db.close_db()
         window.close()

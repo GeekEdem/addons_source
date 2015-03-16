@@ -502,7 +502,10 @@ def get_stream(video_id):
             subtitle_lang = None
     else:
         subtitle_lang = None
-    xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
+    try:
+        xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
+    except:
+        pass
 
     new_data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, bitrate, audio_lang), cache_days=1)
 

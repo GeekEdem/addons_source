@@ -3,8 +3,7 @@
 import os
 import md5
 
-dir_with_script = 'utils'
-release_dir = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), 'zip')
+pass_dirs = ['utils']
 
 class Generator:
 	"""
@@ -12,21 +11,27 @@ class Generator:
 		and a new addons.xml.md5 hash file. Must be run from the root of
 		the checked-out repo. Only handles single depth folder structure.
 	"""
-	def __init__( self ):
+	def __init__( self, *args, **kwargs ):
 		# generate files
-		self._generate_addons_file()
-		self._generate_md5_file()
+		self.version = kwargs.get('version')
+		print('version %s' % self.version)
+		if self.version == '2.1.0':
+			self.release_dir = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), 'zip')
+		elif self.version == '2.0':
+			self.release_dir = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), 'edem-addons')
+		self.generate_addons_file()
+		self.generate_md5_file()
 		# notify user
 		print "Finished updating addons xml and md5 files"
 
-	def _generate_addons_file( self ):
+	def generate_addons_file( self ):
 		# addon list
 		addons = sorted(os.listdir( "." ))
 		# final addons text
 		addons_xml = u"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<addons>\n"
 		# loop thru and add each addons addon.xml file
 		for addon in addons:
-			if addon == dir_with_script:
+			if addon in pass_dirs:
 				continue
 			try:
 				# skip any file or .svn folder
@@ -51,19 +56,19 @@ class Generator:
 		# clean and add closing tag
 		addons_xml = addons_xml.strip() + u"\n</addons>\n"
 		# save file
-		self._save_file( addons_xml.encode( "UTF-8" ), file=os.path.join(release_dir, "addons.xml") )
-
-	def _generate_md5_file( self ):
+		self.save_file(addons_xml.encode("UTF-8"), file=os.path.join(self.release_dir, "addons.xml"))
+		
+	def generate_md5_file( self ):
 		try:
 			# create a new md5 hash
-			m = md5.new( open( os.path.join(release_dir,"addons.xml") ).read() ).hexdigest()
+			m = md5.new( open( os.path.join(self.release_dir,"addons.xml") ).read() ).hexdigest()
 			# save file
-			self._save_file( m, file=os.path.join(release_dir, "addons.xml.md5") )
+			self.save_file( m, file=os.path.join(self.release_dir, "addons.xml.md5") )
 		except Exception, e:
 			# oops
 			print "An error occurred creating addons.xml.md5 file!\n%s" % ( e, )
 
-	def _save_file( self, data, file ):
+	def save_file( self, data, file ):
 		try:
 			# write data to the file
 			open( file, "w" ).write( data )
@@ -71,7 +76,6 @@ class Generator:
 			# oops
 			print "An error occurred saving %s file!\n%s" % ( file, e, )
 
-
-if ( __name__ == "__main__" ):
+# if ( __name__ == "__main__" ):
 	# start
-	Generator()
+#	Generator()
