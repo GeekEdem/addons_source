@@ -1,3 +1,9 @@
+v1.0.8
+- Added "exclusive" label
+- Fix bug with text scrolling
+- Fixed bug with focus on exit dialog
+- Added series button and all-season playlist on "Play" button.
+
 v1.0.7
 - Fixed bug with login
 - Added account page

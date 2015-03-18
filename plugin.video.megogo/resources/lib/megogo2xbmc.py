@@ -311,11 +311,14 @@ def HandleVideoResult(item):
         currency = None
         price = None
 
-    try:
-        recommended_videos = item["recommended_videos"]
-    except:
-        recommended_videos = []
+    try: recommended_videos = item["recommended_videos"]
+    except: recommended_videos = []
 
+    try: exclusive = '%s' % item["is_exclusive"]
+    except: exclusive = 'false'
+
+    try: series = '%s' % item["is_series"]
+    except: series = 'false'
 
     locInfo = { 'title'			: title,
                 'id'			: unicode(vid),
@@ -343,7 +346,9 @@ def HandleVideoResult(item):
                 'available'		: available,
                 'currency'		: currency,
                 'price'			: price,
-                'recommended'   : recommended_videos
+                'recommended'	: recommended_videos,
+                'exclusive'		: exclusive,
+                'series'		: series,
               }
 
     #xbmc.log('[%s]: HandleVideoResult parses data - %s' % (addon_name, locInfo))
@@ -453,6 +458,10 @@ def data_from_stream(video_id):
 
 
 def get_stream(video_id):
+    bitrate = None
+    audio_lang = None
+    subtitle_lang = None
+
     xbmc.log('[%s]: Try to get stream' % addon_name)
 
     p = re.compile(ur'(\d+)')		# REGEXP TO GET VIDEO QUALITY FROM SETTINGS
@@ -483,8 +492,11 @@ def get_stream(video_id):
         else:
             audio_lang = None
     if not audio_lang:
-        audio_lang = data['data']['audio_tracks'][0]['lang']
-    xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
+        try:
+            audio_lang = data['data']['audio_tracks'][0]['lang']
+            xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
+        except:
+            audio_lang = None
 
     preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
     xbmc.log('[%s]: PRESET SUBTITLE - %s' % (addon_name, preset_subtitle.encode('utf-8')))

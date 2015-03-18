@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<window id="13002">
+<window id="13005">
 	<defaultcontrol always="true">6000</defaultcontrol>
 	<controls>
 		<animation type="WindowOpen" reversible="false">
@@ -11,7 +11,7 @@
 			<effect type="fade" start="100" end="0" time="240" />
 		</animation>
 
-		<control type="image">
+        <control type="image">
 			<texture>background.png</texture>
 			<animation effect="fade" start="100" end="80" time="0" condition="true">Focus</animation>
 			<width>1920</width>
@@ -61,7 +61,6 @@
                 <ondown>SetFocus(500)</ondown>
                 <onright>SetFocus(8000)</onright>
                 <onleft>SetFocus(7000)</onleft>
-                <!--focusedcolor>FFFAFAFA</focusedcolor-->
             </control>
             <control type="button" id="8000">
                 <label>$ADDON[plugin.video.megogo 1020]</label>
@@ -80,206 +79,80 @@
                 <textcolor>FF999999</textcolor>
                 <ondown>SetFocus(500)</ondown>
                 <onleft>SetFocus(6000)</onleft>
-                <!--focusedcolor>FFFAFAFA</focusedcolor-->
-            </control>
-
-            <control type="image">
-                <posx>940</posx>
-                <posy>62</posy>
-                <width>28</width>
-                <height>28</height>
-                <texture flipy="true">icons/arrowdown.png</texture>
-                <visible>Container(500).HasPrevious</visible>
-            </control>
-
-            <control type="image">
-                <posx>940</posx>
-                <posy>1050</posy>
-                <width>28</width>
-                <height>28</height>
-                <texture>icons/arrowdown.png</texture>
-                <visible>Container(500).HasNext</visible>
             </control>
 
             <control type="panel" id="500">
-                <posy>100</posy>
-                <posx>200</posx>
-                <width>1700</width>
-                <height>930</height>
-                <onleft>6000</onleft>
+                <posy>300</posy>
+                <posx>120</posx>
+                <width>1800</width>
+                <height>800</height>
                 <onup>6000</onup>
-                <onright>8000</onright>
+                <ondown>501</ondown>
                 <scrolltime>200</scrolltime>
-                <orientation>vertical</orientation>
+                <orientation>horizontal</orientation>
                 <animation type="WindowOpen" reversible="false">
                     <effect type="slide" start="0,1080" end="0,0" delay="0" tween="sine" time="1300" />
                 </animation>
 
-                <itemlayout width="420" height="470">
+                <itemlayout width="430" height="600">
                     <control type="image">
-                        <posx>-2</posx>
-                        <posy>-2</posy>
-                        <width>312</width>
-                        <height>460</height>
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>400</width>
+                        <height>580</height>
                         <texture border="40">buttons/Off.png</texture>
                     </control>
-                    <control type="group">
-                        <control type="image">
-                            <posx>30</posx>
-                            <posy>10</posy>
-                            <width>250</width>
-                            <height>380</height>
-                            <aspectratio scalediffuse="false">scale</aspectratio>
-                            <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
-                        </control>
-                        <control type="button">
-                            <visible>IsEmpty(ListItem.Property(exclusive))</visible>
-                            <posx>60</posx>
-                            <posy>346</posy>
-                            <width>200</width>
-                            <height>44</height>
-                            <textoffsetx>0</textoffsetx>
-                            <textoffsety>0</textoffsety>
-                            <textwidth>200</textwidth>
-                            <align>center</align>
-                            <aligny>center</aligny>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <texturefocus>dialogs/ic_exclusive.png</texturefocus>
-                            <texturenofocus>dialogs/ic_exclusive.png</texturenofocus>
-                            <label>$ADDON[plugin.video.megogo 1037]</label>
-                        </control>
-                        <control type="image">
-                            <posx>35</posx>
-                            <posy>330</posy>
-                            <width>50</width>
-                            <height>50</height>
-                            <aspectratio scalediffuse="false">scale</aspectratio>
-                            <texture>icons/pay.png</texture>
-                            <visible>!IsEmpty(ListItem.Property(Buy))</visible>
-                        </control>
-                        <control type="label">
-                            <posx>10</posx>
-                            <posy>388</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
-                            <visible>!IsEmpty(ListItem.Property(Year))</visible>
-                        </control>
-                        <control type="label">
-                            <posx>10</posx>
-                            <posy>388</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Label]</label>
-                            <visible>IsEmpty(ListItem.Property(Year))</visible>
-                        </control>
-                        <control type="label">
-                            <posx>10</posx>
-                            <posy>414</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Property(Country)]</label>
-                        </control>
+                    <control type="image">
+                        <posx>20</posx>
+                        <posy>20</posy>
+                        <width>360</width>
+                        <height>500</height>
+                        <aspectratio scalediffuse="false">scale</aspectratio>
+                        <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
+                    </control>
+                    <control type="label">
+                        <posx>210</posx>
+                        <posy>490</posy>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <width>250</width>
+                        <height>100</height>
+                        <font>font13</font>
+                        <textcolor>FFFAFAFA</textcolor>
+                        <shadowcolor>black</shadowcolor>
+                        <label>$INFO[ListItem.Label]</label>
                     </control>
                 </itemlayout>
-                <focusedlayout width="420" height="470" >
+                <focusedlayout width="430" height="600">
                     <control type="image">
-                        <posx>-2</posx>
-                        <posy>-2</posy>
-                        <width>312</width>
-                        <height>460</height>
-                        <texture border="40">buttons/Off.png</texture>
-                    </control>
-                    <control type="image">
-                        <posx>-2</posx>
-                        <posy>-2</posy>
-                        <width>312</width>
-                        <height>460</height>
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <width>400</width>
+                        <height>580</height>
                         <texture border="40">buttons/On.png</texture>
-                        <animation effect="fade" start="0" end="100" time="160">Focus</animation>
-                        <animation effect="fade" start="0" end="100" time="0">UnFocus</animation>
                     </control>
-                    <control type="group">
-                        <control type="image">
-                            <posx>30</posx>
-                            <posy>10</posy>
-                            <width>250</width>
-                            <height>380</height>
-                            <aspectratio scalediffuse="false">scale</aspectratio>
-                            <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
-                        </control>
-                        <control type="button">
-                            <visible>IsEmpty(ListItem.Property(exclusive))</visible>
-                            <posx>60</posx>
-                            <posy>346</posy>
-                            <width>200</width>
-                            <height>44</height>
-                            <textoffsetx>0</textoffsetx>
-                            <textoffsety>0</textoffsety>
-                            <textwidth>200</textwidth>
-                            <align>center</align>
-                            <aligny>center</aligny>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <texturefocus>dialogs/ic_exclusive.png</texturefocus>
-                            <texturenofocus>dialogs/ic_exclusive.png</texturenofocus>
-                            <label>$ADDON[plugin.video.megogo 1037]</label>
-                        </control>
-                        <control type="image">
-                            <posx>35</posx>
-                            <posy>330</posy>
-                            <width>50</width>
-                            <height>50</height>
-                            <aspectratio scalediffuse="false">scale</aspectratio>
-                            <texture>icons/pay.png</texture>
-                            <visible>!IsEmpty(ListItem.Property(Buy))</visible>
-                        </control>
-                        <control type="label">
-                            <posx>10</posx>
-                            <posy>388</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
-                            <visible>!IsEmpty(ListItem.Property(Year))</visible>
-                        </control>
-                        <control type="label">
-                            <posx>10</posx>
-                            <posy>388</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Label]</label>
-                            <visible>IsEmpty(ListItem.Property(Year))</visible>
-                        </control>
-                         <control type="label">
-                            <posx>10</posx>
-                            <posy>414</posy>
-                            <align>left</align>
-                            <width>290</width>
-                            <font>font12</font>
-                            <textcolor>FFFAFAFA</textcolor>
-                            <shadowcolor>black</shadowcolor>
-                            <label>$INFO[ListItem.Property(Country)]</label>
-                        </control>
+                    <control type="image">
+                        <posx>20</posx>
+                        <posy>20</posy>
+                        <width>360</width>
+                        <height>500</height>
+                        <aspectratio scalediffuse="false">scale</aspectratio>
+                        <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
+                    </control>
+                    <control type="label">
+                        <posx>210</posx>
+                        <posy>490</posy>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <width>250</width>
+                        <height>100</height>
+                        <font>font13</font>
+                        <textcolor>FFFAFAFA</textcolor>
+                        <shadowcolor>black</shadowcolor>
+                        <label>$INFO[ListItem.Label]</label>
                     </control>
                 </focusedlayout>
             </control>
-
         </control>
 
         <control type="group">
@@ -472,9 +345,7 @@
                     <onup>7009</onup>
                     <focusedcolor>FFFAFAFA</focusedcolor>
                 </control>
-
             </control>
         </control>
-
     </controls>
 </window>

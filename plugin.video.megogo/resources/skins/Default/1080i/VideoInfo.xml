@@ -41,6 +41,25 @@
 				<texture diffuse="thumbs/movieposter_mask.png">$INFO[Image]</texture>
 			</control>
 
+            <control type="button">
+				<description> EXCLUSIVE LABEL </description>
+                <visible>!IsEmpty(Window.Property(exclusive))</visible>
+				<posx>200</posx>
+				<posy>1000</posy>
+				<width>400</width>
+				<height>80</height>
+				<textoffsetx>0</textoffsetx>
+				<textoffsety>0</textoffsety>
+				<textwidth>400</textwidth>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>font13</font>
+				<textcolor>FFFAFAFA</textcolor>
+				<texturefocus>dialogs/ic_exclusive.png</texturefocus>
+				<texturenofocus>dialogs/ic_exclusive.png</texturenofocus>
+				<label>$ADDON[plugin.video.megogo 1037]</label>
+			</control>
+
             <control type="image" id="33010">
 				<description> SVOD OR TVOD POSTER MASK </description>
 				<posy>65</posy>
@@ -77,11 +96,11 @@
 			<control type="textbox">
 				<description> TVOD OR SVOD TEXT </description>
 				<visible>!IsEmpty(Window.Property(TVOD)) | !IsEmpty(Window.Property(SVOD))</visible>
-				<posx>185</posx>
+				<posx>0</posx>
 				<posy>630</posy>
-				<width>600</width>
+				<width>800</width>
 				<textcolor>FFFAFAFA</textcolor>
-				<align>left</align>
+				<align>center</align>
 				<label>$INFO[Window.Property(Price)]</label>
 				<font>font30</font>
 			</control>
@@ -99,13 +118,14 @@
 
 			<control type="button" id="33003">
 				<description> PLAY BUTTON </description>
+                <visible>IsEmpty(Window.Property(series))</visible>
 				<posx>820</posx>
 				<posy>77</posy>
-				<width>350</width>
+				<width>300</width>
 				<height>91</height>
 				<textoffsetx>85</textoffsetx>
 				<textoffsety>25</textoffsety>
-				<textwidth>315</textwidth>
+				<textwidth>210</textwidth>
 				<align>left</align>
 				<aligny>top</aligny>
 				<font>font13</font>
@@ -117,24 +137,67 @@
 				<label>$ADDON[plugin.video.megogo 1000]</label>
 			</control>
 
+            <control type="button" id="33003">
+				<description> PLAY BUTTON WHEN SERIES </description>
+                <visible>!IsEmpty(Window.Property(series))</visible>
+				<posx>820</posx>
+				<posy>77</posy>
+				<width>310</width>
+				<height>91</height>
+				<textoffsetx>65</textoffsetx>
+				<textoffsety>25</textoffsety>
+				<textwidth>240</textwidth>
+				<align>left</align>
+				<aligny>top</aligny>
+				<font>font13</font>
+				<textcolor>FF999999</textcolor>
+				<onright>33012</onright>
+				<!--aspectratio scalediffuse="true">stretch</aspectratio-->
+				<texturefocus>buttons/Play_On.png</texturefocus>
+				<texturenofocus>buttons/Play_Off.png</texturenofocus>
+				<label>$ADDON[plugin.video.megogo 1039]</label>
+			</control>
+
 			<control type="button" id="33012">
 				<description> ABOUT BUTTON </description>
-				<posx>1180</posx>
+				<posx>1150</posx>
 				<posy>77</posy>
-				<width>350</width>
+				<width>300</width>
 				<height>91</height>
-				<textoffsetx>85</textoffsetx>
+				<textoffsetx>55</textoffsetx>
 				<textoffsety>25</textoffsety>
-				<textwidth>315</textwidth>
+				<textwidth>240</textwidth>
 				<align>left</align>
 				<aligny>top</aligny>
 				<font>font13</font>
 				<textcolor>FF999999</textcolor>
 				<onleft>33003</onleft>
+                <onright>33013</onright>
 				<!--aspectratio scalediffuse="true">center</aspectratio-->
 				<texturefocus>buttons/Info_On.png</texturefocus>
 				<texturenofocus>buttons/Info_Off.png</texturenofocus>
 				<label>$ADDON[plugin.video.megogo 1019]</label>
+			</control>
+
+            <control type="button" id="33013">
+				<description> SERIES BUTTON </description>
+                <visible>!IsEmpty(Window.Property(series))</visible>
+				<posx>1480</posx>
+				<posy>77</posy>
+				<width>300</width>
+				<height>91</height>
+				<textoffsetx>75</textoffsetx>
+				<textoffsety>25</textoffsety>
+				<textwidth>220</textwidth>
+				<align>left</align>
+				<aligny>top</aligny>
+				<font>font13</font>
+				<textcolor>FF999999</textcolor>
+				<onleft>33012</onleft>
+				<!--aspectratio scalediffuse="true">center</aspectratio-->
+				<texturefocus>buttons/List_On.png</texturefocus>
+				<texturenofocus>buttons/List_Off.png</texturenofocus>
+				<label>$ADDON[plugin.video.megogo 1038]</label>
 			</control>
 
 			<control type="textbox" id="33002">

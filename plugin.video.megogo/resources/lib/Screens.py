@@ -27,6 +27,7 @@ quality_logo	        = os.path.join(addon_path, 'resources', 'skins', 'Default',
 icon_svod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_plus.png')
 icon_tvod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_payment.png')
 unknown_person	        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'unknown_person.png')
+credit_card             = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'dialogs', 'Credit_card.png')
 flag_en			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'en.png')
 flag_ru			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'ru.png')
 flag_ua			        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'flags', 'ua.png')
@@ -157,13 +158,15 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             if focusid in MENU_IDS:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
             else:
-                xbmc.executebuiltin("Control.SetFocus(6000)")
+                # xbmc.executebuiltin("Control.SetFocus(6000)")
                 xbmc.log('[%s]: Try to kill script' % addon_name)
                 closer(self)
+                return
 
         elif action in ACTION_EXIT_SCRIPT:
-            xbmc.executebuiltin("Control.SetFocus(6000)")
+            # xbmc.executebuiltin("Control.SetFocus(6000)")
             closer(self)
+            return
 
         elif action in ACTION_MOUSE_RIGHT_CLICK:
             xbmc.log('[%s]: HomeScreen ACTION_MOUSE_RIGHT_CLICK' % addon_name)
@@ -173,11 +176,12 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             else:
                 xbmc.log('[%s]: Try to kill script' % addon_name)
                 closer(self)
+                return
 
         elif action in ACTION_CONTEX_MENU:
             item_id = self.getControl(focusid).getSelectedItem().getProperty("id")
             xbmc.log('[%s]: ACTION_CONTEXT_MENU item id - %s' % (addon_name, item_id))
-            closer(self)
+            # closer(self)
 
     def onClick(self, controlID):
         if controlID in [500]:
@@ -232,12 +236,7 @@ class Homescreen(xbmcgui.WindowXMLDialog):
             xbmc.executebuiltin("Control.SetFocus(7000)")
 
         elif controlID in [8000]:
-            search = open_keyboard('search')
-            link = 'search?text=%s' % urllib.quote_plus(search)
-            AddToWindowStack(self, controlID)
-            self.close()
-            dialog = VideoList(u'VideoList.xml', addon_path, page=link)
-            dialog.doModal()
+            open_search(self)
 
         elif controlID in MENU_IDS:
             menu_chooser(self, controlID)
@@ -249,11 +248,11 @@ class Homescreen(xbmcgui.WindowXMLDialog):
 class VideoList(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
-        self.page = kwargs.get('page')
+        xbmc.executebuiltin("ActivateWindow(busydialog)")
+        self.page = kwargs.get('page', '')
         self.offset = kwargs.get('offset', 0)
         self.name = kwargs.get('name', '')
         self.old_id = kwargs.get('wid')
-        xbmc.executebuiltin("ActivateWindow(busydialog)")
         if self.page.startswith('video/collection'):
             self.name = get_title(self.page)
         self.listitems = update_content(force=True, page=self.page, offset=self.offset)
@@ -321,18 +320,153 @@ class VideoList(xbmcgui.WindowXMLDialog):
             if video_type == 'video' and self.page != 'collections':
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, id=video_id, vtype=video_type)
                 dialog.doModal()
+
+                del dialog
+
             elif self.page == 'collections':
                 link = 'video/collection?id=%s' % video_id
                 dialog = VideoList(u'VideoList.xml', addon_path, page=link)
                 dialog.doModal()
 
+                del dialog
+
         elif controlID in [8000]:
-            search = open_keyboard('search')
-            link = 'search?text=%s' % urllib.quote_plus(search)
-            AddToWindowStack(self, controlID)
+            open_search(self)
+
+        elif controlID in [6000]:
+            xbmc.executebuiltin("Control.SetFocus(7000)")
+
+        elif controlID in MENU_IDS and controlID != self.old_id:
+            menu_chooser(self, controlID)
+
+
+#####################################################################################################
+# ###################################	  SEASONS  LISTS	####################################### #
+#####################################################################################################
+class SeasonList(xbmcgui.WindowXMLDialog):
+
+    def __init__(self, *args, **kwargs):
+        xbmc.executebuiltin("ActivateWindow(busydialog)")
+        self.movieplayer = VideoPlayer(popstack=True)
+        self.thumb = kwargs.get('thumb', None)
+        self.name = kwargs.get('name')
+        self.seasons = kwargs.get('seasons', None)
+        self.episode_list = kwargs.get('episodes', None)
+        self.listitems = []
+        self.series = []
+        if self.seasons:
+            for (counter, season) in enumerate(sorted(self.seasons, key=lambda k: k['title'])):
+                item = xbmcgui.ListItem('%s' % (str(counter)))
+                if season['title_original']:
+                    label = '%s (%s)' % (season['title'], season['title_original'])
+                else:
+                    label = season['title']
+                item.setLabel(label)
+                item.setThumbnailImage(self.thumb)
+                item.setProperty('id', unicode(season['id']))
+                self.listitems.append(item)
+        if self.episode_list:
+            for (counter, episode) in enumerate(self.episode_list):
+                episode_item = xbmcgui.ListItem('%s' % (str(counter)))
+                if episode['title_original']:
+                    label = '%s (%s)' % (episode['title'], episode['title_original'])
+                else:
+                    label = episode['title']
+                episode_item.setLabel(label)
+                Get_File(episode['image'])
+                episode_item.setThumbnailImage(episode['image'])
+                episode_item.setProperty('id', unicode(episode['id']))
+                self.series.append(episode_item)
+        xbmcgui.WindowXMLDialog.__init__(self)
+        xbmc.executebuiltin("Dialog.Close(busydialog)")
+
+    def onInit(self):
+        self.windowid = xbmcgui.getCurrentWindowDialogId()
+        self.window = xbmcgui.Window(self.windowid)
+        self.window.setProperty("NAME", self.name)
+
+        if self.seasons:
+            self.getControl(500).reset()
+            self.getControl(500).addItems(self.listitems)
+        elif self.episode_list:
+            self.getControl(501).reset()
+            self.getControl(501).addItems(self.series)
+
+        control = getids()
+        if control:
+            try:
+                if control.isnumeric:
+                    xbmc.log('SELECT control.isnumeric %s' % control)
+                    xbmc.executebuiltin("Control.SetFocus(%s)" % control)
+            except:
+                xbmc.log('[%s]: !!!CONTROL!!! %s' % (addon_name, control))
+                selectedId, _, item = control.partition(', ')
+                xbmc.log('SELECT %s %s' % (int(selectedId), int(item)))
+                self.setFocusId(int(selectedId))
+                self.getControl(int(selectedId)).selectItem(int(item))
+
+    def onAction(self, action):
+        focusid = self.getFocusId()
+        if action in ACTION_PREVIOUS_MENU:
+            xbmc.log('[%s]: SeasonList PREVIOUS_MENU' % addon_name)
+            xbmc.log('[%s]: SeasonList PREVIOUS_MENU focusid - %s' % (addon_name, focusid))
+            if focusid in MENU_IDS:
+                xbmc.executebuiltin("Control.SetFocus(6000)")
+            else:
+                xbmc.executebuiltin("Control.SetFocus(6000)")
+                xbmc.log('[%s]: Try to kill script' % addon_name)
+                self.close()
+                PopWindowStack(self)
+
+        elif action in ACTION_EXIT_SCRIPT:
+            xbmc.executebuiltin("Control.SetFocus(6000)")
+            closer(self)
+
+        elif action in ACTION_CONTEX_MENU or action in ACTION_MOUSE_RIGHT_CLICK:
+            if self.name == language(1018):
+                item_id = self.getControl(focusid).getSelectedItem().getProperty("id")
+                xbmc.log('[%s]: SeasonList ACTION_CONTEXT_MENU item id - %s' % (addon_name, item_id))
+
+        # listitems = language(1030)
+        # xbmc.executebuiltin("ActivateWindow(contextmenu)")
+        # context_menu = ContextMenu.ContextMenu(u'script-globalsearch-contextmenu.xml', addon_path, labels=listitems)
+        # context_menu.doModal()
+        # if context_menu.selection == 0:
+        # Notify(list_id)
+        # selection = xbmcgui.Dialog().select(__addon__.getLocalizedString(32151), listitems)
+
+    def onClick(self, controlID):
+        if controlID in [500]:
+            pos = self.getControl(500).getSelectedPosition()
+            label = self.getControl(500).getListItem(pos).getLabel()
+            if pos == 0:
+                episodes = self.seasons[0]['episode_list']
+            else:
+                xbmc.executebuiltin("ActivateWindow(busydialog)")
+                sid = self.getControl(500).getListItem(pos).getProperty("id")
+                episodes = fetch_data(page='video/episodes?id=%s' % sid)
+            AddToWindowStack(self, "%d, %d" % (controlID, pos))
             self.close()
-            dialog = VideoList(u'VideoList.xml', addon_path, page=link)
+            dialog = SeasonList(u'EpisodeList.xml', addon_path, episodes=episodes, name='%s (%s)' % (self.name, label.decode('utf-8')), thumb=self.thumb)
             dialog.doModal()
+
+            del dialog
+
+        elif controlID in [501]:
+            pos = self.getControl(501).getSelectedPosition()
+            sid = self.getControl(501).getListItem(pos).getProperty("id")
+            label = self.getControl(501).getListItem(pos).getLabel()
+            link, audio, subtitle = megogo2xbmc.get_stream(sid)
+            listitem = xbmcgui.ListItem(label, iconImage=self.thumb, thumbnailImage=self.thumb)
+            listitem.setInfo('video', {'Title': '%s, %s)' % (self.name[:-1], label.decode('utf-8'))})
+            AddToWindowStack(self, "%d, %d" % (controlID, pos))
+            self.close()
+            self.movieplayer.play_item(link, listitem, subtitle)
+            self.movieplayer.WaitForVideoEnd()
+            PopWindowStack(self)
+
+        elif controlID in [8000]:
+            open_search(self)
 
         elif controlID in [6000]:
             xbmc.executebuiltin("Control.SetFocus(7000)")
@@ -371,7 +505,6 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
 
         self.bitrates, self.audio_list, self.subtitles = megogo2xbmc.data_from_stream(self.data["id"])
 
-        # xbmc.log('[%s]: data - %s' % (addon_name, data))
         xbmcgui.WindowXMLDialog.__init__(self)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
 
@@ -390,6 +523,14 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             self.window.setProperty("kinopoisk_rating", self.data["rating"])
         else:
             self.window.setProperty("kinopoisk_rating", '')
+        if self.data['exclusive'] in ['True', 'true']:
+            self.window.setProperty("exclusive", 'True')
+        else:
+            self.window.setProperty("exclusive", '')
+        if self.data['series'] in ['True', 'true']:
+            self.window.setProperty("series", 'True')
+        else:
+            self.window.setProperty("series", '')
         if self.data["delivery_rules"] != '':
             for delivery in self.data["delivery_rules"].split(', '):
                 if delivery == 'svod':
@@ -473,18 +614,33 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
         #        PopWindowStack(self)
 
     def onClick(self, controlID):
-        #if self.window.getProperty('SVOD'):
-        #    xbmc.log('!!![SVOD]: %s' % self.window.getProperty('SVOD'))
-        #if self.window.getProperty('TVOD'):
-        #    xbmc.log('!!![TVOD]: %s' % self.window.getProperty('TVOD'))
-
-        if controlID in [33003]:
-            link, audio, subtitle = megogo2xbmc.get_stream(self.data["id"])
-            listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
-            listitem.setInfo('video', {'Title': self.data['title']})
+        if (self.window.getProperty('SVOD') or self.window.getProperty('TVOD')) and controlID in [33003]:
+            image = xbmcgui.ControlImage(100, 100, 1720, 880, credit_card)
+            self.window.addControl(image)
+        elif controlID in [33003]:
             AddToWindowStack(self, controlID)
             self.close()
-            self.movieplayer.play_item(link, listitem, subtitle)
+            if self.window.getProperty("series") == 'True':
+                playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+                playlist.clear()
+                for (position, episode) in enumerate(self.season[0]['episode_list']):
+                    link, audio, subtitle = megogo2xbmc.get_stream(episode["id"])
+                    if episode['title_original']:
+                        label = '%s (%s, %s)' % (self.data['title'], episode['title'], episode['title_original'])
+                    else:
+                        label = '%s (%s)' % (self.data['title'], episode['title'])
+                    episode_item = xbmcgui.ListItem(label, iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
+                    episode_item.setInfo('video', {'Title': label})
+                    playlist.add(url=link, listitem=episode_item, index=position)
+                # listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
+                # listitem.setInfo('video', {'Title': self.data['title']})
+                # self.movieplayer.play_item(playlist, listitem)
+                xbmc.Player().play(playlist)
+            else:
+                link, audio, subtitle = megogo2xbmc.get_stream(self.data["id"])
+                listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
+                listitem.setInfo('video', {'Title': self.data['title']})
+                self.movieplayer.play_item(link, listitem, subtitle)
             self.movieplayer.WaitForVideoEnd()
             PopWindowStack(self)
 
@@ -503,8 +659,15 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             self.getControl(5002).addItems(item)
             xbmc.executebuiltin("Dialog.Close(busydialog)")
             time.sleep(0.5)
-
             xbmc.executebuiltin("Control.SetFocus(17000)")
+
+        elif controlID in [33013]:
+            AddToWindowStack(self, controlID)
+            self.close()
+            dialog = SeasonList(u'SeasonList.xml', addon_path, seasons=self.season, thumb=self.data["poster"], name=self.data["title"])
+            dialog.doModal()
+
+            del dialog
 
         elif controlID in [5002]:
             xbmc.log('[%s]: Selected related video - %s' % (addon_name, self.getControl(controlID).getSelectedItem().getProperty("Label")))
@@ -516,6 +679,8 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                 self.close()
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, win=self, id=video_id, vtype=video_type)
                 dialog.doModal()
+
+                del dialog
 
         elif controlID in [17050]:
             xbmc.executebuiltin("Control.SetFocus(33012)")
@@ -791,8 +956,18 @@ def menu_chooser(window, controlID):
     dialog.doModal()
 
 
+def open_search(window):
+    search = open_keyboard('search')
+    link = 'search?text=%s' % urllib.quote_plus(search)
+    AddToWindowStack(window, 8000)
+    window.close()
+    dialog = VideoList(u'VideoList.xml', addon_path, page=link)
+    dialog.doModal()
+
+    del dialog
+
+
 def closer(window):
-    xbmc.executebuiltin("Control.SetFocus(6000)")
     dialog = xbmcgui.Dialog()
     if dialog.yesno(language(1035), language(1036)) == 1:
         del dialog

@@ -75,8 +75,8 @@ def CreateListItems(data=None):
         image_requests = []
         for (count, result) in enumerate(data):
             listitem = xbmcgui.ListItem('%s' % (str(count)))
-            itempath = ""
-            counter = 1
+            # itempath = ""
+            # counter = 1
             for (key, value) in result.iteritems():
                 if not value:
                     continue
@@ -110,10 +110,18 @@ def CreateListItems(data=None):
                                     xbmc.log('3 Get_File(%s)' % new_pic)
                                     Get_File(new_pic)
                                     image_requests.append(new_pic.decode('utf-8'))
+                    if key.lower() in ["poster"]:
+                        listitem.setThumbnailImage(value)
+                        continue
                 if key.lower() in ["title"]:
                     listitem.setLabel(value)
-                if key.lower() in ["poster"]:
-                    listitem.setThumbnailImage(value)
+                if key.lower() in ["exclusive"]:
+                    if value in ["True", "true"]:
+                        listitem.setInfo('video', {key.lower(): value})
+                        continue
+                if key.lower() in ["delivery_rules"]:
+                    if value.find('tvod') >= 0 or value.find('svod') >= 0:
+                        listitem.setProperty('Buy', 'True')
                 #if key.lower() in ["path"]:
                 #	itempath = value
                 if key.lower() in Int_InfoLabels:
@@ -131,10 +139,10 @@ def CreateListItems(data=None):
                 #    xbmc.log('value - %s' % value)
                 listitem.setProperty('%s' % key, value)
 
-            listitem.setPath(itempath)
-            listitem.setProperty("index", str(counter))
+            # listitem.setPath(itempath)
+            # listitem.setProperty("index", str(counter))
             itemlist.append(listitem)
-            counter += 1
+            # counter += 1
 
     return itemlist
 
@@ -206,6 +214,43 @@ def CreateCommentList(video_id, data=None):
     return itemlist
 
 
+def CreateEpisodeList(video_id, data=None):
+    if not data:
+        data = megogo2xbmc.getcomments(video_id)
+        if not data:
+            return []
+
+    itemlist = []
+    image_requests = []
+    for (count, result) in enumerate(data):
+        listitem = xbmcgui.ListItem('%s' % (str(count)))
+        # counter = 1
+        for (key, value) in result.iteritems():
+            if not value:
+                continue
+            if key.lower() in ["user_name"]:
+                listitem.setLabel(value)
+            if key.lower() in ["user_avatar"]:
+                if value.startswith("http://") and (value.endswith(".jpg") or value.endswith(".png")):
+                    if not value.decode('utf-8') in image_requests:
+                        try:
+                            Get_File(value)
+                        except:
+                            image_requests.append(value.decode('utf-8'))
+                listitem.setThumbnailImage(value)
+            if key.lower() in ['text']:
+                listitem.setProperty('%s' % key.lower(), value.encode('utf-8'))
+            if key.lower() in ['date']:
+                data, _, time = value.partition('T')
+                listitem.setProperty('%s' % key.lower(), "%s %s" % (data, time[:-1]))
+
+        # listitem.setProperty("index", str(counter))
+        itemlist.append(listitem)
+        # counter += 1
+
+    return itemlist
+
+
 def update_content(force=False, page=False, section=False, offset=0):
     listitems = fetch_data(force, page, section, offset)
     listitems = CreateListItems(listitems)
@@ -238,6 +283,8 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page == 'collections':
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
+    elif page.startswith('video/episodes'):
+        return response['data']
     else:
         return megogo2xbmc.HandleVideoResult(response['data'])
 
