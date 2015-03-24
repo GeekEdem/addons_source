@@ -66,9 +66,9 @@ def parse_argv(paramstring):
 
 
 def CreateListItems(data=None):
-    Int_InfoLabels		= ["year", "duration", "vote", "like", "dislike"]
+    Int_InfoLabels		= ["duration", "vote", "like", "dislike"]
     Float_InfoLabels	= ["rating", "imdb_rating"]
-    String_InfoLabels	= ["id", "type", "originaltitle", "country", "plot", "genre", "categories", "delivery_rules", "mpaa", "crew", "favourite", "screenshots", "quality", "season_list", "available", "audio_list"]
+    String_InfoLabels	= ["id", "type", "originaltitle", "country", "plot", "genre", "categories", "year", "delivery_rules", "mpaa", "crew", "favourite", "screenshots", "quality", "season_list", "available", "audio_list"]
     itemlist = []
 
     if data is not None:
@@ -120,8 +120,10 @@ def CreateListItems(data=None):
                         listitem.setInfo('video', {key.lower(): value})
                         continue
                 if key.lower() in ["delivery_rules"]:
-                    if value.find('tvod') >= 0 or value.find('svod') >= 0:
+                    if value.find('tvod') >= 0:
                         listitem.setProperty('Buy', 'True')
+                    if value.find('svod') >= 0:
+                        listitem.setProperty('Subscribe', 'True')
                 #if key.lower() in ["path"]:
                 #	itempath = value
                 if key.lower() in Int_InfoLabels:
@@ -279,7 +281,7 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'recommended')  # TODO pages!
     elif page == 'Main' and section == 'slider':
         return megogo2xbmc.HandleMainPage(response['data'], 'sliders')	    # TODO pages!
-    elif page == 'subscription' or page == 'premieres' or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection'):
+    elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection'):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page == 'collections':
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
@@ -369,6 +371,10 @@ def PopWindowStack(active):
         dialog.doModal()
     else:
         active.close()
+
+
+def DelWindowStack():
+    windowstack = []
 
 
 def getids():

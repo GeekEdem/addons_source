@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import xbmc, xbmcaddon, xbmcgui, xbmcplugin
-import os, sys, urllib2, re
+import os, sys, urllib2, re, time
 
 __addon__       = xbmcaddon.Addon(id='plugin.video.megogo')
 addon_name		= __addon__.getAddonInfo('name')
@@ -18,9 +18,15 @@ db = DataBase()
 
 xbmc.log('[%s]: Start plugin! Version: %s' % (addon_name, addon_version))
 
+# ##################################	  Start BACK	    ####################################### #
+back = xbmcgui.WindowXML('back.xml', addon_path)
+
 # ##################################	  Start Splash	    ####################################### #
 splash = xbmcgui.WindowXML('splash.xml', addon_path)
+back.show()
+time.sleep(0.01)
 splash.show()
+xbmc.executebuiltin("ActivateWindow(busydialog)")
 
 # ##################################		First run		####################################### #
 if __addon__.getSetting('firstrun') == '0' or __addon__.getSetting('firstrun') == '':
@@ -66,6 +72,7 @@ else:
     dialog.ok(language(1025), language(1031), language(1032))
     del dialog
 
+back.close()
 splash.close()
 
 dic = db.get_login_from_db()

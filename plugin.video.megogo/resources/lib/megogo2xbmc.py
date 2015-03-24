@@ -128,14 +128,15 @@ def GET(url, old_url=None, login=False):
                 return None
 
     else:
-        request = urllib2.Request(url=target, data=None, headers={'User-Agent': UA})
-        request = urllib2.urlopen(request)
-        http = request.read()
-        request.close()
-        xbmc.log('[%s]: GET else, http - %s' % (addon_name, http))
-        return http
-    #except:
-    #    return ''
+        try:
+            request = urllib2.Request(url=target, data=None, headers={'User-Agent': UA})
+            request = urllib2.urlopen(request)
+            http = request.read()
+            request.close()
+            xbmc.log('[%s]: GET else, http - %s' % (addon_name, http))
+            return http
+        except:
+            return ''
 
 
 def checkLogin():

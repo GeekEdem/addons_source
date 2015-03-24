@@ -1,3 +1,9 @@
+v1.0.9
+- Added next and previous pages in categories
+- Fixed "STOP" button
+- Added EVOLUTION background
+- Added sort button
+
 v1.0.8
 - Added "exclusive" label
 - Fix bug with text scrolling

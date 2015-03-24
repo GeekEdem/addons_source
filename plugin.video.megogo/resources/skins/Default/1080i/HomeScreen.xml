@@ -187,6 +187,15 @@
 							<texture>icons/pay.png</texture>
                             <visible>!IsEmpty(ListItem.Property(Buy))</visible>
 						</control>
+                        <control type="image">
+							<posx>25</posx>
+							<posy>240</posy>
+							<width>50</width>
+							<height>50</height>
+							<aspectratio scalediffuse="false">scale</aspectratio>
+							<texture>icons/pay.png</texture>
+                            <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
+						</control>
 						<control type="image">
 							<posx>-5</posx>
 							<posy>-2</posy>
@@ -237,6 +246,15 @@
 							<aspectratio scalediffuse="false">scale</aspectratio>
 							<texture>icons/pay.png</texture>
                             <visible>!IsEmpty(ListItem.Property(Buy))</visible>
+						</control>
+                        <control type="image">
+							<posx>25</posx>
+							<posy>240</posy>
+							<width>50</width>
+							<height>50</height>
+							<aspectratio scalediffuse="false">scale</aspectratio>
+							<texture>icons/pay.png</texture>
+                            <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
 						</control>
 						<control type="label">
 							<posx>5</posx>
@@ -352,6 +370,15 @@
                         <texture>icons/pay.png</texture>
                         <visible>!IsEmpty(ListItem.Property(Buy))</visible>
                     </control>
+                    <control type="image">
+                        <posx>25</posx>
+                        <posy>440</posy>
+                        <width>50</width>
+                        <height>50</height>
+                        <aspectratio scalediffuse="false">scale</aspectratio>
+                        <texture>icons/m+.png</texture>
+                        <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
+                    </control>
                     <control type="button">
                         <visible>IsEmpty(ListItem.Property(exclusive))</visible>
                         <posx>71</posx>
@@ -410,6 +437,15 @@
                         <aspectratio scalediffuse="false">scale</aspectratio>
                         <texture>icons/pay.png</texture>
                         <visible>!IsEmpty(ListItem.Property(Buy))</visible>
+                    </control>
+                    <control type="image">
+                        <posx>25</posx>
+                        <posy>440</posy>
+                        <width>50</width>
+                        <height>50</height>
+                        <aspectratio scalediffuse="false">scale</aspectratio>
+                        <texture>icons/m+.png</texture>
+                        <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
                     </control>
                     <control type="button">
                         <visible>IsEmpty(ListItem.Property(exclusive))</visible>
