@@ -2,8 +2,10 @@
   <dictionary name="locadmin">
     <words>
       <w>addon</w>
+      <w>bitrate</w>
       <w>listitem</w>
       <w>listitems</w>
+      <w>newpage</w>
       <w>tarification</w>
       <w>windowstack</w>
     </words>

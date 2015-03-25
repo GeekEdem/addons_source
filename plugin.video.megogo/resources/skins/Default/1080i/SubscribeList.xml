@@ -58,7 +58,7 @@
                 <texturenofocus>buttons/Menu_Off.PNG</texturenofocus>
                 <font>font13</font>
                 <textcolor>FF999999</textcolor>
-                <ondown>SetFocus(7011)</ondown>
+                <ondown>SetFocus(500)</ondown>
                 <onright>SetFocus(8000)</onright>
                 <onleft>SetFocus(7000)</onleft>
             </control>
@@ -82,7 +82,7 @@
             </control>
 
             <control type="image">
-                <posx>1125</posx>
+                <posx>950</posx>
                 <posy>65</posy>
                 <width>28</width>
                 <height>28</height>
@@ -91,7 +91,7 @@
             </control>
 
             <control type="image">
-                <posx>1125</posx>
+                <posx>950</posx>
                 <posy>1040</posy>
                 <width>28</width>
                 <height>28</height>
@@ -101,8 +101,8 @@
 
             <control type="panel" id="500">
                 <posy>100</posy>
-                <posx>400</posx>
-                <width>1700</width>
+                <posx>226</posx>
+                <width>1720</width>
                 <height>930</height>
                 <onright>6002</onright>
                 <onleft>6001</onleft>
@@ -299,7 +299,7 @@
                 <description> PREVIOUS PAGE BUTTON </description>
                 <visible>!IsEmpty(Window.Property(PAGE)) | !IsEmpty(Window.Property(LAST_PAGE))</visible>
                 <label>$ADDON[plugin.video.megogo 1041]</label>
-                <posx>580</posx>
+                <posx>50</posx>
                 <posy>1021</posy>
                 <width>340</width>
                 <height>56</height>
@@ -319,7 +319,7 @@
                 <description> NEXT PAGE BUTTON </description>
                 <visible>!IsEmpty(Window.Property(FIRST_PAGE)) | !IsEmpty(Window.Property(PAGE))</visible>
                 <label>$ADDON[plugin.video.megogo 1040]</label>
-                <posx>1360</posx>
+                <posx>1530</posx>
                 <posy>1021</posy>
                 <width>340</width>
                 <height>56</height>
@@ -349,106 +349,6 @@
                 <font>font30_title</font>
                 <shadowcolor>black</shadowcolor>
             </control>
-
-            <control type="image">
-				<posx>220</posx>
-				<posy>330</posy>
-				<width>28</width>
-				<height>28</height>
-				<texture flipy="true">icons/arrowdown.png</texture>
-				<visible>Control.HasFocus(7012) | Control.HasFocus(7013)</visible>
-			</control>
-
-			<control type="image">
-				<posx>220</posx>
-				<posy>700</posy>
-				<width>28</width>
-				<height>28</height>
-				<texture>icons/arrowdown.png</texture>
-				<visible>Control.HasFocus(7011) | Control.HasFocus(7012)</visible>
-			</control>
-
-			<control type="grouplist">
-				<posx>40</posx>
-				<posy>400</posy>
-				<width>400</width>
-				<height>1000</height>
-				<orientation>vertical</orientation>
-				<scroll>true</scroll>
-				<itemgap>1</itemgap>
-				<onup>6000</onup>
-                <scrolltime tween="sine" easing="out">200</scrolltime>
-				<control type="button" id="7011">
-					<label>$ADDON[plugin.video.megogo 1012]</label>
-					<width>350</width>
-					<height>90</height>
-					<textoffsetx>0</textoffsetx>
-					<textoffsety>25</textoffsety>
-					<textwidth>350</textwidth>
-					<align>center</align>
-					<aligny>top</aligny>
-					<texturefocus border="40">buttons/On.png</texturefocus>
-					<texturenofocus border="40">buttons/Off.png</texturenofocus>
-					<font>font13</font>
-					<textcolor>FF999999</textcolor>
-					<ondown>7012</ondown>
-                    <onright>500</onright>
-					<focusedcolor>FFFAFAFA</focusedcolor>
-				</control>
-				<control type="button" id="7014">
-					<label>$ADDON[plugin.video.megogo 1013]</label>
-					<width>350</width>
-					<height>90</height>
-					<textoffsetx>0</textoffsetx>
-					<textoffsety>25</textoffsety>
-					<textwidth>350</textwidth>
-					<align>center</align>
-					<aligny>top</aligny>
-					<texturefocus border="40">buttons/On.png</texturefocus>
-					<texturenofocus border="40">buttons/Off.png</texturenofocus>
-					<font>font13</font>
-					<textcolor>FF999999</textcolor>
-                    <onup>7011</onup>
-					<ondown>7013</ondown>
-                    <onright>500</onright>
-					<focusedcolor>FFFAFAFA</focusedcolor>
-				</control>
-				<control type="button" id="7015">
-					<label>$ADDON[plugin.video.megogo 1016]</label>
-					<width>350</width>
-					<height>90</height>
-					<textoffsetx>0</textoffsetx>
-					<textoffsety>25</textoffsety>
-					<textwidth>350</textwidth>
-					<align>center</align>
-					<aligny>top</aligny>
-					<texturefocus border="40">buttons/On.png</texturefocus>
-					<texturenofocus border="40">buttons/Off.png</texturenofocus>
-					<font>font13</font>
-					<textcolor>FF999999</textcolor>
-                    <onup>7012</onup>
-                    <onright>500</onright>
-					<focusedcolor>FFFAFAFA</focusedcolor>
-				</control>
-                <control type="button" id="7016">
-					<label>$ADDON[plugin.video.megogo 1017]</label>
-					<width>350</width>
-					<height>90</height>
-					<textoffsetx>0</textoffsetx>
-					<textoffsety>25</textoffsety>
-					<textwidth>350</textwidth>
-					<align>center</align>
-					<aligny>top</aligny>
-					<texturefocus border="40">buttons/On.png</texturefocus>
-					<texturenofocus border="40">buttons/Off.png</texturenofocus>
-					<font>font13</font>
-					<textcolor>FF999999</textcolor>
-                    <onup>7012</onup>
-                    <onright>500</onright>
-					<focusedcolor>FFFAFAFA</focusedcolor>
-				</control>
-			</control>
-
         </control>
 
         <control type="group">

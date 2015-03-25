@@ -283,7 +283,7 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'sliders')	    # TODO pages!
     elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection'):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
-    elif page == 'collections':
+    elif page.startswith('collections'):
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
     elif page.startswith('video/episodes'):
         return response['data']

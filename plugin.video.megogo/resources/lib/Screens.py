@@ -261,15 +261,12 @@ class VideoList(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
         xbmc.executebuiltin("ActivateWindow(busydialog)")
         self.page = kwargs.get('page', '')
+        self.newpage = self.page
         self.offset = kwargs.get('offset', 0)
         self.name = kwargs.get('name', '')
         self.old_id = kwargs.get('wid')
         if self.page.startswith('video/collection'):
             self.name = get_title(self.page)
-        if self.page.startswith('subscription'):
-            self.newpage = "%s&category_id=%d" % (self.page, MovieID)
-        else:
-            self.newpage = self.page
         self.listitems = update_content(force=True, page=self.newpage, offset=self.offset)
         self.items_len = len(self.listitems)
         xbmcgui.WindowXMLDialog.__init__(self)
@@ -292,6 +289,8 @@ class VideoList(xbmcgui.WindowXMLDialog):
 
         self.getControl(500).reset()
         self.getControl(500).addItems(self.listitems)
+
+        time.sleep(0.3)
         xbmc.executebuiltin("Control.SetFocus(500, 1)")
 
         control = getids()
@@ -326,13 +325,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
             self.newpage = "%s&sort=popular" % self.page
             items = update_content(force=False, page=self.newpage, offset=self.offset)
             self.getControl(500).reset()
-        # ###### SubscribeList.xml ###### #
-        elif control == 7014 and self.newpage.find('category_id=%d' % SerialID) == -1:
-            self.newpage = "%s&category_id=%d" % (self.page, SerialID)
-            items = update_content(force=False, page=self.newpage, offset=self.offset)
-            self.getControl(500).reset()
             self.getControl(500).addItems(items)
-
 
     def onAction(self, action):
         actions = action.getId()
@@ -343,8 +336,9 @@ class VideoList(xbmcgui.WindowXMLDialog):
             if focusid in MENU_IDS:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
             elif focusid in [500]:
-                xbmc.log('!! SELF.PAGE !!! %s' % self.page)
-                if self.newpage.find('sort=add') > 0:
+                if self.page.startswith('subscription') or self.page.startswith('premieres') or self.page.startswith('collections') or self.page.startswith('user/favorites'):
+                    button_id = 6000
+                elif self.newpage.find('sort=add') > 0:
                     button_id = 7012
                 elif self.newpage.find('sort=popular') > 0:
                     button_id = 7013
@@ -380,10 +374,10 @@ class VideoList(xbmcgui.WindowXMLDialog):
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
             xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
-            if video_type == 'video' and self.page != 'collections':
+            if video_type == 'video' and not self.page.startswith('collections'):
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, id=video_id, vtype=video_type)
-            elif self.page == 'collections':
-                link = 'video/collection?id=%s' % video_id
+            elif self.page.startswith('collections'):
+                link = 'video/collection?id=%s&limit=100' % video_id
                 dialog = VideoList(u'VideoList.xml', addon_path, page=link)
 
             dialog.doModal()
@@ -408,7 +402,11 @@ class VideoList(xbmcgui.WindowXMLDialog):
                 offset = self.offset + 100
             AddToWindowStack(self, controlID)
             self.close()
-            dialog = VideoList(u'VideoList.xml', addon_path, page=self.page, offset=offset, name=self.name, wid=self.old_id)
+            if self.page.startswith('subscription') or self.page.startswith('premieres') or self.page.startswith('collections') or self.page.startswith('user/favorites'):
+                xml = u'SubscribeList.xml'
+            else:
+                xml = u'VideoList.xml'
+            dialog = VideoList(xml, addon_path, page=self.page, offset=offset, name=self.name, wid=self.old_id)
             dialog.doModal()
             del dialog
 
@@ -461,9 +459,13 @@ class SeasonList(xbmcgui.WindowXMLDialog):
         if self.seasons:
             self.getControl(500).reset()
             self.getControl(500).addItems(self.listitems)
+            time.sleep(0.3)
+            xbmc.executebuiltin("Control.SetFocus(500, 1)")
         elif self.episode_list:
             self.getControl(501).reset()
             self.getControl(501).addItems(self.series)
+            time.sleep(0.3)
+            xbmc.executebuiltin("Control.SetFocus(501, 1)")
 
         control = getids()
         if control:
@@ -690,6 +692,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
         elif controlID in [33003]:
             AddToWindowStack(self, controlID)
             self.close()
+            xbmc.executebuiltin("ActivateWindow(busydialog)")
             if self.window.getProperty("series") == 'True':
                 playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
                 playlist.clear()
@@ -982,7 +985,8 @@ def menu_chooser(window, controlID):
 
     elif controlID == 7003:
         page_name = language(1011)
-        link = 'premieres?limit=100'
+        link = 'premieres?limit=500'
+        xml = u'SubscribeList.xml'
 
     elif controlID == 7004:
         page_name = language(1012)
@@ -998,7 +1002,8 @@ def menu_chooser(window, controlID):
 
     elif controlID == 7007:
         page_name = language(1015)
-        link = 'collections'
+        link = 'collections?limit=100'
+        xml = u'SubscribeList.xml'
 
     elif controlID == 7008:
         page_name = language(1016)
@@ -1011,6 +1016,7 @@ def menu_chooser(window, controlID):
     elif controlID == 7010:
         if login():
             link = 'user/favorites'
+            xml = u'SubscribeList.xml'
             page_name = language(1018)
         else:
             dialog = xbmcgui.Dialog()

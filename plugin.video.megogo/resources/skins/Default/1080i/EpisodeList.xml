@@ -81,9 +81,27 @@
                 <onleft>SetFocus(6000)</onleft>
             </control>
 
+            <control type="image">
+                <posx>950</posx>
+                <posy>115</posy>
+                <width>28</width>
+                <height>28</height>
+                <texture flipy="true">icons/arrowdown.png</texture>
+                <visible>Container(501).HasPrevious</visible>
+            </control>
+
+            <control type="image">
+                <posx>950</posx>
+                <posy>1020</posy>
+                <width>28</width>
+                <height>28</height>
+                <texture>icons/arrowdown.png</texture>
+                <visible>Container(501).HasNext</visible>
+            </control>
+
             <control type="panel" id="501">
                 <posy>160</posy>
-                <posx>150</posx>
+                <posx>170</posx>
                 <width>1700</width>
                 <height>860</height>
                 <onup>6000</onup>
@@ -113,7 +131,7 @@
                             <posx>20</posx>
                             <posy>360</posy>
                             <align>left</align>
-                            <width>290</width>
+                            <width>430</width>
                             <font>font12</font>
                             <textcolor>FFFAFAFA</textcolor>
                             <shadowcolor>black</shadowcolor>
@@ -151,7 +169,7 @@
                             <posx>20</posx>
                             <posy>360</posy>
                             <align>left</align>
-                            <width>290</width>
+                            <width>430</width>
                             <font>font12</font>
                             <textcolor>FFFAFAFA</textcolor>
                             <shadowcolor>black</shadowcolor>
