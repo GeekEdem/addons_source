@@ -8,7 +8,7 @@
 #############################################################################
 
 import xbmc, xbmcgui, xbmcplugin, xbmcaddon
-import time, os
+import time, os, base64
 import sqlite3 as db
 
 addon 			= xbmcaddon.Addon()
@@ -241,7 +241,7 @@ class DataBase:
         else:
             self.create_login_table()
 
-        self.cu.execute("INSERT INTO account(id, login, password) VALUES (1, ?, ?)", (usr, pwd))
+        self.cu.execute("INSERT INTO account(id, login, password) VALUES (1, ?, ?)", (usr, base64.b64encode(pwd)))
         self.c.commit()
         xbmc.log('[%s]: account was writen to db' % addon_name)
 
@@ -257,6 +257,8 @@ class DataBase:
         if not self.table_exist('account'):
             self.create_login_table()
         else:
+            if field == 'password':
+                data = base64.b64encode(data)
             self.cu.execute("SELECT * FROM account")
             if len(self.cu.fetchall()) == 0:
                 self.cu.execute("INSERT INTO account(id) VALUES (1)")
@@ -272,13 +274,13 @@ class DataBase:
         except:
             var = None
         if var:
-            return {'login': var[1], 'password': var[2], 'cookie': var[3]}
+            return {'login': var[1], 'password': base64.b64decode(var[2]), 'cookie': var[3], 'user_id': var[4], 'card_num': var[5], 'card_type': var[6]}
         else:
-            return {'login': '', 'password': '', 'cookie': ''}
+            return {'login': '', 'password': '', 'cookie': '', 'user_id': '', 'card_num': '', 'card_type': ''}
 
     # Create Table
     def create_login_table(self):
-        self.cu.execute("CREATE TABLE account (id, login, password, cookie)")
+        self.cu.execute("CREATE TABLE account (id, login, password, cookie, user_id, card_num, card_type)")
         self.c.commit()
         self.cu.execute("INSERT INTO account(id) VALUES (1)")
         self.c.commit()

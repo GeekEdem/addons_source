@@ -11,6 +11,7 @@
 	<string id="00024">Video quality (default)</string>
 	<string id="00025">Audio language (default)</string>
 	<string id="00026">Subtitle language (only work in KODI)</string>
+    <string id="00027">Interface language</string>
 
 	<!-- Separators -->
 	<string id="00091">Color Settings</string>
@@ -52,7 +53,7 @@
 	<string id="00205">Hight 720p (1280x720)</string>
 	<string id="00206">Best 1080p (1920x1080)</string>
 
-	<!-- Video Language -->
+	<!-- Languages -->
 	<string id="00300">Russian (ru)</string>
 	<string id="00301">Ukrainian (ua)</string>
 	<string id="00302">Lithuanian (lt)</string>
@@ -64,20 +65,7 @@
     <string id="00308">Belorussian (be)</string>
     <string id="00309">Kyrgyz (kg)</string>
     <string id="00310">Czech (cz)</string>
-
-	<!-- Subtitles Language -->
 	<string id="00400">Off</string>
-	<string id="00401">Russian (ru)</string>
-	<string id="00402">Ukrainian (ua)</string>
-	<string id="00403">Lithuanian (lt)</string>
-	<string id="00404">Latvian (lv)</string>
-	<string id="00405">Estonian (ee)</string>
-	<string id="00406">Georgian (ge)</string>
-    <string id="00407">English (en)</string>
-    <string id="00408">Kazakh (kz)</string>
-    <string id="00409">Belorussian (be)</string>
-    <string id="00410">Kyrgyz (kg)</string>
-    <string id="00411">Czech (cz)</string>
 
 	<!-- TEXT -->
 	<string id="01000">Watch</string>
@@ -127,5 +115,26 @@
     <string id="01044">Popular</string>
     <string id="01045">Latest</string>
     <string id="01046">Recommendations</string>
+    <string id="01047">See after subscription on MEGOGO+</string>
+    <string id="01048">Access to the film 7 days for</string>
+    <string id="01049">Get access to this and other films by subscription MEGOGO+ a month for</string>
+    <string id="01050">Subscribe</string>
+    <string id="01051">Enter the certificate</string>
+    <string id="01052">Cancel</string>
+    <string id="01053">All films by subscription</string>
+    <string id="01054">added to favorites</string>
+    <string id="01055">removed from favorites</string>
+    <string id="01056">Entering certificate number</string>
+    <string id="01057">Entering card number</string>
+    <string id="01058">Enter only 4 digits. Re-enter?</string>
+    <string id="01059">Input error</string>
+    <string id="01060">Enter only 3 digits. Re-enter?</string>
+    <string id="01061">Select a month</string>
+    <string id="01062">Select a year</string>
+    <string id="01063">Remember card</string>
+    <string id="01064">Payment amount</string>
+    <string id="01065">Pay</string>
+    <string id="01066">Success</string>
+    <string id="01067">Please, fill all fields!</string>
 
 </strings>

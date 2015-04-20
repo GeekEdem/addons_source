@@ -1,3 +1,9 @@
+v1.0.10
+- Little bug fixes
+- Added "Add to favorite" and "Remove from favorite" buttons.
+- Added purchase
+- Little functional changes in addon
+
 v1.0.9
 - Added next and previous pages in categories
 - Fixed "STOP" button

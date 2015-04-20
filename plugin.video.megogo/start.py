@@ -33,6 +33,11 @@ if __addon__.getSetting('firstrun') == '0' or __addon__.getSetting('firstrun') =
     __addon__.openSettings()
     __addon__.setSetting(id='firstrun', value='1')
 
+# ##################################  SET UI LANGUAGE 'RU'	####################################### #
+if __addon__.getSetting('language') == '0' or __addon__.getSetting('language') == '':
+    __addon__.setSetting(id='language', value='0')
+
+# ##################################   WRITE TO DB ACCOUNT	####################################### #
 usr = __addon__.getSetting('login')
 pwd = __addon__.getSetting('password')
 if not db.table_exist('account'):
@@ -43,8 +48,7 @@ else:
     db.login_data_to_db(usr, pwd)
     db.cookie_to_db("")
 
-#xbmc.executebuiltin("XBMC.UpdateAddonRepos()")
-
+# ##################################    CHECK NEW VERSION   ####################################### #
 xbmc.log('[%s]: Trying to get new version...' % addon_name)
 try:
     request = urllib2.Request(url=source, headers={'s-Agent': 'MEGOGO Addon for XBMC/Kodi'})
@@ -60,10 +64,10 @@ try:
         dialog = xbmcgui.Dialog()
         dialog.ok(language(1033), language(1034))
         del dialog
-except:
-    xbmc.log('[%s]: No new version addon available.' % addon_name)
-    pass
+except Exception as e:
+    xbmc.log('[%s]: ERROR getting branch version! %s' % (addon_name, e))
 
+# ##################################        START UI        ####################################### #
 if getconfiguration():    # Get config from MEGOGO
     import Screens
     Screens.Main(splash=splash)
@@ -72,10 +76,16 @@ else:
     dialog.ok(language(1025), language(1031), language(1032))
     del dialog
 
+# ##################################        CLOSE APP        ####################################### #
 back.close()
 splash.close()
 
 dic = db.get_login_from_db()
+db.close_db()
 __addon__.setSetting(id='login', value=dic['login'])
 __addon__.setSetting(id='password', value=dic['password'])
+try:
+    xbmc.executebuiltin("Dialog.Close(busydialog)")
+except Exception as e:
+    xbmc.log('[%s]: ERROR closing busydialog! %s' % (addon_name, e))
 xbmc.log('[%s]: Close plugin. Version: %s' % (addon_name, addon_version))

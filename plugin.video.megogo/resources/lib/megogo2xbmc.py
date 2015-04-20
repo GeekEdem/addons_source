@@ -11,7 +11,7 @@ import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 import simplejson, requests
 import urllib, time, urllib2, hashlib, os, re, base64
 from sqlite import DataBase as DB
-from Utils import get_quality, get_language, get_subtitle
+from Utils import get_quality, get_language, get_subtitle, get_ui_language
 
 addon 			= xbmcaddon.Addon()
 language		= addon.getLocalizedString
@@ -26,6 +26,8 @@ API_Private_Key_MEGOGO  = '63ee38849d'
 API_Public_Key_MEGOGO   = '_kodi_j1'
 API_URL                 = 'http://api.megogo.net/v1'
 MEGOGO_URL              = 'http://megogo.net'
+PAY_URL                 = 'https://megogo.net/%s/billing/payu' % get_ui_language()
+PAY_VENDOR              = 'Studio-Evolution'
 UA                      = 'Plugin/%s %s/%s' % (addon_id, urllib.quote_plus(addon_author), addon_version)
 
 slider_images_resolution = ['image_1920x300', 'image_1600x520', 'image_1350x510']
@@ -37,6 +39,12 @@ a = DB()
 def Get_JSON_response(url="", cache_days=7):
     xbmc.log('[%s]: Trying to get %s' % (addon_name, url))
     now = time.time()
+    # Language correction
+    if url.find('?') > 0:
+        url = "%s&lang=%s" % (url, get_ui_language())
+    else:
+        url = "%s?lang=%s" % (url, get_ui_language())
+
     hashed_url = hashlib.md5(url).hexdigest()
     cache_seconds = int(cache_days * 86400)
     response = a.get_page_from_db(hashed_url, cache_seconds)
@@ -44,13 +52,13 @@ def Get_JSON_response(url="", cache_days=7):
     if not response:
         xbmc.log("[%s]: %s is not in cache, trying download data" % (addon_name, url))
         response = GET(url)
-        #try:
-        result = simplejson.loads(response)
-        xbmc.log("[%s]: %s download  in %f seconds" % (addon_name, url, time.time() - now))
-        a.set_page_to_db(hashed_url, int(time.time()), response)
-        #except:
-        #    xbmc.log("[%s]: Exception: Could not get new JSON data. %s" % (addon_name, response))
-        #    result = []
+        try:
+            result = simplejson.loads(response)
+            xbmc.log("[%s]: %s download  in %f seconds" % (addon_name, url, time.time() - now))
+            a.set_page_to_db(hashed_url, int(time.time()), response)
+        except Exception as e:
+            xbmc.log("[%s]: Get_JSON_response ERROR! Response - %s.\n %s" % (addon_name, response, e))
+            result = []
     else:
         result = simplejson.loads(response)
         xbmc.log("[%s]: %s loaded from cache in %f seconds" % (addon_name, url, time.time() - now))
@@ -62,91 +70,113 @@ def Get_JSON_response(url="", cache_days=7):
 # Function for sending GET requsts to megogo.net
 # req_p1 used for keeping urlencoded parameters
 # req_p2 used for keeping md5-sign of parameters+API_Public_Key_MEGOGO, that send in end of each request 
-def GET(url, old_url=None, login=False):
+def GET(url, old_url=None, login=False, post=False, post_data=None):
     #try:
-    dicParams = {}
-    linkParams = []
-    hashParams = []
-    dic = a.get_login_from_db()
-    if dic['cookie']:
-        cookie = simplejson.loads(base64.b64decode(dic['cookie']))
-    else:
-        cookie = None
-    usr = dic['login']
-    pwd = dic['password']
-
-    page, _, params = url.partition('?')
-
-    if params:
-        params = params.split('&')
-        for param in params:
-            key, _, value = param.partition('=')
-            dicParams[key] = value
-
-        for keys in dicParams:
-            linkParams.append('%s=%s' % (keys, urllib.quote_plus(dicParams[keys])))
-            hashParams.append('%s=%s' % (keys, dicParams[keys]))
-
-        linkParams = '&'.join(linkParams)
-        hashParams = ''.join(hashParams)
-    else:
-        hashParams = ''
-        linkParams = ''
-
-    m = hashlib.md5()
-    m.update('%s%s'%(hashParams, API_Private_Key_MEGOGO))
-    target = '%s/%s?%s&sign=%s' % (API_URL, page, linkParams, '%s%s' % (m.hexdigest(), API_Public_Key_MEGOGO))
-
-    xbmc.log('[%s]: GET\nUSR - %s\nPASS - %s\nCookie - %s\nTarget - %s' % (addon_name, usr, pwd, cookie, target))
-
-    if cookie and not old_url:
-        request = requests.get(target, cookies=cookie)
-        http = request.text
-        xbmc.log('[%s]: GET cookie and not old_url, http - %s' % (addon_name, http.encode('utf-8')))
-        return http.encode('utf-8')
-
-    # log in account in megogo.net
-    elif usr and pwd and login:
-        xbmc.log('[%s]: GET elif usr and pwd and login, url - %s' % (addon_name, url))
-        if not url.startswith('auth/login?login='):
-            GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), old_url=url, login=True)
+        dicParams = {}
+        linkParams = []
+        hashParams = []
+        dic = a.get_login_from_db()
+        if dic['cookie']:
+            cookie = simplejson.loads(base64.b64decode(dic['cookie']))
         else:
-            session = requests.session()
-            request = session.get(target)
-            http = request.text
-            if http.startswith('{"result":"ok"'):
-                cookies = requests.utils.dict_from_cookiejar(session.cookies)
-                xbmc.log('[%s]: NEW COOKIE - %s' % (addon_name, cookies))
-                a.cookie_to_db(base64.b64encode(str(cookies).replace("'", '"')))
-                if old_url:
-                    xbmc.log('[%s]: GET elif usr and pwd, old_url - %s' % (addon_name, old_url))
-                    GET(old_url)
-                else:
-                    xbmc.log('[%s]: return GET elif usr and pwd, http - %s' % (addon_name, http.encode('utf-8')))
-                    return http.encode('utf-8')
-            else:
-                return None
+            cookie = None
+        usr = dic['login']
+        pwd = dic['password']
 
-    else:
-        try:
-            request = urllib2.Request(url=target, data=None, headers={'User-Agent': UA})
+        # Language correction
+        if url.find('lang=') == -1 and not post and not url.startswith('auth/logout'):
+            if url.find('?') > 0:
+                url = "%s&lang=%s" % (url, get_ui_language())
+            else:
+                url = "%s?lang=%s" % (url, get_ui_language())
+
+        page, _, params = url.partition('?')
+
+        if params:
+            params = params.split('&')
+            for param in params:
+                key, _, value = param.partition('=')
+                dicParams[key] = value
+
+            for keys in dicParams:
+                linkParams.append('%s=%s' % (keys, urllib.quote_plus(dicParams[keys])))
+                hashParams.append('%s=%s' % (keys, dicParams[keys]))
+
+            linkParams = '&'.join(reversed(linkParams))
+            hashParams = ''.join(reversed(hashParams))
+        else:
+            hashParams = ''
+            linkParams = ''
+
+        m = hashlib.md5()
+        m.update('%s%s'%(hashParams, API_Private_Key_MEGOGO))
+        if not post:
+            target = '%s/%s?%s&sign=%s' % (API_URL, page, linkParams, '%s%s' % (m.hexdigest(), API_Public_Key_MEGOGO))
+        else:
+            target = '%s/%s?%s&sign=%s' % (PAY_URL, page, linkParams, '%s%s' % (m.hexdigest(), API_Public_Key_MEGOGO))
+
+        xbmc.log('[%s]: GET\nUSR - %s\nPASS - %s\nCookie - %s\nTarget - %s' % (addon_name, usr, pwd, cookie, target))
+
+        if cookie and not old_url and not post:
+            request = requests.get(target, cookies=cookie)
+            xbmc.log('[%s]: GET cookie and not old_url, request - %s' % (addon_name, request))
+            http = request.text
+            xbmc.log('[%s]: GET cookie and not old_url, http - %s' % (addon_name, http.encode('utf-8')))
+            return http.encode('utf-8')
+
+        # log in account in megogo.net
+        elif usr and pwd and login and not post:
+            xbmc.log('[%s]: GET elif usr and pwd and login, url - %s' % (addon_name, url))
+            if not url.startswith('auth/login?login='):
+                GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), old_url=url, login=True)
+            else:
+                session = requests.session()
+                request = session.get(target)
+                http = request.text
+                if http.startswith('{"result":"ok"'):
+                    cookies = requests.utils.dict_from_cookiejar(session.cookies)
+                    xbmc.log('[%s]: NEW COOKIE - %s' % (addon_name, cookies))
+                    a.cookie_to_db(base64.b64encode(str(cookies).replace("'", '"')))
+                    if old_url:
+                        xbmc.log('[%s]: GET elif usr and pwd, old_url - %s' % (addon_name, old_url))
+                        GET(old_url)
+                    else:
+                        xbmc.log('[%s]: return GET elif usr and pwd, http - %s' % (addon_name, http.encode('utf-8')))
+                        return http.encode('utf-8')
+                else:
+                    return None
+
+        else:
+            #try:
+            if post_data:
+                post_data = urllib.urlencode(post_data)
+            xbmc.log('ENCODED POST DATA - %s' % post_data)
+            request = urllib2.Request(url=target, data=post_data, headers={'User-Agent': UA})
             request = urllib2.urlopen(request)
             http = request.read()
             request.close()
             xbmc.log('[%s]: GET else, http - %s' % (addon_name, http))
             return http
-        except:
-            return ''
+            #except Exception as e:
+            #    xbmc.log('[%s]: Cannot get data from %s.\n%s' % (addon_name, target, e))
+            #    return None
+    #except Exception as e:
+    #    xbmc.log('[%s]: GET ERROR! %s' % (addon_name, e))
+    #    return None
 
 
 def checkLogin():
     dic = a.get_login_from_db()
-    if dic['cookie']:
+    if dic['cookie'] and dic['card_num']:
         xbmc.log('[%s]: Log in success. Cookie - %s' % (addon_name, dic['cookie']))
         return True
     else:
         if dic['login'] and dic['password']:
-            if log_in(dic['login'], dic['password']):
+            answer = log_in(dic['login'], dic['password'])
+            if answer:
+                a.update_account_in_db('user_id', answer["user_id"])
+                a.update_account_in_db('card_num', answer["credit_card"])
+                a.update_account_in_db('card_type', answer["card_type"])
                 return True
             else:
                 return False
@@ -158,20 +188,25 @@ def checkLogin():
 def log_in(usr, pwd):
     xbmc.log('[%s]: Try to login with {usr: %s, pass: %s}' % (addon_name, usr, pwd))
     data = GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), login=True)
-    xbmc.log('[%s]: login, if usr and pwd, data - %s' % (addon_name, data))
     if data:
-        return simplejson.loads(data)
+        result = simplejson.loads(data)
+        if result['result'] == 'ok':
+            return result["data"]
+        else:
+            return None
     else:
         xbmc.log('[%s]: Cannot log in account! Error retrieving data.' % addon_name)
-        return False
+        return None
 
 
 # Clear user, password and session_id from addon settings
 def logout():
-    # TODO: LOGOUT FROM MEGOGO.NET
+    dic = a.get_login_from_db()
+    if dic['login'] and dic['password']:
+        GET('auth/logout?')
+    a.clear_table('account')
     addon.setSetting('login', '')
     addon.setSetting('password', '')
-    xbmc.log('[%s]: logout successful' % addon_name)
 
 
 def HandleMainPage(responce, types = None):
@@ -259,12 +294,10 @@ def HandleVideoResult(item):
     try: poster = item["image"]["image_vertical"]
     except: pass
 
-    try:
-        rating = "%.2f" % float(item['rating_kinopoisk'])
+    try: rating = "%.2f" % float(item['rating_kinopoisk'])
     except: rating = ''
 
-    try:
-        rating_imdb = "%.2f" % float(item['rating_imdb'])
+    try: rating_imdb = "%.2f" % float(item['rating_imdb'])
     except: rating_imdb = ''
 
     try: age_limit = item['age_limit']
@@ -279,8 +312,7 @@ def HandleVideoResult(item):
     try: duration = int(item['duration'] / 60)
     except: duration = ''
 
-    try:
-        crew = a.crew_info(item['people'])
+    try: crew = a.crew_info(item['people'])
     except: crew = ''
 
     try: favourite = item['is_favorite']
@@ -298,7 +330,7 @@ def HandleVideoResult(item):
     try: quality = item['quality']
     except: quality = ''
 
-    try: season_list = item['season_list']		# TODO SEASONS!
+    try: season_list = item['season_list']
     except: season_list = None
 
     try: available = item['is_available']
@@ -307,7 +339,7 @@ def HandleVideoResult(item):
     try:
         purchase = item["purchase_info"]
         currency = purchase['tvod']['subscriptions'][0]['currency']
-        price = int(purchase['tvod']['subscriptions'][0]['tariffs'][0]['price'])
+        price = purchase['tvod']['subscriptions'][0]['tariffs'][0]['price']
     except:
         currency = None
         price = None
@@ -320,6 +352,12 @@ def HandleVideoResult(item):
 
     try: series = '%s' % item["is_series"]
     except: series = 'false'
+
+    try: promo = item["is_promocode"]
+    except: promo = False
+
+    try: purchase = item["purchase_info"]
+    except: purchase = None
 
     locInfo = { 'title'			: title,
                 'id'			: unicode(vid),
@@ -350,6 +388,8 @@ def HandleVideoResult(item):
                 'recommended'	: recommended_videos,
                 'exclusive'		: exclusive,
                 'series'		: series,
+                'is_promocode'  : promo,
+                'purchase_info' : purchase
               }
 
     #xbmc.log('[%s]: HandleVideoResult parses data - %s' % (addon_name, locInfo))
@@ -360,47 +400,59 @@ def HandleVideoResult(item):
 def getconfiguration():
     xbmc.log('[%s]: Try to get configuration' % addon_name)
     data = GET('configuration')
-    #try:
-    # xbmc.log('data - %s' % data)
-    data = simplejson.loads(data)
-
-    if data['result'] == 'ok':
-        a.set_genres_to_db(data['data']['genres'])
-        a.set_categories_to_db(data['data']['categories'])
-        a.set_member_types_to_db(data['data']['member_types'])
-        xbmc.log('[%s]: Successful get configuration' % addon_name)
-        return True
+    if data:
+        try:
+            # xbmc.log('data - %s' % data)
+            data = simplejson.loads(data)
+            if data['result'] == 'ok':
+                a.set_genres_to_db(data['data']['genres'])
+                a.set_categories_to_db(data['data']['categories'])
+                a.set_member_types_to_db(data['data']['member_types'])
+                xbmc.log('[%s]: Successful get configuration' % addon_name)
+                return True
+            else:
+                return None
+        except Exception as e:
+            xbmc.log('[%s]: Getting configuration ERROR! %s' % (addon_name, e))
+            return None
     else:
-        return False
-    #except:
-    #    return False
-    
+        return None
 
 
 # Get tarifications
 def gettarification():
     xbmc.log('[%s]: Try to get tarification' % addon_name)
     data = Get_JSON_response('subscription/info')
-    if data['result'] == 'ok':
-        xbmc.log('[%s]: Successful get tarification' % addon_name)
-        return data['data']
+    if data:
+        if data['result'] == 'ok':
+            xbmc.log('[%s]: Successful get tarification' % addon_name)
+            return data['data']
+        else:
+            return None
     else:
-        return False
+        return None
 
 
-# Get prise from tarif
+# Get mounth price from tariff
 def get_price(title):
+    currency = None
+    month_price = None
     if title == 'svod':
-        title = 'MEGOGO+'
+        title = 'M+'
 
     data = gettarification()
-    for arr in data:
-        if arr['title'] == title:
-            currency = arr['currency']
-            month_price = arr['tariffs'][0]['price']
-            break
-
-    return "%s %s" % (month_price, currency)
+    if data:
+        for arr in data:
+            if arr['title'] == title:
+                currency = arr['currency']
+                month_price = arr['tariffs'][0]['price']
+                break
+        if currency and month_price:
+            return "%s %s" % (month_price, currency)
+        else:
+            return ""
+    else:
+        return ""
 
 
 # Get recommended materials
@@ -413,14 +465,38 @@ def main_page(cache_days=1):
 
 
 # Get video data
-def getvideodata(section, page):
+def getvideodata(force, page, section):
     xbmc.log('[%s]: Try to get getvideodata' % addon_name)
+    if force:
+        cache = 0
+    else:
+        cache = 1
     if section == 'collection':
-        data = Get_JSON_response('collection?id=%s' % page)
+        data = Get_JSON_response('collection?id=%s' % page, cache_days=cache)
     elif section == 'video':
-        data = Get_JSON_response('video/info?id=%s' % page)
+        data = Get_JSON_response('video/info?id=%s' % page, cache_days=cache)
     if data['result'] == 'ok':
         return data
+    else:
+        return []
+
+
+# Get page
+def get_page(force, page, offset=0):
+    if offset != 0:
+        url = '%s&offset=%d' % (page, offset)
+    else:
+        url = page
+    if force:
+        cache = 0
+    else:
+        cache = 1
+    data = Get_JSON_response(url, cache_days=cache)
+    if data:
+        if data['result'] == 'ok':
+            return data
+        else:
+            return []
     else:
         return []
 
@@ -452,10 +528,15 @@ def data_from_stream(video_id):
         except:
             subtitles = None
 
-        return bitrates, audios, subtitles
+        try:
+            src = data['data']['src']
+        except:
+            src = None
+
+        return bitrates, audios, subtitles, src
 
     else:
-        return None, None, None
+        return None, None, None, None
 
 
 def get_stream(video_id):
@@ -529,39 +610,84 @@ def get_stream(video_id):
 # Get comments to video
 def getcomments(video_id):
     data = Get_JSON_response('comment/list?video_id=%s' % video_id, cache_days=1)
-    if data['result'] == 'ok':
-        return data['data']['comments']
+    if data:
+        if data['result'] == 'ok':
+            return data['data']['comments']
+        else:
+            return None
     else:
         return None
 
 
-def get_page(force, page, offset=0):
-    if offset != 0:
-        url = '%s&offset=%d' % (page, offset)
-    else:
-        url = page
-    if force:
-        cache = 0
-    else:
-        cache = 1
-    data = Get_JSON_response(url, cache_days=cache)
-
-    return data
-
-
-def addFav(params):
-    data = Get_JSON_response('addfavorite?video=%s' % params['id'])
-    if data['result'] == 'ok':
-        return True
+# Add video to favorites
+def addFav(vid):
+    data = simplejson.loads(GET('user/favorite/add?video_id=%s' % vid))
+    if data:
+        if data['result'] == 'ok':
+            return True
+        else:
+            return False
     else:
         return False
 
 
 # Delete video from favorites
-def delFav(params):
-    data = Get_JSON_response('removefavorite?video=%s' % params['id'])
-    if data['result'] == 'ok':
-        return True
+def delFav(vid):
+    data = simplejson.loads(GET('user/favorite/delete?video_id=%s' % vid))
+    if data:
+        if data['result'] == 'ok':
+            return True
+        else:
+            return False
     else:
         return False
 
+
+# Send certificate code
+def send_certificate(certificate, vid, tariff_id, subscription_id, ptype):
+    if ptype == 'svod':
+        link = 'payments/code?code=%s&video_id=%s&subscription_id=%s' % (certificate, vid, subscription_id)
+    elif ptype == 'tvod':
+        link = 'payments/code?code=%s&video_id=%s&tariff_id=%s' % (certificate, vid, tariff_id)
+    else:
+        return None
+
+    data = GET(link)
+    if data:
+        result = simplejson.loads(data)
+        xbmc.log('CERTIFICATE RESULT! %s' % result)
+        if result['result'] == 'ok':
+            return {'message': result['data']['message'], 'code': result['data']['status_code']}
+        else:
+            return None
+    else:
+        return None
+
+
+# PAY functions
+def send_payrequest(card_data, service_id, pay_obj_id=False, autoprolong=False):
+    if pay_obj_id:
+        url = "order?pay_method=alu&service_id=%s&pay_obj_id=%s&user_id=%s" % (service_id, pay_obj_id, a.get_login_from_db()['user_id'])
+    else:
+        url = "order?pay_method=alu&service_id=%s&user_id=%s" % (service_id, a.get_login_from_db()['user_id'])
+
+    amount = card_data['amount']
+    xbmc.log('amount %s' % (type(amount), amount))
+    replace_amount = amount.split(' ')[0]+'0'
+    card_data['amount'] = replace_amount + ' ' + amount.split(' ')[1]
+    xbmc.log('CARD DATA %s - %s' % (type(card_data), card_data))
+    data = GET(url, post=True, post_data=card_data)
+    if data:
+        result = simplejson.loads(data)
+        if result['result'] == 'done':
+            xbmc.log('SUCCESS PAYMENT! %s' % data)
+            return {'answer': 'success', 'message': result['message']}
+        elif result['result'] == 'error':
+            errors = [result['message']]
+            for error in result['errors']:
+                errors.append(error['message'])
+            return {'answer': 'error', 'message': errors}
+        else:
+            return None
+    else:
+        return None

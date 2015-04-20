@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <window id="13001">
-	<!--onload>Control.SetFocus(6000)</onload-->
-	<!--onunload>UnloadSkin()</onunload-->
-	<defaultcontrol always="true">6000</defaultcontrol>
 	<controls>
 		<animation type="WindowOpen" reversible="false">
 			<effect type="zoom" start="80" end="100" center="960,540" delay="500" tween="back" time="240" />
@@ -91,7 +88,7 @@
                 <textcolor>FF999999</textcolor>
                 <ondown>SetFocus(500)</ondown>
                 <onright>SetFocus(8000)</onright>
-                <onleft>SetFocus(7000)</onleft>
+                <onleft>SetFocus(7001)</onleft>
                 <!--focusedcolor>FFFAFAFA</focusedcolor-->
             </control>
             <control type="button" id="8000">

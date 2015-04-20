@@ -216,11 +216,9 @@ def CreateCommentList(video_id, data=None):
     return itemlist
 
 
-def CreateEpisodeList(video_id, data=None):
+"""def CreateEpisodeList(video_id, data=None):
     if not data:
-        data = megogo2xbmc.getcomments(video_id)
-        if not data:
-            return []
+        return []
 
     itemlist = []
     image_requests = []
@@ -250,13 +248,42 @@ def CreateEpisodeList(video_id, data=None):
         itemlist.append(listitem)
         # counter += 1
 
+    return itemlist"""
+
+
+def CreateTiriffList(data, currency):
+    if not data:
+        return []
+    Int_InfoLabels		= ["tariff_id", "period"]
+    Float_InfoLabels	= ["price"]
+    String_InfoLabels	= ["description", "title"]
+
+    itemlist = []
+    for (count, result) in enumerate(data):
+        listitem = xbmcgui.ListItem('%s' % (str(count)))
+        listitem.setProperty('currency', unicode(currency))
+        for (key, value) in result.iteritems():
+            if not value:
+                continue
+            if key.lower() in Int_InfoLabels:
+                listitem.setProperty('%s' % key.lower(), unicode(value))
+            if key.lower() in String_InfoLabels:
+                listitem.setProperty('%s' % key.lower(), value.encode('utf-8'))
+            if key.lower() in Float_InfoLabels:
+                try:
+                    listitem.setProperty('%s' % key.lower(), "%1.1f" % float(value))
+                except:
+                    pass
+        itemlist.append(listitem)
     return itemlist
 
 
 def update_content(force=False, page=False, section=False, offset=0):
     listitems = fetch_data(force, page, section, offset)
-    listitems = CreateListItems(listitems)
-    return listitems
+    if listitems:
+        return CreateListItems(listitems)
+    else:
+        return []
 
 
 def fetch_data(force=False, page=False, section=False, offset=0):
@@ -271,17 +298,17 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         else:
             response = megogo2xbmc.main_page()
     elif page and section:
-        response = megogo2xbmc.getvideodata(section, page)
+        response = megogo2xbmc.getvideodata(force, page, section)
     else:
         response = megogo2xbmc.get_page(force, page, offset)
 
     if len(response) == 0 or response['result'] != 'ok':
-        return False
+        return None
     elif page == 'Main' and section == 'recommended':
-        return megogo2xbmc.HandleMainPage(response['data'], 'recommended')  # TODO pages!
+        return megogo2xbmc.HandleMainPage(response['data'], 'recommended')
     elif page == 'Main' and section == 'slider':
-        return megogo2xbmc.HandleMainPage(response['data'], 'sliders')	    # TODO pages!
-    elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection'):
+        return megogo2xbmc.HandleMainPage(response['data'], 'sliders')
+    elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection') or page.startswith('search'):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page.startswith('collections'):
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
@@ -347,6 +374,19 @@ def Get_File(url):
             return None
 
 
+def get_subscribe_tariffs(title):
+    if title == 'svod':
+        title = 'M+'
+
+    data = megogo2xbmc.gettarification()
+    if data:
+        for arr in data:
+            if arr['title'] == title:
+                return arr
+    else:
+        return []
+
+
 def get_quality(value):
     return language(int(value)+201)
 
@@ -356,11 +396,27 @@ def get_language(value):
 
 
 def get_subtitle(value):
-    return language(int(value)+400)
+    if value == 0:
+        return language(400)
+    else:
+        return language(int(value)+300)
+
+
+def get_ui_language():
+    index = get_language(addon.getSetting('language'))[-3:-1]
+    xbmc.log("[%s]: UI LANGUAGE - %s" % (addon_name, index))
+    return index
 
 
 def AddToWindowStack(window, controlID):
     windowstack.append({'window': window, 'id': controlID})
+
+
+def DelWindowStack():
+    global windowstack
+    for window in windowstack:
+        window['window'].close()
+    windowstack = []
 
 
 def PopWindowStack(active):
@@ -373,13 +429,11 @@ def PopWindowStack(active):
         active.close()
 
 
-def DelWindowStack():
-    windowstack = []
-
-
 def getids():
     if ids:
         return ids.pop()
+    else:
+        return None
 
 
 class VideoPlayer(xbmc.Player):

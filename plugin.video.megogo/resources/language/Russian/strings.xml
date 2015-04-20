@@ -11,6 +11,7 @@
 	<string id="00024">Качаство видео (по умолчанию)</string>
 	<string id="00025">Язык дорожки (по умолчанию)</string>
 	<string id="00026">Язык субтитров (работает только в KODI)</string>
+    <string id="00027">Язык интерфейса</string>
 
 	<!-- Разделители -->
 	<string id="00091">Настройки цвета</string>
@@ -52,9 +53,9 @@
 	<string id="00205">Высокое 720p (1280x720)</string>
 	<string id="00206">Наилучшее 1080p (1920x1080)</string>
 
-	<!-- Язык видео -->
+	<!-- Языки -->
 	<string id="00300">Русский (ru)</string>
-	<string id="00301">Українська (ua)</string>
+	<string id="00301">Украинский (ua)</string>
 	<string id="00302">Литовский (lt)</string>
     <string id="00303">Латвийский (lv)</string>
     <string id="00304">Эстонский (ee)</string>
@@ -64,20 +65,7 @@
     <string id="00308">Белорусский (be)</string>
     <string id="00309">Киргизский (kg)</string>
     <string id="00310">Чешский (cz)</string>
-  
-	<!-- Субтитры -->
-	<string id="00400">Отключены</string>
-	<string id="00401">Русский (ru)</string>
-	<string id="00402">Українська (ua)</string>
-	<string id="00403">Литовский (lt)</string>
-	<string id="00404">Латвийский (lv)</string>
-	<string id="00405">Эстонский (ee)</string>
-	<string id="00406">Грузинский (ge)</string>
-    <string id="00407">Английский (en)</string>
-    <string id="00408">Казахский (kz)</string>
-    <string id="00409">Белорусский (be)</string>
-    <string id="00410">Киргизский (kg)</string>
-    <string id="00411">Чешский (cz)</string>
+    <string id="00400">Отключены</string>
 
 	<!-- Текст -->
 	<string id="01000">Смотреть</string>
@@ -127,5 +115,26 @@
     <string id="01044">Популярные</string>
     <string id="01045">Последние</string>
     <string id="01046">Рекомендации</string>
+    <string id="01047">Смотрите по подписке на MEGOGO+</string>
+    <string id="01048">Получите доступ к фильму на 7 дней за</string>
+    <string id="01049">Получите доступ к этому и другим фильмам по подписке MEGOGO+ на месяц за</string>
+    <string id="01050">Оформить подписку</string>
+    <string id="01051">Ввести сертификат</string>
+    <string id="01052">Отмена</string>
+    <string id="01053">Все фильмы по подписке</string>
+    <string id="01054">добавлено в избранное</string>
+    <string id="01055">удалено с избранного</string>
+    <string id="01056">Ввод сертификата</string>
+    <string id="01057">Ввод номера карты</string>
+    <string id="01058">Введите только 4 цифры. Повторить ввод?</string>
+    <string id="01059">Ошибка ввода</string>
+    <string id="01060">Введите только 3 цифры. Повторить ввод?</string>
+    <string id="01061">Выберите месяц</string>
+    <string id="01062">Выберите год</string>
+    <string id="01063">Запомнить карту</string>
+    <string id="01064">Сумма к оплате</string>
+    <string id="01065">Оплатить</string>
+    <string id="01066">Успех</string>
+    <string id="01067">Пожалуйста, заполните все поля!</string>
 
 </strings>

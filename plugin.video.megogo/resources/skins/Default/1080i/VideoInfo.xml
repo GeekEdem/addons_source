@@ -77,7 +77,6 @@
 				<posy>420</posy>
 				<width>156</width>
 				<height>156</height>
-				<!--aspectratio scalediffuse="false">scale</aspectratio-->
 				<texture>$INFO[Window.Property(SVOD)]</texture>
 				<visible>!IsEmpty(Window.Property(SVOD))</visible>
 			</control>
@@ -88,7 +87,6 @@
 				<posy>420</posy>
 				<width>156</width>
 				<height>156</height>
-				<!--aspectratio scalediffuse="false">scale</aspectratio-->
 				<texture>$INFO[Window.Property(TVOD)]</texture>
 				<visible>!IsEmpty(Window.Property(TVOD))</visible>
 			</control>
@@ -116,10 +114,34 @@
 				<visible>!IsEmpty(Window.Property(Quality))</visible>
 			</control>
 
+            <control type="button" id="33014">
+				<description> ADD TO FAVOURITE </description>
+                <visible>!IsEmpty(Window.Property(Add))</visible>
+				<posx>820</posx>
+				<posy>80</posy>
+				<width>85</width>
+				<height>85</height>
+				<onright>33003</onright>
+				<texturefocus>buttons/Add_On.png</texturefocus>
+				<texturenofocus>buttons/Add_Off.png</texturenofocus>
+			</control>
+
+            <control type="button" id="33014">
+				<description> DELL FROM FAVOURITE </description>
+                <visible>!IsEmpty(Window.Property(Remove))</visible>
+				<posx>820</posx>
+				<posy>80</posy>
+				<width>85</width>
+				<height>85</height>
+				<onright>33003</onright>
+				<texturefocus>buttons/Remove_On.png</texturefocus>
+				<texturenofocus>buttons/Remove_Off.png</texturenofocus>
+			</control>
+
 			<control type="button" id="33003">
 				<description> PLAY BUTTON </description>
                 <visible>IsEmpty(Window.Property(series))</visible>
-				<posx>820</posx>
+				<posx>925</posx>
 				<posy>77</posy>
 				<width>300</width>
 				<height>91</height>
@@ -130,6 +152,7 @@
 				<aligny>top</aligny>
 				<font>font13</font>
 				<textcolor>FF999999</textcolor>
+                <onleft>33014</onleft>
 				<onright>33012</onright>
 				<!--aspectratio scalediffuse="true">stretch</aspectratio-->
 				<texturefocus>buttons/Play_On.png</texturefocus>
@@ -140,7 +163,7 @@
             <control type="button" id="33003">
 				<description> PLAY BUTTON WHEN SERIES </description>
                 <visible>!IsEmpty(Window.Property(series))</visible>
-				<posx>820</posx>
+				<posx>925</posx>
 				<posy>77</posy>
 				<width>310</width>
 				<height>91</height>
@@ -151,8 +174,8 @@
 				<aligny>top</aligny>
 				<font>font13</font>
 				<textcolor>FF999999</textcolor>
+                <onleft>33014</onleft>
 				<onright>33012</onright>
-				<!--aspectratio scalediffuse="true">stretch</aspectratio-->
 				<texturefocus>buttons/Play_On.png</texturefocus>
 				<texturenofocus>buttons/Play_Off.png</texturenofocus>
 				<label>$ADDON[plugin.video.megogo 1039]</label>
@@ -160,7 +183,7 @@
 
 			<control type="button" id="33012">
 				<description> ABOUT BUTTON </description>
-				<posx>1150</posx>
+				<posx>1250</posx>
 				<posy>77</posy>
 				<width>300</width>
 				<height>91</height>
@@ -182,7 +205,7 @@
             <control type="button" id="33013">
 				<description> SERIES BUTTON </description>
                 <visible>!IsEmpty(Window.Property(series))</visible>
-				<posx>1480</posx>
+				<posx>1580</posx>
 				<posy>77</posy>
 				<width>300</width>
 				<height>91</height>
@@ -914,7 +937,7 @@
 		<control type="group">
 			<posy>65</posy>
 			<animation type="Conditional" condition="!Control.HasFocus(17051) + !ControlGroup(17000).HasFocus + !Control.HasFocus(17050) + !ControlGroup(50000).HasFocus  + !ControlGroup(50001).HasFocus + !ControlGroup(50002).HasFocus">
-				<effect type="slide" end="-1920" time="620" easing="in" tween="cubic" />
+				<effect type="slide" end="-1921" time="620" easing="in" tween="cubic" />
 			</animation>
 
             <control type="button" id="17051">
@@ -932,7 +955,7 @@
 				<width>28</width>
 				<height>28</height>
 				<texture flipy="true">icons/arrowdown.png</texture>
-				<visible>Control.HasFocus(7001) | Control.HasFocus(7002) | Control.HasFocus(7003) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus | ControlGroup(50002).HasFocus</visible>
+				<visible>Control.HasFocus(17001) | Control.HasFocus(17002) | Control.HasFocus(17003) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus | ControlGroup(50002).HasFocus</visible>
 			</control>
 
 			<control type="image">
@@ -941,7 +964,7 @@
 				<width>28</width>
 				<height>28</height>
 				<texture>icons/arrowdown.png</texture>
-				<visible>Control.HasFocus(7001) | Control.HasFocus(7002) | Control.HasFocus(17050) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus | ControlGroup(50002).HasFocus</visible>
+				<visible>Control.HasFocus(17001) | Control.HasFocus(17002) | Control.HasFocus(17050) | ControlGroup(50000).HasFocus | ControlGroup(50001).HasFocus</visible>
 			</control>
 
 			<control type="button" id="17050">
@@ -1300,10 +1323,10 @@
                 </control>
 
                 <control type="panel" id="5002">
-					<posy>90</posy>
+					<posy>50</posy>
 					<posx>90</posx>
 					<width>1400</width>
-					<height>800</height>
+					<height>850</height>
 					<onleft>17003</onleft>
 					<scrolltime>200</scrolltime>
 					<orientation>vertical</orientation>
@@ -1311,26 +1334,26 @@
 						<effect type="slide" start="0,1080" end="0,0" delay="0" tween="sine" time="1300" />
 					</animation>
 
-					<itemlayout width="420" height="400">
+					<itemlayout width="420" height="410">
                         <control type="image">
                             <posx>0</posx>
-                            <posy>1</posy>
-                            <width>262</width>
-                            <height>334</height>
+                            <posy>0</posy>
+                            <width>292</width>
+                            <height>414</height>
                             <texture border="40">buttons/Off.png</texture>
                         </control>
                         <control type="group">
                             <control type="image">
-                                <posx>6</posx>
-                                <posy>8</posy>
+                                <posx>20</posx>
+                                <posy>20</posy>
                                 <width>250</width>
                                 <height>320</height>
                                 <aspectratio scalediffuse="false">scale</aspectratio>
                                 <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
                             </control>
                             <control type="label">
-                                <posx>0</posx>
-                                <posy>328</posy>
+                                <posx>15</posx>
+                                <posy>338</posy>
                                 <align>left</align>
                                 <width>260</width>
                                 <font>font12</font>
@@ -1339,8 +1362,8 @@
                                 <label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
                             </control>
                             <control type="label">
-                                <posx>0</posx>
-                                <posy>350</posy>
+                                <posx>15</posx>
+                                <posy>365</posy>
                                 <align>left</align>
                                 <width>260</width>
                                 <font>font12</font>
@@ -1353,32 +1376,32 @@
                     <focusedlayout width="420" height="400" >
                         <control type="image">
                             <posx>0</posx>
-                            <posy>1</posy>
-                            <width>262</width>
-                            <height>334</height>
+                            <posy>0</posy>
+                            <width>292</width>
+                            <height>414</height>
                             <texture border="40">buttons/Off.png</texture>
                         </control>
                         <control type="image">
                             <posx>0</posx>
-                            <posy>1</posy>
-                            <width>262</width>
-                            <height>334</height>
+                            <posy>0</posy>
+                            <width>292</width>
+                            <height>414</height>
                             <texture border="40">buttons/On.png</texture>
                             <animation effect="fade" start="0" end="100" time="160">Focus</animation>
                             <animation effect="fade" start="0" end="100" time="0">UnFocus</animation>
                         </control>
                         <control type="group">
                             <control type="image">
-                                <posx>6</posx>
-                                <posy>8</posy>
+                                <posx>20</posx>
+                                <posy>20</posy>
                                 <width>250</width>
                                 <height>320</height>
                                 <aspectratio scalediffuse="false">scale</aspectratio>
                                 <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
                             </control>
                             <control type="label">
-                                <posx>0</posx>
-                                <posy>328</posy>
+                                <posx>15</posx>
+                                <posy>338</posy>
                                 <align>left</align>
                                 <width>260</width>
                                 <font>font12</font>
@@ -1386,9 +1409,9 @@
                                 <shadowcolor>black</shadowcolor>
                                 <label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
                             </control>
-                             <control type="label">
-                                <posx>0</posx>
-                                <posy>350</posy>
+                            <control type="label">
+                                <posx>15</posx>
+                                <posy>365</posy>
                                 <align>left</align>
                                 <width>260</width>
                                 <font>font12</font>
