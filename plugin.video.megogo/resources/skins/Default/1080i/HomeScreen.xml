@@ -359,8 +359,8 @@
                         <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
 					</control>
                     <control type="image">
-                        <posx>25</posx>
-                        <posy>440</posy>
+                        <posx>22</posx>
+                        <posy>430</posy>
                         <width>50</width>
                         <height>50</height>
                         <aspectratio scalediffuse="false">scale</aspectratio>
@@ -368,8 +368,8 @@
                         <visible>!IsEmpty(ListItem.Property(Buy))</visible>
                     </control>
                     <control type="image">
-                        <posx>25</posx>
-                        <posy>440</posy>
+                        <posx>22</posx>
+                        <posy>430</posy>
                         <width>50</width>
                         <height>50</height>
                         <aspectratio scalediffuse="false">scale</aspectratio>
@@ -427,8 +427,8 @@
                         <texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Thumb]</texture>
 					</control>
                     <control type="image">
-                        <posx>25</posx>
-                        <posy>440</posy>
+                        <posx>22</posx>
+                        <posy>430</posy>
                         <width>50</width>
                         <height>50</height>
                         <aspectratio scalediffuse="false">scale</aspectratio>
@@ -436,8 +436,8 @@
                         <visible>!IsEmpty(ListItem.Property(Buy))</visible>
                     </control>
                     <control type="image">
-                        <posx>25</posx>
-                        <posy>440</posy>
+                        <posx>22</posx>
+                        <posy>430</posy>
                         <width>50</width>
                         <height>50</height>
                         <aspectratio scalediffuse="false">scale</aspectratio>

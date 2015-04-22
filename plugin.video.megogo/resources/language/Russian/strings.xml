@@ -136,5 +136,9 @@
     <string id="01065">Оплатить</string>
     <string id="01066">Успех</string>
     <string id="01067">Пожалуйста, заполните все поля!</string>
+    <string id="01068">Оплата картой</string>
+    <string id="01069">Изменить карту</string>
+    <string id="01070">Телефон поддержки</string>
+    <string id="01071">Ваш ID</string>
 
 </strings>

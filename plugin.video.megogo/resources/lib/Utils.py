@@ -290,19 +290,15 @@ def fetch_data(force=False, page=False, section=False, offset=0):
     if page == 'configuration':
         return megogo2xbmc.getconfiguration()
     elif page == 'tarification':
-        megogo2xbmc.gettarification()
-        return
+        return megogo2xbmc.gettarification()
     elif page == 'Main':
-        if force:
-            response = megogo2xbmc.main_page(0)
-        else:
-            response = megogo2xbmc.main_page()
+        response = megogo2xbmc.main_page(force)
     elif page and section:
         response = megogo2xbmc.getvideodata(force, page, section)
     else:
         response = megogo2xbmc.get_page(force, page, offset)
 
-    if len(response) == 0 or response['result'] != 'ok':
+    if not response:
         return None
     elif page == 'Main' and section == 'recommended':
         return megogo2xbmc.HandleMainPage(response['data'], 'recommended')
@@ -427,6 +423,14 @@ def PopWindowStack(active):
         dialog.doModal()
     else:
         active.close()
+
+
+def DelFromWindowStack(amount):
+    if amount:
+        inc = 0
+        while inc < amount:
+            del windowstack[-1]
+            inc += 1
 
 
 def getids():

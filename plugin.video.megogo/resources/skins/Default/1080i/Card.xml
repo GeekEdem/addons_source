@@ -209,7 +209,7 @@
 				<description> UNCHECK FOCUS </description>
                 <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED))</visible>
 				<posx>800</posx>
-				<posy>950</posy>
+				<posy>912</posy>
                 <width>60</width>
                 <height>60</height>
 				<aspectratio align="center">scale</aspectratio>
@@ -220,7 +220,7 @@
 				<description> UNCHECK NOFOCUS </description>
                 <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED))</visible>
 				<posx>800</posx>
-				<posy>950</posy>
+				<posy>912</posy>
                 <width>60</width>
                 <height>60</height>
 				<aspectratio align="center">scale</aspectratio>
@@ -231,7 +231,7 @@
 				<description> CHECK FOCUS </description>
                 <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED))</visible>
 				<posx>800</posx>
-				<posy>950</posy>
+				<posy>912</posy>
                 <width>60</width>
                 <height>60</height>
 				<aspectratio align="center">scale</aspectratio>
@@ -242,7 +242,7 @@
 				<description> CHECK NOFOCUS </description>
                 <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED))</visible>
 				<posx>800</posx>
-				<posy>950</posy>
+				<posy>912</posy>
                 <width>60</width>
                 <height>60</height>
 				<aspectratio align="center">scale</aspectratio>
@@ -252,7 +252,7 @@
             <control type="button" id="608">
                 <description> CARD REMEMBER CHECKBOX </description>
                 <posx>850</posx>
-                <posy>928</posy>
+                <posy>890</posy>
                 <width>300</width>
                 <height>100</height>
                 <colordiffuse>FFFFFFFF</colordiffuse>
@@ -269,7 +269,6 @@
                 <textoffsety>0</textoffsety>
                 <pulseonselect>false</pulseonselect>
                 <onup>605</onup>
-                <onright>609</onright>
                 <ondown>609</ondown>
             </control>
 
@@ -277,7 +276,7 @@
 				<description> PAY </description>
                 <onleft>608</onleft>
                 <onup>608</onup>
-				<posx>1600</posx>
+				<posx>810</posx>
 				<posy>980</posy>
 				<width>300</width>
 				<height>90</height>
@@ -291,6 +290,20 @@
 				<texturefocus>buttons/On.png</texturefocus>
 				<texturenofocus>buttons/Off.png</texturenofocus>
 				<label>$ADDON[plugin.video.megogo 1065]</label>
+			</control>
+
+            <control type="textbox">
+				<description> SUPPORT INFO </description>
+				<posx>1400</posx>
+				<posy>950</posy>
+				<width>500</width>
+                <height>160</height>
+				<textcolor>FFFAFAFA</textcolor>
+				<align>right</align>
+				<label>$ADDON[plugin.video.megogo 1070][CR]$INFO[Window.Property(Phone)][CR]$INFO[Window.Property(UID)]</label>
+				<font>font13</font>
+				<shadowcolor>black</shadowcolor>
+                <autoscroll delay="5000" time="4000" repeat="2000">true</autoscroll>
 			</control>
 
         </control>

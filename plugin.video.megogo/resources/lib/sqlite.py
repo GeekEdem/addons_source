@@ -207,6 +207,29 @@ class DataBase:
         else:
             return ''
 
+    # Write to db support telephones
+    def set_support_telephone_to_db(self, phones):
+        if self.table_exist('support'):
+            self.clear_table('support')
+        else:
+            self.cu.execute("CREATE TABLE support (number)")
+            self.c.commit()
+            xbmc.log('[%s]: table "SUPPORT" was created' % addon_name)
+
+        phone = ', '.join(phones)
+        self.cu.execute("INSERT INTO support (number) VALUES (?)", (phone,))
+        self.c.commit()
+        xbmc.log('[%s]: %d new phones was writen to db' % (addon_name, len(phones)))
+
+    # Get from db support telephones
+    def get_support_telephone_from_db(self):
+        self.cu.execute("SELECT number FROM support")
+        try:
+            var = self.cu.fetchone()[0]
+            return var
+        except:
+            return None
+
     # Get crew information
     def crew_info(self, peoples):
         info = []

@@ -3,8 +3,8 @@
     <defaultcontrol always="true">33005</defaultcontrol>
     <controls>
         <control type="group">
-            <animation effect="rotate" start="90" end="0" center="0,1080" time="200">WindowOpen</animation>
-            <animation effect="rotate" start="0" end="90" center="0,1080" time="200">WindowClose</animation>
+            <!--animation effect="rotate" start="90" end="0" center="0,1080" time="200">WindowOpen</animation>
+            <animation effect="rotate" start="0" end="90" center="0,1080" time="200">WindowClose</animation-->
             <control type="image">
                 <description> BACKGROUND </description>
                 <posx>0</posx>
@@ -165,6 +165,20 @@
                 <textureradioonnofocus></textureradioonnofocus>
                 <textureradiooffnofocus></textureradiooffnofocus>
             </control>
+
+            <control type="textbox">
+				<description> SUPPORT INFO </description>
+				<posx>1400</posx>
+				<posy>950</posy>
+				<width>500</width>
+                <height>160</height>
+				<textcolor>FFFAFAFA</textcolor>
+				<align>right</align>
+				<label>$ADDON[plugin.video.megogo 1070][CR]$INFO[Window.Property(Phone)][CR]$INFO[Window.Property(UID)]</label>
+				<font>font13</font>
+				<shadowcolor>black</shadowcolor>
+                <autoscroll delay="5000" time="4000" repeat="2000">true</autoscroll>
+			</control>
 
         </control>
     </controls>

@@ -27,28 +27,16 @@
 			</control>
 
             <control type="image">
-				<description> SVOD ICON </description>
+				<description> TVOD OR SVOD ICON </description>
 				<posx>882</posx>
 				<posy>202</posy>
 				<width>156</width>
 				<height>156</height>
-				<texture>$INFO[Window.Property(SVOD)]</texture>
-				<visible>!IsEmpty(Window.Property(SVOD))</visible>
-			</control>
-
-			<control type="image">
-				<description> TVOD ICON </description>
-				<posx>882</posx>
-				<posy>202</posy>
-				<width>156</width>
-				<height>156</height>
-				<texture>$INFO[Window.Property(TVOD)]</texture>
-				<visible>!IsEmpty(Window.Property(TVOD))</visible>
+				<texture>$INFO[Window.Property(ICON)]</texture>
 			</control>
 
             <control type="textbox">
 				<description> TVOD OR SVOD TITLE </description>
-				<visible>!IsEmpty(Window.Property(TVOD)) | !IsEmpty(Window.Property(SVOD))</visible>
 				<posx>0</posx>
 				<posy>380</posy>
 				<width>1920</width>

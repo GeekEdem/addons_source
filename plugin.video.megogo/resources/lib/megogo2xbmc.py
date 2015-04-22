@@ -84,7 +84,7 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
         pwd = dic['password']
 
         # Language correction
-        if url.find('lang=') == -1 and not post and not url.startswith('auth/logout'):
+        if url.find('lang=') == -1 and not post and not url.startswith('auth/logout') and not url.startswith('auth/login'):
             if url.find('?') > 0:
                 url = "%s&lang=%s" % (url, get_ui_language())
             else:
@@ -115,7 +115,8 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
         else:
             target = '%s/%s?%s&sign=%s' % (PAY_URL, page, linkParams, '%s%s' % (m.hexdigest(), API_Public_Key_MEGOGO))
 
-        xbmc.log('[%s]: GET\nUSR - %s\nPASS - %s\nCookie - %s\nTarget - %s' % (addon_name, usr, pwd, cookie, target))
+        xbmc.log('[%s]: GET Target:\n%s' % (addon_name, target))
+        # xbmc.log('[%s]: GET\nUSR - %s\nPASS - %s\nCookie - %s\nTarget - %s' % (addon_name, usr, pwd, cookie, target))
 
         if cookie and not old_url and not post:
             request = requests.get(target, cookies=cookie)
@@ -150,7 +151,6 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
             #try:
             if post_data:
                 post_data = urllib.urlencode(post_data)
-            xbmc.log('ENCODED POST DATA - %s' % post_data)
             request = urllib2.Request(url=target, data=post_data, headers={'User-Agent': UA})
             request = urllib2.urlopen(request)
             http = request.read()
@@ -391,7 +391,6 @@ def HandleVideoResult(item):
                 'is_promocode'  : promo,
                 'purchase_info' : purchase
               }
-
     #xbmc.log('[%s]: HandleVideoResult parses data - %s' % (addon_name, locInfo))
     return locInfo
 
@@ -408,6 +407,7 @@ def getconfiguration():
                 a.set_genres_to_db(data['data']['genres'])
                 a.set_categories_to_db(data['data']['categories'])
                 a.set_member_types_to_db(data['data']['member_types'])
+                a.set_support_telephone_to_db(data['data']['support_info']["phones"])
                 xbmc.log('[%s]: Successful get configuration' % addon_name)
                 return True
             else:
@@ -450,18 +450,25 @@ def get_price(title):
         if currency and month_price:
             return "%s %s" % (month_price, currency)
         else:
-            return ""
+            return None
     else:
-        return ""
+        return None
 
 
 # Get recommended materials
-def main_page(cache_days=1):
-    data = Get_JSON_response('digest', cache_days)
-    if data['result'] == 'ok':
-        return data
+def main_page(force):
+    if force:
+        cache_days = 0
     else:
-        return []
+        cache_days = 1
+    data = Get_JSON_response('digest', cache_days)
+    if data:
+        if data['result'] == 'ok':
+            return data
+        else:
+            return None
+    else:
+        return None
 
 
 # Get video data
@@ -475,10 +482,13 @@ def getvideodata(force, page, section):
         data = Get_JSON_response('collection?id=%s' % page, cache_days=cache)
     elif section == 'video':
         data = Get_JSON_response('video/info?id=%s' % page, cache_days=cache)
-    if data['result'] == 'ok':
-        return data
+    if data:
+        if data['result'] == 'ok':
+            return data
+        else:
+            return None
     else:
-        return []
+        return None
 
 
 # Get page
@@ -496,13 +506,14 @@ def get_page(force, page, offset=0):
         if data['result'] == 'ok':
             return data
         else:
-            return []
+            return None
     else:
-        return []
+        return None
 
 
 # Get stream
 def data_from_stream(video_id):
+    # TODO REFACTORING!
     xbmc.log('[%s]: Try to data from stream' % addon_name)
     bitrates = []
     audios = []
@@ -540,6 +551,7 @@ def data_from_stream(video_id):
 
 
 def get_stream(video_id):
+    # TODO REFACTORING!
     bitrate = None
     audio_lang = None
     subtitle_lang = None
@@ -603,8 +615,9 @@ def get_stream(video_id):
 
     new_data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, bitrate, audio_lang), cache_days=1)
 
-    if new_data['result'] == 'ok':
-        return new_data['data']['src'], audio_lang, subtitle_lang
+    if new_data:
+        if new_data['result'] == 'ok':
+            return new_data['data']['src'], audio_lang, subtitle_lang
 
 
 # Get comments to video
@@ -644,11 +657,11 @@ def delFav(vid):
 
 
 # Send certificate code
-def send_certificate(certificate, vid, tariff_id, subscription_id, ptype):
+def send_certificate(certificate, vid, ptype, pay_id):
     if ptype == 'svod':
-        link = 'payments/code?code=%s&video_id=%s&subscription_id=%s' % (certificate, vid, subscription_id)
+        link = 'payments/code?code=%s&video_id=%s&subscription_id=%s' % (certificate, vid, pay_id)
     elif ptype == 'tvod':
-        link = 'payments/code?code=%s&video_id=%s&tariff_id=%s' % (certificate, vid, tariff_id)
+        link = 'payments/code?code=%s&video_id=%s&tariff_id=%s' % (certificate, vid, pay_id)
     else:
         return None
 
@@ -665,18 +678,17 @@ def send_certificate(certificate, vid, tariff_id, subscription_id, ptype):
 
 
 # PAY functions
-def send_payrequest(card_data, service_id, pay_obj_id=False, autoprolong=False):
-    if pay_obj_id:
-        url = "order?pay_method=alu&service_id=%s&pay_obj_id=%s&user_id=%s" % (service_id, pay_obj_id, a.get_login_from_db()['user_id'])
+def send_payrequest(card_data, token, autoprolong=False):
+    if token:
+        url = "order?pay_through_token=on"
     else:
-        url = "order?pay_method=alu&service_id=%s&user_id=%s" % (service_id, a.get_login_from_db()['user_id'])
+        url = "order?pay_method=alu"
 
-    amount = card_data['amount']
-    xbmc.log('amount %s' % (type(amount), amount))
-    replace_amount = amount.split(' ')[0]+'0'
-    card_data['amount'] = replace_amount + ' ' + amount.split(' ')[1]
     xbmc.log('CARD DATA %s - %s' % (type(card_data), card_data))
+
+    xbmc.executebuiltin("ActivateWindow(busydialog)")
     data = GET(url, post=True, post_data=card_data)
+    xbmc.executebuiltin("Dialog.Close(busydialog)")
     if data:
         result = simplejson.loads(data)
         if result['result'] == 'done':

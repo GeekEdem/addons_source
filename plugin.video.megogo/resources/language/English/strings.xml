@@ -136,5 +136,9 @@
     <string id="01065">Pay</string>
     <string id="01066">Success</string>
     <string id="01067">Please, fill all fields!</string>
+    <string id="01068">Payment cards</string>
+    <string id="01069">Change card</string>
+    <string id="01070">Phone support</string>
+    <string id="01071">Your ID</string>
 
 </strings>

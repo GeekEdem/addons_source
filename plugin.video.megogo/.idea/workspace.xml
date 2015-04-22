@@ -31,31 +31,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Screens.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/lib/Screens.py">
+      <file leaf-file-name="Pay.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Pay.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67950964" vertical-offset="11648" max-vertical-offset="18054">
-              <caret line="711" column="0" selection-start-line="711" selection-start-column="0" selection-end-line="711" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2312">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EpisodeList.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/EpisodeList.xml">
+      <file leaf-file-name="changelog.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/changelog.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="6477">
-              <caret line="94" column="25" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SeasonList.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SeasonList.xml">
+      <file leaf-file-name="addon.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/addon.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="6035">
-              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.42355606" vertical-offset="0" max-vertical-offset="883">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,32 @@
       <file leaf-file-name="megogo2xbmc.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.206897" vertical-offset="816" max-vertical-offset="9673">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="68" selection-end-column="19" />
+            <state vertical-scroll-proportion="-24.758621" vertical-offset="948" max-vertical-offset="12070">
+              <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+              <folding>
+                <element signature="e#269#312#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Screens.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/Screens.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.4827585" vertical-offset="4393" max-vertical-offset="25075">
+              <caret line="278" column="44" selection-start-line="277" selection-start-column="9" selection-end-line="278" selection-end-column="44" />
+              <folding>
+                <element signature="e#269#300#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Account.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Account.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3247">
+              <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -74,48 +98,70 @@
       <file leaf-file-name="Utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.551723" vertical-offset="6243" max-vertical-offset="7055">
-              <caret line="406" column="28" selection-start-line="406" selection-start-column="18" selection-end-line="406" selection-end-column="28" />
+            <state vertical-scroll-proportion="-9.793103" vertical-offset="4034" max-vertical-offset="8041">
+              <caret line="256" column="37" selection-start-line="256" selection-start-column="28" selection-end-line="256" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/settings.xml">
+      <file leaf-file-name="sqlite.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/lib/sqlite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1166" max-vertical-offset="5355">
+              <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
+              <folding>
+                <element signature="e#269#312#0" expanded="true" />
+                <marker date="1429612733859" expanded="true" signature="1244:1256" placeholder="DELETE FROM ..." />
+                <marker date="1429612733859" expanded="true" signature="1658:1698" placeholder="SELECT time ..." />
+                <marker date="1429612733859" expanded="true" signature="1778:1819" placeholder="CREATE TABLE..cache..." />
+                <marker date="1429612733859" expanded="true" signature="2302:2337" placeholder="DELETE FROM ..." />
+                <marker date="1429612733859" expanded="true" signature="2586:2626" placeholder="SELECT data ..cache..." />
+                <marker date="1429612733859" expanded="true" signature="3017:3053" placeholder="SELECT time ..cache..." />
+                <marker date="1429612733859" expanded="true" signature="3313:3348" placeholder="DELETE FROM ..." />
+                <marker date="1429612733859" expanded="true" signature="3801:3842" placeholder="CREATE TABLE..cache..." />
+                <marker date="1429612733859" expanded="true" signature="3981:4033" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="4472:4507" placeholder="CREATE TABLE..genres..." />
+                <marker date="1429612733859" expanded="true" signature="4777:4820" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="5116:5152" placeholder="SELECT title..genres..." />
+                <marker date="1429612733859" expanded="true" signature="5572:5619" placeholder="CREATE TABLE..categories..." />
+                <marker date="1429612733859" expanded="true" signature="5982:6040" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="6365:6405" placeholder="SELECT title..categories..." />
+                <marker date="1429612733859" expanded="true" signature="6740:6780" placeholder="SELECT id FR..categories..." />
+                <marker date="1429612733859" expanded="true" signature="7114:7152" placeholder="CREATE TABLE..MemberTypes..." />
+                <marker date="1429612733859" expanded="true" signature="7444:7494" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="7734:7781" placeholder="SELECT title..MemberTypes..." />
+                <marker date="1429612733859" expanded="true" signature="8169:8198" placeholder="CREATE TABLE..support..." />
+                <marker date="1429612733859" expanded="true" signature="8360:8399" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="8629:8655" placeholder="SELECT numbe..support..." />
+                <marker date="1429612733859" expanded="true" signature="9942:9999" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="10253:10298" placeholder="UPDATE accou..." />
+                <marker date="1429612733859" expanded="true" signature="10690:10711" placeholder="SELECT * FRO..account..." />
+                <marker date="1429612733859" expanded="true" signature="10792:10826" placeholder="INSERT INTO ..." />
+                <marker date="1429612733859" expanded="true" signature="10858:10899" placeholder="UPDATE accou..." />
+                <marker date="1429612733859" expanded="true" signature="11104:11125" placeholder="SELECT * FRO..account..." />
+                <marker date="1429612733859" expanded="true" signature="11593:11673" placeholder="CREATE TABLE..account..." />
+                <marker date="1429612733859" expanded="true" signature="11725:11759" placeholder="INSERT INTO ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExistedCard.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/ExistedCard.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2261">
+              <caret line="35" column="22" selection-start-line="28" selection-start-column="12" selection-end-line="35" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoInfo.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <file leaf-file-name="TariffsList.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/TariffsList.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24038">
-              <caret line="4" column="35" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoList.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="10812">
-              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="99" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SubscribeList.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SubscribeList.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="9401">
-              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="99" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="1972">
+              <caret line="71" column="70" selection-start-line="71" selection-start-column="59" selection-end-line="71" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -126,25 +172,30 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/Account.xml" />
-        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml" />
-        <option value="$PROJECT_DIR$/addon.xml" />
-        <option value="$PROJECT_DIR$/resources/lib/megogo2xbmc.py" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/back.xml" />
-        <option value="$PROJECT_DIR$/changelog.txt" />
-        <option value="$PROJECT_DIR$/resources/settings.xml" />
-        <option value="$PROJECT_DIR$/resources/language/Russian/strings.xml" />
-        <option value="$PROJECT_DIR$/resources/language/English/strings.xml" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/splash.xml" />
-        <option value="$PROJECT_DIR$/start.py" />
-        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml" />
-        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoList2.xml" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/SubscribeList.xml" />
-        <option value="$PROJECT_DIR$/resources/lib/Utils.py" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/SeasonList.xml" />
         <option value="$PROJECT_DIR$/resources/skins/Default/1080i/EpisodeList.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml" />
+        <option value="$PROJECT_DIR$/resources/settings.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/TariffsList.xml" />
+        <option value="$PROJECT_DIR$/start.py" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml" />
+        <option value="$PROJECT_DIR$/resources/lib/Utils.py" />
+        <option value="$PROJECT_DIR$/resources/lib/sqlite.py" />
+        <option value="$PROJECT_DIR$/resources/language/English/strings.xml" />
+        <option value="$PROJECT_DIR$/resources/language/Russian/strings.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/ExistedCard.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/Card.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/Pay.xml" />
+        <option value="$PROJECT_DIR$/resources/skins/Default/1080i/Account.xml" />
         <option value="$PROJECT_DIR$/resources/lib/Screens.py" />
+        <option value="$PROJECT_DIR$/resources/lib/megogo2xbmc.py" />
+        <option value="$PROJECT_DIR$/changelog.txt" />
+        <option value="$PROJECT_DIR$/addon.xml" />
       </list>
     </option>
   </component>
@@ -152,10 +203,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="x" value="1358" />
+    <option name="y" value="-320" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -180,6 +231,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -324,7 +376,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -545,13 +596,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="1358" y="-320" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25567323" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29424307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -575,16 +626,16 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.116204694" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29424307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -615,44 +666,17 @@
           <url>file://$PROJECT_DIR$/start.py</url>
           <line>3</line>
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/resources/lib/Screens.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/changelog.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="714">
-          <caret line="4" column="63" selection-start-line="4" selection-start-column="63" selection-end-line="4" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addon.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lib/Screens.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10135" max-vertical-offset="16609">
-          <caret line="617" column="58" selection-start-line="617" selection-start-column="58" selection-end-line="617" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3932" max-vertical-offset="9656">
-          <caret line="248" column="25" selection-start-line="247" selection-start-column="21" selection-end-line="248" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1590" max-vertical-offset="6953">
@@ -705,7 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="680">
           <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -713,7 +736,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13821">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#269#300#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -736,7 +761,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5447" max-vertical-offset="9537">
           <caret line="344" column="28" selection-start-line="344" selection-start-column="17" selection-end-line="344" selection-end-column="28" />
-          <folding />
+          <folding>
+            <element signature="e#269#312#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -791,7 +818,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13634">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#269#300#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -814,7 +843,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1032" max-vertical-offset="9452">
           <caret line="509" column="24" selection-start-line="509" selection-start-column="24" selection-end-line="509" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="e#269#312#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -865,41 +896,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Account.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1790" max-vertical-offset="3009">
-          <caret line="119" column="32" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lib/sqlite.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4896">
-          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/back.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
           <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/language/English/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1373" max-vertical-offset="2312">
-          <caret line="128" column="24" selection-start-line="128" selection-start-column="24" selection-end-line="128" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/addon.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -912,116 +912,215 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/changelog.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/start.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5175644" vertical-offset="0" max-vertical-offset="1462">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-          <folding>
-            <element signature="e#43#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24038">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm40/system/python_stubs/-762174762/__builtin__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3325527" vertical-offset="37031" max-vertical-offset="87516">
           <caret line="2195" column="8" selection-start-line="2195" selection-start-column="8" selection-end-line="2195" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/language/Russian/strings.xml">
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SeasonList.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2312">
-          <caret line="98" column="21" selection-start-line="98" selection-start-column="19" selection-end-line="98" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11943794" vertical-offset="0" max-vertical-offset="11900">
-          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="10812">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="99" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SubscribeList.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="9401">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="99" selection-end-column="22" />
+        <state vertical-scroll-proportion="-0.81615925" vertical-offset="714" max-vertical-offset="6035">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/EpisodeList.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="6477">
+        <state vertical-scroll-proportion="0.6416862" vertical-offset="1050" max-vertical-offset="6477">
           <caret line="94" column="25" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoList.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.551723" vertical-offset="6243" max-vertical-offset="7055">
-          <caret line="406" column="28" selection-start-line="406" selection-start-column="18" selection-end-line="406" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10795">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SeasonList.xml">
+    <entry file="file://$PROJECT_DIR$/resources/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6035">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+    <entry file="file://$PROJECT_DIR$/start.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.206897" vertical-offset="816" max-vertical-offset="9673">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="68" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="1632">
+          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+          <folding>
+            <element signature="e#43#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/language/English/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8671875" vertical-offset="1620" max-vertical-offset="2533">
+          <caret line="141" column="39" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/language/Russian/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.92410713" vertical-offset="1569" max-vertical-offset="2533">
+          <caret line="141" column="24" selection-start-line="141" selection-start-column="24" selection-end-line="141" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Card.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12723215" vertical-offset="3473" max-vertical-offset="5372">
+          <caret line="211" column="25" selection-start-line="211" selection-start-column="25" selection-end-line="211" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/SubscribeList.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.060268" vertical-offset="2142" max-vertical-offset="9401">
+          <caret line="340" column="67" selection-start-line="340" selection-start-column="25" selection-end-line="340" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/VideoInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.21404304" vertical-offset="2892" max-vertical-offset="24429">
+          <caret line="159" column="63" selection-start-line="159" selection-start-column="63" selection-end-line="159" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/HomeScreen.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0" vertical-offset="7130" max-vertical-offset="11849">
+          <caret line="445" column="30" selection-start-line="445" selection-start-column="30" selection-end-line="445" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/TariffsList.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="1972">
+          <caret line="71" column="70" selection-start-line="71" selection-start-column="59" selection-end-line="71" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/ExistedCard.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="2261">
+          <caret line="35" column="22" selection-start-line="28" selection-start-column="12" selection-end-line="35" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Account.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3247">
+          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/lib/Screens.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67950964" vertical-offset="11648" max-vertical-offset="18054">
-          <caret line="711" column="0" selection-start-line="711" selection-start-column="0" selection-end-line="711" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.4827585" vertical-offset="4393" max-vertical-offset="25075">
+          <caret line="278" column="44" selection-start-line="277" selection-start-column="9" selection-end-line="278" selection-end-column="44" />
+          <folding>
+            <element signature="e#269#300#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/sqlite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1166" max-vertical-offset="5355">
+          <caret line="101" column="27" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
+          <folding>
+            <element signature="e#269#312#0" expanded="true" />
+            <marker date="1429612733859" expanded="true" signature="1244:1256" placeholder="DELETE FROM ..." />
+            <marker date="1429612733859" expanded="true" signature="1658:1698" placeholder="SELECT time ..." />
+            <marker date="1429612733859" expanded="true" signature="1778:1819" placeholder="CREATE TABLE..cache..." />
+            <marker date="1429612733859" expanded="true" signature="2302:2337" placeholder="DELETE FROM ..." />
+            <marker date="1429612733859" expanded="true" signature="2586:2626" placeholder="SELECT data ..cache..." />
+            <marker date="1429612733859" expanded="true" signature="3017:3053" placeholder="SELECT time ..cache..." />
+            <marker date="1429612733859" expanded="true" signature="3313:3348" placeholder="DELETE FROM ..." />
+            <marker date="1429612733859" expanded="true" signature="3801:3842" placeholder="CREATE TABLE..cache..." />
+            <marker date="1429612733859" expanded="true" signature="3981:4033" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="4472:4507" placeholder="CREATE TABLE..genres..." />
+            <marker date="1429612733859" expanded="true" signature="4777:4820" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="5116:5152" placeholder="SELECT title..genres..." />
+            <marker date="1429612733859" expanded="true" signature="5572:5619" placeholder="CREATE TABLE..categories..." />
+            <marker date="1429612733859" expanded="true" signature="5982:6040" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="6365:6405" placeholder="SELECT title..categories..." />
+            <marker date="1429612733859" expanded="true" signature="6740:6780" placeholder="SELECT id FR..categories..." />
+            <marker date="1429612733859" expanded="true" signature="7114:7152" placeholder="CREATE TABLE..MemberTypes..." />
+            <marker date="1429612733859" expanded="true" signature="7444:7494" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="7734:7781" placeholder="SELECT title..MemberTypes..." />
+            <marker date="1429612733859" expanded="true" signature="8169:8198" placeholder="CREATE TABLE..support..." />
+            <marker date="1429612733859" expanded="true" signature="8360:8399" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="8629:8655" placeholder="SELECT numbe..support..." />
+            <marker date="1429612733859" expanded="true" signature="9942:9999" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="10253:10298" placeholder="UPDATE accou..." />
+            <marker date="1429612733859" expanded="true" signature="10690:10711" placeholder="SELECT * FRO..account..." />
+            <marker date="1429612733859" expanded="true" signature="10792:10826" placeholder="INSERT INTO ..." />
+            <marker date="1429612733859" expanded="true" signature="10858:10899" placeholder="UPDATE accou..." />
+            <marker date="1429612733859" expanded="true" signature="11104:11125" placeholder="SELECT * FRO..account..." />
+            <marker date="1429612733859" expanded="true" signature="11593:11673" placeholder="CREATE TABLE..account..." />
+            <marker date="1429612733859" expanded="true" signature="11725:11759" placeholder="INSERT INTO ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.793103" vertical-offset="4034" max-vertical-offset="8041">
+          <caret line="256" column="37" selection-start-line="256" selection-start-column="28" selection-end-line="256" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/lib/megogo2xbmc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.758621" vertical-offset="948" max-vertical-offset="12070">
+          <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+          <folding>
+            <element signature="e#269#312#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/skins/Default/1080i/Pay.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2312">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/changelog.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/addon.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42355606" vertical-offset="0" max-vertical-offset="883">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
