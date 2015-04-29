@@ -17,7 +17,7 @@ db = DataBase()
 __addon__			    = xbmcaddon.Addon(id='plugin.video.megogo')
 addon_id                = __addon__.getAddonInfo('id')
 addon_name		        = __addon__.getAddonInfo('name')
-addon_path		        = __addon__.getAddonInfo('path').decode("utf-8")
+addon_path		        = xbmc.translatePath(__addon__.getAddonInfo('path')).decode('utf-8')
 addon_version	        = __addon__.getAddonInfo('version')
 language		        = __addon__.getLocalizedString
 SkinFolder		        = os.path.join(addon_path, 'resources', 'skins', 'Default', '1080i')
@@ -279,7 +279,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
         self.items_len = len(self.listitems)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
 
-        xbmc.log('[%s]: offset - %s, len - %s' % (addon_name, self.offset, self.items_len))
+        # xbmc.log('[%s]: offset - %s, len - %s' % (addon_name, self.offset, self.items_len))
         if self.items_len == 0:
             self.window.setProperty("EMPTY", 'True')
         if self.offset == 0 and self.items_len == 100:
@@ -300,18 +300,15 @@ class VideoList(xbmcgui.WindowXMLDialog):
             else:
                 xbmc.executebuiltin("Control.SetFocus(500, 1)")
         elif control:
-            xbmc.log('[%s]: CONTROL TRUE! %s' % (addon_name, control))
+            # xbmc.log('[%s]: CONTROL TRUE! %s' % (addon_name, control))
             try:
                 self.setFocusId(int(control))
             except Exception as e:
                 xbmc.log('SELECT control %s error!\n%s' % (control, e))
                 try:
                     selectedId, _, item = control.partition(', ')
-                    if selectedId == 500 or selectedId == '500':
-                        self.setFocusId(6000)
-                    else:
-                        self.setFocusId(int(selectedId))
-                        self.getControl(int(selectedId)).selectItem(int(item))
+                    self.setFocusId(int(selectedId))
+                    self.getControl(int(selectedId)).selectItem(int(item))
                 except Exception as e:
                     xbmc.log('SELECT control %s second error!\n%s' % (control, e))
                     self.setFocusId(6000)
@@ -342,7 +339,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
         actions = action.getId()
         focusid = self.getFocusId()
         if actions in ACTION_PREVIOUS_MENU or actions in ACTION_CONTEX_MENU or action in ACTION_MOUSE_RIGHT_CLICK:
-            xbmc.log('[%s]: VideoList PREVIOUS_MENU focusid - %s' % (addon_name, focusid))
+            # xbmc.log('[%s]: VideoList PREVIOUS_MENU focusid - %s' % (addon_name, focusid))
             if focusid in MENU_IDS:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
             elif focusid in [500]:
@@ -370,7 +367,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
             self.close()
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
-            xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
+            # xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
             if video_type == 'video' and not self.page.startswith('collections'):
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, id=video_id)
             elif self.page.startswith('collections'):
@@ -465,29 +462,23 @@ class SeasonList(xbmcgui.WindowXMLDialog):
         control = getids()
         if control:
             try:
-                if control.isnumeric:
-                    xbmc.log('SELECT control.isnumeric %s' % control)
-                    xbmc.executebuiltin("Control.SetFocus(%s)" % control)
-            except:
-                xbmc.log('[%s]: !!!CONTROL!!! %s' % (addon_name, control))
                 selectedId, _, item = control.partition(', ')
-                xbmc.log('SELECT %s %s' % (int(selectedId), int(item)))
                 self.setFocusId(int(selectedId))
                 self.getControl(int(selectedId)).selectItem(int(item))
+            except Exception as e:
+                xbmc.log('SELECT control %s error!\n%s' % (control, e))
+                self.setFocusId(6000)
         else:
-            # time.sleep(0.3)
+            time.sleep(0.3)
             xbmc.executebuiltin("Control.SetFocus(%d, 1)" % item_id)
 
     def onAction(self, action):
         focusid = self.getFocusId()
         if action in ACTION_PREVIOUS_MENU or action in ACTION_CONTEX_MENU or action in ACTION_MOUSE_RIGHT_CLICK:
-            xbmc.log('[%s]: SeasonList PREVIOUS_MENU' % addon_name)
-            xbmc.log('[%s]: SeasonList PREVIOUS_MENU focusid - %s' % (addon_name, focusid))
             if focusid in MENU_IDS:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
             else:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
-                xbmc.log('[%s]: Try to kill script' % addon_name)
                 self.close()
                 PopWindowStack(self)
 
@@ -655,7 +646,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
 
     def onAction(self, action):
         focusid = self.getFocusId()
-        xbmc.log('[%s]: VideoInfo onAction id - %s' % (addon_name, action.getId()))
+        # xbmc.log('[%s]: VideoInfo onAction id - %s' % (addon_name, action.getId()))
         # action_id = action.getId()
         if action in ACTION_PREVIOUS_MENU:
             if focusid in [17050, 17051, 17000, 17001, 17002, 17003, 18000]:
@@ -768,7 +759,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             del dialog
 
         elif controlID in [5002]:
-            xbmc.log('[%s]: Selected related video - %s' % (addon_name, self.getControl(controlID).getSelectedItem().getProperty("Label")))
+            # xbmc.log('[%s]: Selected related video - %s' % (addon_name, self.getControl(controlID).getSelectedItem().getProperty("Label")))
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
             if video_type == 'video':
@@ -876,7 +867,7 @@ class Pay(xbmcgui.WindowXMLDialog):
 
     def onAction(self, action):
         # focusid = self.getFocusId()
-        xbmc.log('[%s]: PAY_SCREEN onAction id - %s' % (addon_name, action.getId()))
+        # xbmc.log('[%s]: PAY_SCREEN onAction id - %s' % (addon_name, action.getId()))
         if action in ACTION_PREVIOUS_MENU:
             self.close()
             PopWindowStack(self)
@@ -903,7 +894,7 @@ class Pay(xbmcgui.WindowXMLDialog):
             data = db.get_login_from_db()
             card_num = data['card_num']
             card_type = data['card_type']
-            xbmc.log("[%s]:\ncard_num - %s\ncard_type - %s" % (addon_name, card_num, card_type))
+            # xbmc.log("[%s]:\ncard_num - %s\ncard_type - %s" % (addon_name, card_num, card_type))
             if controlID in [501] and self.ptype == 'tvod':
                 # Buy movie
                 if not card_num and not card_type:
@@ -921,7 +912,7 @@ class Pay(xbmcgui.WindowXMLDialog):
 
             elif controlID in [502]:
                 # Enter certificate
-                xbmc.log('[%s]: CERTIFICATE\n tarif - %s\n subscribe -%s\n id -%s\n' % (addon_name, self.tariff_id, self.subscription_id, self.id))
+                # xbmc.log('[%s]: CERTIFICATE\n tarif - %s\n subscribe -%s\n id -%s\n' % (addon_name, self.tariff_id, self.subscription_id, self.id))
                 certificate = open_keyboard('certificate')
                 if self.ptype == 'tvod':
                     res = megogo2xbmc.send_certificate(certificate, self.id, self.ptype, self.tariff_id)
@@ -1011,7 +1002,6 @@ class CARD(xbmcgui.WindowXMLDialog):
             if self.card_num and self.card_type:
                 self.window.setProperty('CARD_DATA', '%s •••• •••• •••• %s' % (self.card_type.encode('utf-8'), self.card_num.encode('utf-8')))
             self.window.setProperty("ICON", globals()['icon_%s' % self.ptype])
-            xbmc.log('[%s]: ICON! %s' % (addon_name, globals()['icon_%s' % self.ptype]))
 
         if not self.control:
             control = getids()
@@ -1114,7 +1104,6 @@ class CARD(xbmcgui.WindowXMLDialog):
                                                    'user_id': self.UID},
                                                   True)
             if res:
-                xbmc.log('BUY RESPONCE! %s' % res)
                 if res['answer'] == 'success':
                     dialog = xbmcgui.Dialog()
                     dialog.ok(language(1066), res['message'])
@@ -1166,7 +1155,7 @@ class Account(xbmcgui.WindowXMLDialog):
             PopWindowStack(self)
 
         if not self.avatar:
-            self.avatar = unknown_person
+            self.avatar = unknown_person.encode('utf-8')
         else:
             Get_File(self.avatar)
 
@@ -1193,7 +1182,7 @@ class Account(xbmcgui.WindowXMLDialog):
         #    xbmc.executebuiltin("Control.SetFocus(%s)" % control)
 
     def onAction(self, action):
-        xbmc.log('[%s]: Account onAction id - %s' % (addon_name, action.getId()))
+        # xbmc.log('[%s]: Account onAction id - %s' % (addon_name, action.getId()))
         if action in ACTION_PREVIOUS_MENU:
             self.close()
             PopWindowStack(self)
@@ -1289,23 +1278,71 @@ def login():
     if megogo2xbmc.checkLogin():
         return True
     else:
-        # xbmc.executebuiltin("Control.SetFocus(6000)")
         dialog = xbmcgui.Dialog()
         if dialog.yesno(language(1025), language(1026)) == 1:
-            open_keyboard('login')
-            open_keyboard('password')
-            if not megogo2xbmc.checkLogin():
-                login()
+            items = [language(1073), language(1078)]  # , language(1074), language(1075), language(1076), language(1077)]
+            index = xbmcgui.Dialog().select(language(1072), items)
+            if index == -1:
+                return False
+            elif index == 0:    # login MEGOGO
+                return enter_megogo()
+            elif index == 1:    # Register MEGOGO
+                return registration()
             else:
-                return True
+                return False
+
+            # elif index == 2:    # FB
+                # App ID: 1566886233591702
+                # App Secret: f0d66dd5298ffc7b3a247efad7dec710
+
         else:
             return False
+
+
+def registration(usr=None, nck=None):
+    dialog = xbmcgui.Dialog()
+    user = open_keyboard('login', usr)
+    nick = open_keyboard('nickname', nck)
+    passwd = open_keyboard('password')
+    res = megogo2xbmc.registerUser(user, nick, passwd)
+    if res:
+        if res['answer'] == 'success':
+            dialog = xbmcgui.Dialog()
+            dialog.ok(language(1066), '%s "%s" %s' % (language(1083), nick, language(1084)))
+            return True
+        else:
+            for message in res['message']:
+                dialog = xbmcgui.Dialog()
+                dialog.ok(language(1059), message)
+            if dialog.yesno(language(1080), language(1081)) == 1:
+                return registration(user, nick)
+            else:
+                return False
+    else:
+        dialog = xbmcgui.Dialog()
+        dialog.ok(language(1080), language(1031), language(1032))
+        del dialog
+        return False
+
+
+def enter_megogo(usr=None):
+    dialog = xbmcgui.Dialog()
+    user = open_keyboard('login', usr)
+    open_keyboard('password')
+    if not megogo2xbmc.checkLogin():
+        if dialog.yesno(language(1025), language(1082)) == 1:
+            return enter_megogo(user)
+        else:
+            return False
+    else:
+        return True
 
 
 def open_keyboard(name, default_value=''):
     if name == 'login':
         header = language(1027)
-        default_value = __addon__.getSetting(name)
+    elif name == 'nickname':
+        header = language(1079)
     elif name == 'password':
         header = language(1028)
     elif name == 'search':
@@ -1350,18 +1387,18 @@ def open_keyboard(name, default_value=''):
             dialog.ok(header, language(1029))
             del dialog
             return open_keyboard(name)
-        elif name != 'search' and name != 'certificate':
-            db.update_account_in_db(field=name, data=text)
         elif name == 'card_number':
             if len(text) != 4 or not text.isnumeric():
                 dialog = xbmcgui.Dialog()
                 dialog.ok(language(1059), language(1058))
                 return open_keyboard(name)
+        elif name != 'search' and name != 'certificate' and name != 'nickname':
+            db.update_account_in_db(field=name, data=text)
 
         return text
 
 
-def menu_chooser(window, controlID, real_control = None):
+def menu_chooser(window, controlID, real_control=None):
     link = ''
     page_name = ''
     xml = None
@@ -1445,7 +1482,7 @@ def menu_chooser(window, controlID, real_control = None):
 
 def open_search(window):
     search = open_keyboard('search')
-    link = 'search?text=%s&limit=100' % urllib.quote_plus(search)
+    link = 'search?text=%s&limit=100' % search
     AddToWindowStack(window, 8000)
     window.close()
     dialog = VideoList(u'SubscribeList.xml', addon_path, page=link, name='%s "%s"' % (language(1020), search.decode('utf-8')))

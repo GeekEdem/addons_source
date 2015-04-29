@@ -94,8 +94,8 @@
 	<string id="01023">Reviews</string>
 	<string id="01024">Related Videos</string>
 	<string id="01025">Login error</string>
-	<string id="01026">You want to enter now right login and password?</string>
-	<string id="01027">Enter login</string>
+	<string id="01026">You want to login or register new user?</string>
+	<string id="01027">Enter e-mail</string>
 	<string id="01028">Enter password</string>
 	<string id="01029">Field can not be empty!</string>
     <string id="01030">Add to favorites MEGOGO</string>
@@ -140,5 +140,17 @@
     <string id="01069">Change card</string>
     <string id="01070">Phone support</string>
     <string id="01071">Your ID</string>
+    <string id="01072">Login</string>
+    <string id="01073">Sign in with your account MEGOGO</string>
+    <string id="01074">Sign in with your account vkontakte</string>
+    <string id="01075">Sign in with your account facebook</string>
+    <string id="01076">Sign in with your account twitter</string>
+    <string id="01077">Sign in with your account odnoklassniki</string>
+    <string id="01078">Register new user</string>
+    <string id="01080">Registration error</string>
+    <string id="01081">Repeat registration?</string>
+    <string id="01082">Repeat enter in account?</string>
+    <string id="01083">User</string>
+    <string id="01084">was created!</string>
 
 </strings>

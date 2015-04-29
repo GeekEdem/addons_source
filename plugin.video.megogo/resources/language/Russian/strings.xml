@@ -94,8 +94,8 @@
 	<string id="01023">Отзывы</string>
 	<string id="01024">Похожие видео</string>
 	<string id="01025">Ошибка входа</string>
-	<string id="01026">Вы хотите сейчас ввести правильный логин и пароль?</string>
-	<string id="01027">Ввод логина</string>
+	<string id="01026">Вы хотите выполнить вход или новую регистрацию?</string>
+	<string id="01027">Ввод e-mail</string>
 	<string id="01028">Ввод пароля</string>
 	<string id="01029">Поле не может быть пустым!</string>
     <string id="01030">Добавить в избранное MEGOGO</string>
@@ -140,5 +140,18 @@
     <string id="01069">Изменить карту</string>
     <string id="01070">Телефон поддержки</string>
     <string id="01071">Ваш ID</string>
+    <string id="01072">Вход</string>
+    <string id="01073">Вход через аккаунт MEGOGO</string>
+    <string id="01074">Вход через аккаунт vkontakte</string>
+    <string id="01075">Вход через аккаунт facebook</string>
+    <string id="01076">Вход через аккаунт twitter</string>
+    <string id="01077">Вход через аккаунт odnoklassniki</string>
+    <string id="01078">Регистрация нового пользователя</string>
+    <string id="01079">Ввод псевдонима</string>
+    <string id="01080">Ошибка регистрации</string>
+    <string id="01081">Повторить регистрацию?</string>
+    <string id="01082">Повторить вход?</string>
+    <string id="01083">Пользователь</string>
+    <string id="01084">создан!</string>
 
 </strings>

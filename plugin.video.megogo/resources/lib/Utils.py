@@ -90,24 +90,21 @@ def CreateListItems(data=None):
                             if picture.startswith("http://") and (picture.endswith(".jpg") or picture.endswith(".png")):
                                 if not picture.decode('utf-8') in image_requests:
                                     if Get_File(picture):
-                                        xbmc.log('1 Get_File(%s)' % picture)
+                                        # xbmc.log('1 Get_File(%s)' % picture)
                                         image_requests.append(picture.decode('utf-8'))
                                     else:
-                                        xbmc.log('2 Get_File(%s)' % picture)
+                                        # xbmc.log('2 Get_File(%s)' % picture)
                                         new_pic = picture.replace("2:", "5:")
-                                        xbmc.log('3 Get_File(%s)' % new_pic)
+                                        # xbmc.log('3 Get_File(%s)' % new_pic)
                                         Get_File(new_pic)
                                         image_requests.append(new_pic.decode('utf-8'))
                     elif type(value) == str:
                         if value.startswith("http://") and (value.endswith(".jpg") or value.endswith(".png")):
                             if not value.decode('utf-8') in image_requests:
                                 if Get_File(value):
-                                    xbmc.log('1 Get_File(%s)' % picture)
                                     image_requests.append(value.decode('utf-8'))
                                 else:
-                                    xbmc.log('2 Get_File(%s)' % picture)
                                     new_pic = picture.replace("2:", "5:")
-                                    xbmc.log('3 Get_File(%s)' % new_pic)
                                     Get_File(new_pic)
                                     image_requests.append(new_pic.decode('utf-8'))
                     if key.lower() in ["poster"]:
@@ -135,16 +132,9 @@ def CreateListItems(data=None):
                         listitem.setInfo('video', {key.lower(): "%1.1f" % float(value)})
                     except:
                         pass
-                #try:
-                #    xbmc.log('value - %s' % value.encode('utf-8'))
-                #except:
-                #    xbmc.log('value - %s' % value)
                 listitem.setProperty('%s' % key, value)
 
-            # listitem.setPath(itempath)
-            # listitem.setProperty("index", str(counter))
             itemlist.append(listitem)
-            # counter += 1
 
     return itemlist
 
@@ -357,11 +347,10 @@ def Get_File(url):
                     image = xbmc_cache_file_png
                 else:
                     image = xbmc_cache_file_jpg
-                xbmc.log('[%s]: image %s' % (addon_name, image))
                 tmpfile = open(xbmc.translatePath(image), 'wb')
                 tmpfile.write(data)
                 tmpfile.close()
-                xbmc.log("[%s]: image downloaded: %s" % (addon_name, url))
+                xbmc.log("[%s]: image %s downloaded: %s" % (addon_name, image, url))
                 return xbmc.translatePath(image)
             except:
                 xbmc.log("[%s]: failed to save image %s" % (addon_name, url))

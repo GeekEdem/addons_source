@@ -7,7 +7,7 @@ import os, sys, urllib2, re, time
 __addon__       = xbmcaddon.Addon(id='plugin.video.megogo')
 addon_name		= __addon__.getAddonInfo('name')
 addon_version	= __addon__.getAddonInfo('version')
-addon_path 		= xbmc.translatePath(__addon__.getAddonInfo('path'))
+addon_path 		= xbmc.translatePath(__addon__.getAddonInfo('path')).decode('utf-8')
 language        = __addon__.getLocalizedString
 source          = 'http://raw.github.com/GeekEdem/zip/master/plugin.video.megogo/addon.xml'
 
