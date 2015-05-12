@@ -54,7 +54,7 @@
                 <align>left</align>
                 <aligny>top</aligny>
                 <texturefocus>buttons/Menu_On.png</texturefocus>
-                <texturenofocus>buttons/Menu_Off.PNG</texturenofocus>
+                <texturenofocus>buttons/Menu_Off.png</texturenofocus>
                 <font>font13</font>
                 <textcolor>FF999999</textcolor>
                 <ondown>SetFocus(500)</ondown>

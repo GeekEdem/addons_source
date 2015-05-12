@@ -1,4 +1,15 @@
-v.1.1.0
+v1.1.1
+- Fixed bug with missing icons on Linux
+- Added buying TV-programs from plugin
+- Added TV-program on slider
+- New working TV program in menu
+
+TODO:
+- Add video type "DTO" - buy movie for forever use
+- Fixed bug with play full season
+- Add bought films in Account Menu
+
+v1.1.0
 - Fixed crash on Windows, when user name is with spaces and cyrillic symbols
 - Changed vendor and header in requests
 - Fixed search on russian language

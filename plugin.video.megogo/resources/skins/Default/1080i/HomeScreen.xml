@@ -83,13 +83,12 @@
                 <align>left</align>
                 <aligny>top</aligny>
                 <texturefocus>buttons/Menu_On.png</texturefocus>
-                <texturenofocus>buttons/Menu_Off.PNG</texturenofocus>
+                <texturenofocus>buttons/Menu_Off.png</texturenofocus>
                 <font>font13</font>
                 <textcolor>FF999999</textcolor>
                 <ondown>SetFocus(500)</ondown>
                 <onright>SetFocus(8000)</onright>
                 <onleft>SetFocus(7001)</onleft>
-                <!--focusedcolor>FFFAFAFA</focusedcolor-->
             </control>
             <control type="button" id="8000">
                 <label>$ADDON[plugin.video.megogo 1020]</label>
@@ -108,7 +107,6 @@
                 <textcolor>FF999999</textcolor>
                 <ondown>SetFocus(500)</ondown>
                 <onleft>SetFocus(6000)</onleft>
-                <!--focusedcolor>FFFAFAFA</focusedcolor-->
             </control>
         </control>
 
@@ -193,6 +191,15 @@
 							<texture>icons/pay.png</texture>
                             <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
 						</control>
+                        <control type="image">
+							<posx>30</posx>
+							<posy>200</posy>
+							<width>80</width>
+							<height>80</height>
+							<aspectratio scalediffuse="false">scale</aspectratio>
+							<texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Property(channel_image)]</texture>
+                            <visible>!IsEmpty(ListItem.Property(channel_image))</visible>
+						</control>
 						<control type="image">
 							<posx>-5</posx>
 							<posy>-2</posy>
@@ -211,6 +218,16 @@
 							<label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
 							<visible>!IsEmpty(ListItem.Property(Year))</visible>
 						</control>
+                        <control type="label">
+							<posx>5</posx>
+							<posy>307</posy>
+							<align>left</align>
+							<width>1780</width>
+							<font>font13</font>
+							<textcolor>FFFAFAFA</textcolor>
+							<label>$INFO[ListItem.Label]</label>
+							<visible>IsEmpty(ListItem.Property(Year))</visible>
+						</control>
 						<control type="label">
 							<posx>5</posx>
 							<posy>341</posy>
@@ -220,6 +237,16 @@
 							<textcolor>FFFAFAFA</textcolor>
 							<label>$INFO[ListItem.Property(Country)], $INFO[ListItem.Property(Genre)]</label>
 							<visible>!IsEmpty(ListItem.Property(Country))</visible>
+						</control>
+                        <control type="label">
+							<posx>5</posx>
+							<posy>341</posy>
+							<align>left</align>
+							<width>1780</width>
+							<font>font13</font>
+							<textcolor>FFFAFAFA</textcolor>
+							<label>$INFO[ListItem.Property(channel_title)], $INFO[ListItem.Property(start_time)], $INFO[ListItem.Property(Genre)]</label>
+							<visible>IsEmpty(ListItem.Property(Country)) + !IsEmpty(ListItem.Property(channel_title))</visible>
 						</control>
 					</control>
 				</itemlayout>
@@ -253,6 +280,15 @@
 							<texture>icons/pay.png</texture>
                             <visible>!IsEmpty(ListItem.Property(Subscribe))</visible>
 						</control>
+                        <control type="image">
+							<posx>30</posx>
+							<posy>200</posy>
+							<width>80</width>
+							<height>80</height>
+							<aspectratio scalediffuse="false">scale</aspectratio>
+							<texture diffuse="thumbs/movieposter_mask.png">$INFO[ListItem.Property(channel_image)]</texture>
+                            <visible>!IsEmpty(ListItem.Property(channel_image))</visible>
+						</control>
 						<control type="label">
 							<posx>5</posx>
 							<posy>306</posy>
@@ -264,6 +300,16 @@
 							<label>$INFO[ListItem.Label] ($INFO[ListItem.Property(Year)])</label>
 							<visible>!IsEmpty(ListItem.Property(Year))</visible>
 						</control>
+                        <control type="label">
+							<posx>5</posx>
+							<posy>307</posy>
+							<align>left</align>
+							<width>1780</width>
+							<font>font13</font>
+							<textcolor>FFFAFAFA</textcolor>
+							<label>$INFO[ListItem.Label]</label>
+							<visible>IsEmpty(ListItem.Property(Year))</visible>
+						</control>
 						<control type="label">
 							<posx>5</posx>
 							<posy>340</posy>
@@ -273,6 +319,16 @@
 							<textcolor>FFFAFAFA</textcolor>
 							<label>$INFO[ListItem.Property(Country)], $INFO[ListItem.Property(Genre)]</label>
 							<visible>!IsEmpty(ListItem.Property(Country))</visible>
+						</control>
+                        <control type="label">
+							<posx>5</posx>
+							<posy>341</posy>
+							<align>left</align>
+							<width>1780</width>
+							<font>font13</font>
+							<textcolor>FFFAFAFA</textcolor>
+							<label>$INFO[ListItem.Property(channel_title)], $INFO[ListItem.Property(start_time)], $INFO[ListItem.Property(Genre)]</label>
+							<visible>IsEmpty(ListItem.Property(Country)) + !IsEmpty(ListItem.Property(channel_title))</visible>
 						</control>
 					</control>
 				</focusedlayout>

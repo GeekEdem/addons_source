@@ -9,7 +9,7 @@
 
 import xbmc, xbmcgui, xbmcplugin, xbmcaddon
 import simplejson, requests
-import urllib, time, urllib2, hashlib, os, re, base64, platform
+import urllib, time, urllib2, hashlib, os, re, base64, platform, datetime
 from sqlite import DataBase as DB
 from Utils import get_quality, get_language, get_subtitle, get_ui_language
 
@@ -40,10 +40,11 @@ def Get_JSON_response(url, cache_days=7):
     xbmc.log('[%s]: Trying to get %s' % (addon_name, url))
     now = time.time()
     # Language correction
-    if url.find('?') > 0:
-        url = "%s&lang=%s" % (url, get_ui_language())
-    else:
-        url = "%s?lang=%s" % (url, get_ui_language())
+    if url.find('lang=') == -1:
+        if url.find('?') > 0:
+            url = "%s&lang=%s" % (url, get_ui_language())
+        else:
+            url = "%s?lang=%s" % (url, get_ui_language())
 
     hashed_url = hashlib.md5(url).hexdigest()
     cache_seconds = int(cache_days * 86400)
@@ -58,7 +59,7 @@ def Get_JSON_response(url, cache_days=7):
             a.set_page_to_db(hashed_url, int(time.time()), response)
         except Exception as e:
             xbmc.log("[%s]: Get_JSON_response ERROR! Response - %s.\n %s" % (addon_name, response, e))
-            result = []
+            result = {'result': 'error'}
     else:
         result = simplejson.loads(response)
         xbmc.log("[%s]: %s loaded from cache in %f seconds" % (addon_name, url, time.time() - now))
@@ -249,7 +250,9 @@ def HandleVideoResult(item):
     except: video = item
 
     try: title = video['title']
-    except: title = ''
+    except:
+        try: title = item['title']
+        except: title = ''
 
     try: vid = video['object_id']
     except: vid = video['id']
@@ -259,6 +262,8 @@ def HandleVideoResult(item):
             video_type = 'collection'
         elif video["slider_type"] == "object":
             video_type = 'video'
+        elif video["slider_type"] == "tv_program":
+            video_type = 'TV'
     except:
         video_type = 'video'
 
@@ -281,10 +286,14 @@ def HandleVideoResult(item):
     except: description = ''
 
     try: genre = a.get_genres_from_db(video['genres'])
-    except: genre = ''
+    except:
+        try: genre = item["tv_program"]["genre"]["title"]
+        except: genre = ''
 
     try: category = a.get_category_from_db(video['categories'])
-    except: category = ''
+    except:
+        try: category = item["tv_program"]["category"]["title"]
+        except: category = ''
 
     try: delivery = ', '.join(video['delivery_rules'])
     except: delivery = ''
@@ -362,7 +371,23 @@ def HandleVideoResult(item):
     except: promo = False
 
     try: purchase = item["purchase_info"]
-    except: purchase = None
+    except:
+        try: purchase = ', '.join(str(x) for x in item["tv_channel"]["purchase_info"]["svod"]["subscriptions"])
+        except: purchase = None
+
+    try:
+        channel_title = item["tv_channel"]["title"]
+        channel_image = item["tv_channel"]["image"]["small"]
+    except:
+        channel_title = None
+        channel_image = None
+
+    try:
+        start_time = datetime.datetime.fromtimestamp(item['tv_program']['start_timestamp']).strftime('%H:%M, %d.%m.%Y')
+    except:
+        start_time = None
+
+    xbmc.log('PURCHASE INFO: %s' % purchase)
 
     locInfo = { 'title'			: title,
                 'id'			: unicode(vid),
@@ -394,9 +419,12 @@ def HandleVideoResult(item):
                 'exclusive'		: exclusive,
                 'series'		: series,
                 'is_promocode'  : promo,
-                'purchase_info' : purchase
+                'purchase_info' : purchase,
+                'channel_title' : channel_title,
+                'channel_image' : channel_image,
+                'start_time'    : start_time
               }
-    # xbmc.log('[%s]: HandleVideoResult parses data - %s' % (addon_name, locInfo))
+    # xbmc.log('\n[%s]: HandleVideoResult parses data - %s' % (addon_name, locInfo))
     return locInfo
 
 
@@ -428,22 +456,20 @@ def getconfiguration():
 def gettarification():
     xbmc.log('[%s]: Try to get tarification' % addon_name)
     data = Get_JSON_response('subscription/info')
-    if data:
-        if data['result'] == 'ok':
-            xbmc.log('[%s]: Successful get tarification' % addon_name)
-            return data['data']
-        else:
-            return None
+    if data['result'] == 'ok':
+        xbmc.log('[%s]: Successful get tarification' % addon_name)
+        return data['data']
     else:
         return None
 
 
 # Get mounth price from tariff
-def get_price(title):
+def get_price(tarif):
     currency = None
     month_price = None
-    if title == 'svod':
+    if tarif == 'svod':
         title = 'M+'
+    #if tarif == ''
 
     data = gettarification()
     if data:
@@ -465,15 +491,13 @@ def main_page(force):
     if force:
         cache_days = 0
     else:
-        cache_days = 1
+        cache_days = 0.5  # Cache main page on 12 hours
     data = Get_JSON_response('digest', cache_days)
-    if data:
-        if data['result'] == 'ok':
-            return data
-        else:
-            return None
+    if data['result'] == 'ok':
+        return data
     else:
         return None
+
 
 
 # Get video data
@@ -487,11 +511,8 @@ def getvideodata(force, page, section):
         data = Get_JSON_response('collection?id=%s' % page, cache_days=cache)
     elif section == 'video':
         data = Get_JSON_response('video/info?id=%s' % page, cache_days=cache)
-    if data:
-        if data['result'] == 'ok':
-            return data
-        else:
-            return None
+    if data['result'] == 'ok':
+        return data
     else:
         return None
 
@@ -512,132 +533,129 @@ def get_page(force, page, offset=0):
             data = simplejson.loads(data)
     else:
         data = Get_JSON_response(url, cache_days=cache)
+    if data['result'] == 'ok':
+        return data
+    else:
+        return None
+
+
+
+# Get stream information about available bitrate, languages and subtitles
+def data_from_stream(video_id):
+    xbmc.log('[%s]: Try to get available configurations of stream' % addon_name)
+    bitrates = []
+    audios = []
+    subtitles = []
+
+    data = GET('stream?video_id=%s' % video_id)
     if data:
+        data = simplejson.loads(data)
         if data['result'] == 'ok':
-            return data
+            try:
+                for bit in data['data']['bitrates']:
+                    bitrates.append(bit['bitrate'])
+            except:
+                bitrates = None
+
+            try:
+                for audio in data['data']['audio_tracks']:
+                    audios.append(audio['lang'])
+            except:
+                audios = None
+
+            try:
+                for subtitle in data['data']['subtitles']:
+                    subtitles.append(subtitle['lang'])
+            except:
+                subtitles = None
+
+            try:
+                src = data['data']['src']
+            except:
+                src = None
+
+            return {'bitrates': bitrates, 'audio': audios, 'subtitle': subtitles, 'link': src}
         else:
             return None
     else:
         return None
 
 
-# Get stream
-def data_from_stream(video_id):
-    # TODO REFACTORING!
-    xbmc.log('[%s]: Try to data from stream' % addon_name)
-    bitrates = []
-    audios = []
-    subtitles = []
-
-    data = Get_JSON_response('stream?video_id=%s' % video_id, cache_days=1)
-    if data['result'] == 'ok':
-        try:
-            for bit in data['data']['bitrates']:
-                bitrates.append(bit['bitrate'])
-        except:
-            bitrates = None
-
-        try:
-            for audio in data['data']['audio_tracks']:
-                audios.append(audio['lang'])
-        except:
-            audios = None
-
-        try:
-            for subtitle in data['data']['subtitles']:
-                subtitles.append(subtitle['lang'])
-        except:
-            subtitles = None
-
-        try:
-            src = data['data']['src']
-        except:
-            src = None
-
-        return bitrates, audios, subtitles, src
-
-    else:
-        return None, None, None, None
-
-
 def get_stream(video_id):
-    # TODO REFACTORING!
+    xbmc.log('[%s]: Try to get stream' % addon_name)
     bitrate = None
     audio_lang = None
     subtitle_lang = None
 
-    xbmc.log('[%s]: Try to get stream' % addon_name)
-
     p = re.compile(ur'(\d+)')		# REGEXP TO GET VIDEO QUALITY FROM SETTINGS
 
-    data = Get_JSON_response('stream?video_id=%s' % video_id, cache_days=1)
+    data = Get_JSON_response('stream?video_id=%s' % video_id, cache_days=0.5)
     if data['result'] == 'ok':
         if data['data']['is_wvdrm']:
             xbmc.log('[%s]: NEED TO DO DRM FOR THIS VIDEO (%s, %s)' % (addon_name, data['data']['title'], data['data']['id']))
 
-    preset_bitrate = get_quality(addon.getSetting('quality'))
-    xbmc.log('[%s]: PRESET BITRATE - %s' % (addon_name, preset_bitrate.encode('utf-8')))
-    for bit in data['data']['bitrates']:
-        if bit['bitrate'] == int(re.search(p, preset_bitrate).group(0)):
-            bitrate = bit['bitrate']
-            break
-        else:
-            bitrate = None
-    if not bitrate:
-        bitrate = data['data']['bitrates'][-1]['bitrate']
-    xbmc.log('[%s]: BITRATE IN MOVIE - %s' % (addon_name, bitrate))
-
-    preset_language = get_language(addon.getSetting('audio_language'))
-    xbmc.log('[%s]: PRESET LANGUAGE - %s' % (addon_name, preset_language.encode('utf-8')))
-    for audio in data['data']['audio_tracks']:
-        if audio['lang'] == preset_language[-3:-1]:
-            audio_lang = audio['lang']
-            break
-        else:
-            audio_lang = None
-    if not audio_lang:
-        try:
-            audio_lang = data['data']['audio_tracks'][0]['lang']
-            xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
-        except:
-            audio_lang = None
-
-    preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
-    xbmc.log('[%s]: PRESET SUBTITLE - %s' % (addon_name, preset_subtitle.encode('utf-8')))
-    if preset_subtitle.endswith(')'):
-        try:
-            for subtitle in data['data']['subtitles']:
-                if subtitle['lang'] == addon.getSetting('subtitle_language')[-3:-1]:
-                    subtitle_lang = subtitle['url']
+        if not data['data']['is_tv']:
+            preset_bitrate = get_quality(addon.getSetting('quality'))
+            xbmc.log('[%s]: PRESET BITRATE - %s' % (addon_name, preset_bitrate.encode('utf-8')))
+            for bit in data['data']['bitrates']:
+                if bit['bitrate'] == int(re.search(p, preset_bitrate).group(0)):
+                    bitrate = bit['bitrate']
                     break
                 else:
+                    bitrate = None
+            if not bitrate:
+                bitrate = data['data']['bitrates'][-1]['bitrate']
+            xbmc.log('[%s]: BITRATE IN MOVIE - %s' % (addon_name, bitrate))
+
+            preset_language = get_language(addon.getSetting('audio_language'))
+            xbmc.log('[%s]: PRESET LANGUAGE - %s' % (addon_name, preset_language.encode('utf-8')))
+            for audio in data['data']['audio_tracks']:
+                if audio['lang'] == preset_language[-3:-1]:
+                    audio_lang = audio['lang']
+                    break
+                else:
+                    audio_lang = None
+            if not audio_lang:
+                try:
+                    audio_lang = data['data']['audio_tracks'][0]['lang']
+                    xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
+                except:
+                    audio_lang = None
+
+            preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
+            xbmc.log('[%s]: PRESET SUBTITLE - %s' % (addon_name, preset_subtitle.encode('utf-8')))
+            if preset_subtitle.endswith(')'):
+                try:
+                    for subtitle in data['data']['subtitles']:
+                        if subtitle['lang'] == addon.getSetting('subtitle_language')[-3:-1]:
+                            subtitle_lang = subtitle['url']
+                            break
+                        else:
+                            subtitle_lang = None
+                    if not subtitle_lang:
+                        subtitle_lang = data['data']['subtitles'][0]['url']
+                    xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
+                except:
                     subtitle_lang = None
-            if not subtitle_lang:
-                subtitle_lang = data['data']['subtitles'][0]['url']
-        except:
-            subtitle_lang = None
+            else:
+                subtitle_lang = None
+
+            data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, bitrate, audio_lang), cache_days=0.5)
+            if data['result'] == 'ok':
+                return {'src': data['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
+            else:
+                return None
+        else:   # IF TV
+            return {'src': data['data']['src']}
     else:
-        subtitle_lang = None
-    try:
-        xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
-    except:
-        pass
-
-    new_data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, bitrate, audio_lang), cache_days=1)
-
-    if new_data:
-        if new_data['result'] == 'ok':
-            return new_data['data']['src'], audio_lang, subtitle_lang
+        return None
 
 
 # Get comments to video
 def getcomments(video_id):
     data = Get_JSON_response('comment/list?video_id=%s' % video_id, cache_days=1)
-    if data:
-        if data['result'] == 'ok':
-            return data['data']['comments']
-        else:
-            return None
+    if data['result'] == 'ok':
+        return data['data']['comments']
     else:
         return None
 
@@ -645,11 +663,8 @@ def getcomments(video_id):
 # Add video to favorites
 def addFav(vid):
     data = simplejson.loads(GET('user/favorite/add?video_id=%s' % vid))
-    if data:
-        if data['result'] == 'ok':
-            return True
-        else:
-            return False
+    if data['result'] == 'ok':
+        return True
     else:
         return False
 
@@ -657,18 +672,15 @@ def addFav(vid):
 # Delete video from favorites
 def delFav(vid):
     data = simplejson.loads(GET('user/favorite/delete?video_id=%s' % vid))
-    if data:
-        if data['result'] == 'ok':
-            return True
-        else:
-            return False
+    if data['result'] == 'ok':
+        return True
     else:
         return False
 
 
 # Send certificate code
 def send_certificate(certificate, vid, ptype, pay_id):
-    if ptype == 'svod':
+    if ptype == 'svod' or ptype == 'TV':
         link = 'payments/code?code=%s&video_id=%s&subscription_id=%s' % (certificate, vid, pay_id)
     elif ptype == 'tvod':
         link = 'payments/code?code=%s&video_id=%s&tariff_id=%s' % (certificate, vid, pay_id)
@@ -688,7 +700,7 @@ def send_certificate(certificate, vid, ptype, pay_id):
 
 
 # PAY functions
-def send_payrequest(card_data, token, autoprolong=False):
+def send_payrequest(card_data, token):
     if token:
         url = "order?pay_through_token=on"
     else:

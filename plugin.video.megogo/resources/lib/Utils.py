@@ -47,28 +47,28 @@ def FileDoSave(path, data):
 
 
 # Parse arguments
-def parse_argv(paramstring):
-    params={}
-    if len(paramstring)>=2:
-        if paramstring.endswith('/'):
-            paramstring = params[:-2]
-        if paramstring.startswith('plugin://%s/' % addon_id):
-            paramstring = paramstring.replace('plugin://%s/' % addon_id, '')
-            clas, _, func = paramstring.partition('/')
-            return clas, func
-        elif paramstring.startswith('?'):
-            paramstring = paramstring[1:]
-            pairsofparams = paramstring.split('&')
-            for pair in pairsofparams:
-                key, value = pair.split('=')
-                params[key] = value
-            return params
+# def parse_argv(paramstring):
+#    params={}
+#    if len(paramstring)>=2:
+#        if paramstring.endswith('/'):
+#            paramstring = params[:-2]
+#        if paramstring.startswith('plugin://%s/' % addon_id):
+#            paramstring = paramstring.replace('plugin://%s/' % addon_id, '')
+#            clas, _, func = paramstring.partition('/')
+#            return clas, func
+#        elif paramstring.startswith('?'):
+#            paramstring = paramstring[1:]
+#            pairsofparams = paramstring.split('&')
+#            for pair in pairsofparams:
+#                key, value = pair.split('=')
+#                params[key] = value
+#            return params
 
 
 def CreateListItems(data=None):
-    Int_InfoLabels		= ["duration", "vote", "like", "dislike"]
-    Float_InfoLabels	= ["rating", "imdb_rating"]
-    String_InfoLabels	= ["id", "type", "originaltitle", "country", "plot", "genre", "categories", "year", "delivery_rules", "mpaa", "crew", "favourite", "screenshots", "quality", "season_list", "available", "audio_list"]
+    #Int_InfoLabels		= ["duration", "vote", "like", "dislike"]
+    #Float_InfoLabels	= ["rating", "imdb_rating"]
+    #String_InfoLabels	= ["id", "type", "originaltitle", "country", "plot", "genre", "categories", "year", "delivery_rules", "mpaa", "crew", "favourite", "screenshots", "quality", "season_list", "available", "audio_list"]
     itemlist = []
 
     if data is not None:
@@ -84,7 +84,7 @@ def CreateListItems(data=None):
                 #try: xbmc.log('[%s]: value.encode in CreateListItems - %s' % (addon_name, value.encode('utf-8')))
                 #except: xbmc.log('[%s]: value in CreateListItems - %s' % (addon_name, value))
 
-                if key.lower() in ['poster', 'screenshots']:
+                if key.lower() in ['poster', 'screenshots', 'channel_image']:
                     if type(value) == list:
                         for picture in value:
                             if picture.startswith("http://") and (picture.endswith(".jpg") or picture.endswith(".png")):
@@ -123,15 +123,16 @@ def CreateListItems(data=None):
                         listitem.setProperty('Subscribe', 'True')
                 #if key.lower() in ["path"]:
                 #	itempath = value
-                if key.lower() in Int_InfoLabels:
-                    listitem.setInfo('video', {key.lower(): int(value)})
-                if key.lower() in String_InfoLabels:
-                    listitem.setInfo('video', {key.lower(): value})
-                if key.lower() in Float_InfoLabels:
-                    try:
-                        listitem.setInfo('video', {key.lower(): "%1.1f" % float(value)})
-                    except:
-                        pass
+                #if key.lower() in Int_InfoLabels:
+                #    listitem.setInfo('video', {key.lower(): int(value)})
+                #if key.lower() in String_InfoLabels:
+                #    listitem.setInfo('video', {key.lower(): value})
+                #if key.lower() in Float_InfoLabels:
+                #    try:
+                #        listitem.setInfo('video', {key.lower(): "%1.1f" % float(value)})
+                #    except:
+                #        pass
+
                 listitem.setProperty('%s' % key, value)
 
             itemlist.append(listitem)
@@ -206,41 +207,6 @@ def CreateCommentList(video_id, data=None):
     return itemlist
 
 
-"""def CreateEpisodeList(video_id, data=None):
-    if not data:
-        return []
-
-    itemlist = []
-    image_requests = []
-    for (count, result) in enumerate(data):
-        listitem = xbmcgui.ListItem('%s' % (str(count)))
-        # counter = 1
-        for (key, value) in result.iteritems():
-            if not value:
-                continue
-            if key.lower() in ["user_name"]:
-                listitem.setLabel(value)
-            if key.lower() in ["user_avatar"]:
-                if value.startswith("http://") and (value.endswith(".jpg") or value.endswith(".png")):
-                    if not value.decode('utf-8') in image_requests:
-                        try:
-                            Get_File(value)
-                        except:
-                            image_requests.append(value.decode('utf-8'))
-                listitem.setThumbnailImage(value)
-            if key.lower() in ['text']:
-                listitem.setProperty('%s' % key.lower(), value.encode('utf-8'))
-            if key.lower() in ['date']:
-                data, _, time = value.partition('T')
-                listitem.setProperty('%s' % key.lower(), "%s %s" % (data, time[:-1]))
-
-        # listitem.setProperty("index", str(counter))
-        itemlist.append(listitem)
-        # counter += 1
-
-    return itemlist"""
-
-
 def CreateTiriffList(data, currency):
     if not data:
         return []
@@ -298,6 +264,8 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page.startswith('collections'):
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
+    elif page.startswith('tv'):
+        return megogo2xbmc.HandleMainPage(response['data'], 'channels')
     elif page.startswith('video/episodes'):
         return response['data']
     else:
@@ -361,15 +329,20 @@ def Get_File(url):
 
 def get_subscribe_tariffs(title):
     if title == 'svod':
-        title = 'M+'
+        product = 'main'
+    elif title == 'TV':
+        product = 'tv'
+
+    tariffs = []
 
     data = megogo2xbmc.gettarification()
     if data:
         for arr in data:
-            if arr['title'] == title:
-                return arr
+            if arr['product'] == product:
+                tariffs.append(arr)
+        return tariffs
     else:
-        return []
+        return None
 
 
 def get_quality(value):
