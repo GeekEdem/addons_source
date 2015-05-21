@@ -51,7 +51,6 @@ busydialog		        = xbmcgui.Window(10138)
 
 MovieID = db.get_category_from_db_by_name("'%s'" % language(1012))
 SerialID = db.get_category_from_db_by_name("'%s'" % language(1013))
-#TVID = db.get_category_from_db_by_name("'%s'" % language(1014))
 CartoonsID = db.get_category_from_db_by_name("'%s'" % language(1016))
 ProgramsID = db.get_category_from_db_by_name("'%s'" % language(1017))
 
@@ -63,57 +62,9 @@ class Main:
     # Initialization
     def __init__(self, **kwargs):
         splash = kwargs.get('splash')
-
-        from Utils import FileDoOpen, FileDoSave
-
-        # ##################################	Work with colors	####################################### #
-        if __addon__.getSetting('last-text-color') == '':
-            __addon__.setSetting(id='last-text-color', value='FFFAFAFA')
-
-        value = __addon__.getSetting('text-color')
-        try:
-            TextColor = value.split(']', 1)[0].split(' ')[1]
-            ColorName = value.split(']', 1)[1].split('[')[0]
-
-            # re_current_color_diffuse 	= re.compile(ur'<colordiffuse>0x([^<]*)</colordiffuse>')
-            # try: current_color_diffuse 	= re.search(re_current_color_diffuse, File).group(1)
-            # except: current_color_diffuse= ''
-            # if (current_color_diffuse!=SkinColor and current_color_diffuse!=''):
-            #	File=File.replace('<colordiffuse>0x%s</colordiffuse>' % current_color_diffuse, '<colordiffuse>0x%s</colordiffuse>' % SkinColor)	# Find and replace color diffuse in skin
-            #	xbmc.log('[%s]: diffuse color changed' % addon_name)
-        except:
-            TextColor = 'FFFAFAFA'
-            ColorName = 'Original'
-
-        if __addon__.getSetting('last-text-color') != TextColor:
-            xbmc.log('[%s]: chosen new text color - %s (%s)' % (addon_name, TextColor, ColorName))
-            try:
-                for name in os.listdir(SkinFolder):
-                    if name.endswith('.xml'):
-                        Fil = FileDoOpen(os.path.join(SkinFolder, name))
-
-                        re_current_color_text = re.compile(ur'<textcolor>([^<]*)</textcolor>')
-                        try:
-                            current_color_text = re.search(re_current_color_text, Fil).group(1)
-                        except:
-                            current_color_text = ''
-
-                        if current_color_text != TextColor.upper() and current_color_text != '':
-                            Fil = Fil.replace('<textcolor>%s</textcolor>' % current_color_text, '<textcolor>%s</textcolor>' % TextColor.upper())		# Find and replace color text in skin
-                            __addon__.setSetting(id='last-text-color', value=TextColor.upper())
-                            xbmc.log('[%s]: text color changed' % addon_name)
-                        FileDoSave(os.path.join(SkinFolder, name), Fil)
-            except:
-                xbmc.log('[%s]: cannot change skin colors!' % addon_name)
-        else:
-            xbmc.log('[%s]: colors settings not changed' % addon_name)
-
-        # ##################################	Start Home Screen	####################################### #
         home = Homescreen('HomeScreen.xml', addon_path, win=splash)
         home.doModal()
-
         del home
-
 
 #####################################################################################################
 # ##################################	  HOME   SCREEN		####################################### #
@@ -122,45 +73,55 @@ class Homescreen(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
         xbmc.executebuiltin("ActivateWindow(busydialog)")
+        xbmcgui.WindowXMLDialog.__init__(self)
+        # try:
         self.splash = kwargs.get('win', None)
         megogo2xbmc.checkLogin()
         fetch_data(page='tarification')						                        # Get tarification from MEGOGO
         self.listitems = update_content(page='Main', section='slider')
         self.slider_len = len(self.listitems)
-        xbmcgui.WindowXMLDialog.__init__(self)
+        # except:
+        #    self.error = True
+        self.error = False
         xbmc.executebuiltin("Dialog.Close(busydialog)")
 
     def onInit(self):
-        self.windowid = xbmcgui.getCurrentWindowDialogId()
-        self.window = xbmcgui.Window(self.windowid)
-        if self.splash:
-            self.splash.close()
-
-        self.getControl(500).reset()
-        self.getControl(500).addItems(self.listitems)
-
-        item = CreateListItems(fetch_data(page='Main', section='recommended'))
-        self.getControl(501).reset()
-        self.getControl(501).addItems(item)
-
-        control = getids()
-        if control:
-            try:
-                self.setFocusId(int(control))
-            except Exception as e:
-                xbmc.log('SELECT control %s error!\n%s' % (control, e))
-                try:
-                    selectedId, _, item = control.partition(', ')
-                    if selectedId == 500 or selectedId == '500':
-                        self.setFocusId(6000)
-                    else:
-                        self.setFocusId(int(selectedId))
-                        self.getControl(int(selectedId)).selectItem(int(item))
-                except Exception as e:
-                    xbmc.log('SELECT control %s second error!\n%s' % (control, e))
-                    self.setFocusId(6000)
+        if self.error:
+            dialog = xbmcgui.Dialog()
+            dialog.ok(language(1025), language(1031))
+            del dialog
+            self.close()
         else:
-            self.setFocusId(6000)
+            self.windowid = xbmcgui.getCurrentWindowDialogId()
+            self.window = xbmcgui.Window(self.windowid)
+            if self.splash:
+                self.splash.close()
+
+            self.getControl(500).reset()
+            self.getControl(500).addItems(self.listitems)
+
+            item = CreateListItems(fetch_data(page='Main', section='recommended'))
+            self.getControl(501).reset()
+            self.getControl(501).addItems(item)
+
+            control = getids()
+            if control:
+                try:
+                    self.setFocusId(int(control))
+                except Exception as e:
+                    xbmc.log('SELECT control %s error!\n%s' % (control, e))
+                    try:
+                        selectedId, _, item = control.partition(', ')
+                        if selectedId == 500 or selectedId == '500':
+                            self.setFocusId(6000)
+                        else:
+                            self.setFocusId(int(selectedId))
+                            self.getControl(int(selectedId)).selectItem(int(item))
+                    except Exception as e:
+                        xbmc.log('SELECT control %s second error!\n%s' % (control, e))
+                        self.setFocusId(6000)
+            else:
+                self.setFocusId(6000)
 
     def onAction(self, action):
         focusid = self.getFocusId()
@@ -247,13 +208,17 @@ class VideoList(xbmcgui.WindowXMLDialog):
         self.old_id = kwargs.get('wid')
         if self.page.startswith('video/collection'):
             self.name = get_title(self.page)
+        if self.page.startswith('tv'):
+            self.programs = update_content(force=False, page='tv')
+        else:
+            self.programs = []
         xbmcgui.WindowXMLDialog.__init__(self)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
 
     def onInit(self):
         self.windowid = xbmcgui.getCurrentWindowDialogId()
         self.window = xbmcgui.Window(self.windowid)
-        xbmc.log('PAGE! %s' % self.page)
+        # xbmc.log('PAGE! %s' % self.page)
         if not (self.page.startswith('video/collection') or self.page == 'tv/channels' or self.page.startswith('collection')):
             self.window.setProperty("NAME", "%s (%s %d)" % (self.name, language(1042), self.offset/100+1))
         else:
@@ -263,6 +228,20 @@ class VideoList(xbmcgui.WindowXMLDialog):
         self.listitems = update_content(force=True, page=self.newpage, offset=self.offset)
         self.items_len = len(self.listitems)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
+
+        items = []
+        if self.programs:
+            if self.programs[0]['title'] != language(1091):
+                self.programs.insert(0, {'title': language(1091), 'channels': self.listitems})
+            for array in self.programs:
+                items.append({'title': array['title']})
+        else:
+            items.append({'title': language(1091)})
+        try:
+            self.getControl(7014).reset()
+            self.getControl(7014).addItems(CreateListItems(items))
+        except:
+            pass
 
         # xbmc.log('[%s]: offset - %s, len - %s' % (addon_name, self.offset, self.items_len))
         if self.items_len == 0:
@@ -319,6 +298,14 @@ class VideoList(xbmcgui.WindowXMLDialog):
             items = update_content(force=False, page=self.newpage, offset=self.offset)
             self.getControl(500).reset()
             self.getControl(500).addItems(items)
+        # ###### TVList.xml ###### #
+        elif control == 7014:
+            pos = self.getControl(7014).getSelectedPosition()
+            label = self.getControl(7014).getListItem(pos).getLabel()
+            for items in self.programs:
+                if items['title'].encode('utf-8') == label:
+                    self.getControl(500).reset()
+                    self.getControl(500).addItems(items['channels'])
 
     def onAction(self, action):
         actions = action.getId()
@@ -328,12 +315,14 @@ class VideoList(xbmcgui.WindowXMLDialog):
             if focusid in MENU_IDS:
                 xbmc.executebuiltin("Control.SetFocus(6000)")
             elif focusid in [500]:
-                if self.page.startswith('subscription') or self.page.startswith('premieres') or self.page.startswith('collections') or self.page.startswith('user/favorites') or self.page.startswith('search') or self.page.startswith('tv'):
+                if self.page.startswith('subscription') or self.page.startswith('premieres') or self.page.startswith('collections') or self.page.startswith('user/favorites') or self.page.startswith('search'):
                     button_id = 6000
                 elif self.newpage.find('sort=add') > 0:
                     button_id = 7012
                 elif self.newpage.find('sort=popular') > 0:
                     button_id = 7013
+                elif self.page.startswith('tv'):
+                    button_id = 7014
                 else:
                     button_id = 7011
                 xbmc.executebuiltin("Control.SetFocus(%d)" % button_id)
@@ -352,7 +341,15 @@ class VideoList(xbmcgui.WindowXMLDialog):
             self.close()
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
-            # xbmc.log('[%s]: id - %s, type - %s' % (addon_name, video_id, video_type))
+            #xbmc.log('[%s]:\n id - %s\n type - %s\n purchase - %s' % (addon_name, video_id, video_type, self.getControl(controlID).getSelectedItem().getProperty("purchase_info")))
+            if self.page.startswith('tv'):
+                try:
+                    purchase = self.getControl(controlID).getSelectedItem().getProperty("purchase_info")
+                except:
+                    purchase = None
+                if purchase:
+                    open_tv_stream(video_id, purchase)
+                    return
             if video_type == 'video' and not self.page.startswith('collections'):
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, id=video_id)
             elif self.page.startswith('collections'):
@@ -388,6 +385,14 @@ class VideoList(xbmcgui.WindowXMLDialog):
             dialog = VideoList(xml, addon_path, page=self.page, offset=offset, name=self.name, wid=self.old_id)
             dialog.doModal()
             del dialog
+
+        elif controlID == 7014:
+            pos = self.getControl(7014).getSelectedPosition()
+            label = self.getControl(7014).getListItem(pos).getLabel()
+            for items in self.programs:
+                if items['title'].encode('utf-8') == label:
+                    self.getControl(500).reset()
+                    self.getControl(500).addItems(items['channels'])
 
 
 #####################################################################################################
@@ -528,10 +533,10 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
         self.vid = kwargs.get('id', None)
         status = kwargs.get('force', False)
         self.data = fetch_data(force=status, page=self.vid, section='video')
-        #try:
+        # try:
         #    self.screenshots = self.data['screenshots']
         #    del self.data['screenshots']
-        #except:
+        # except:
         #    self.screenshots = None
         try:
             self.actors = self.data['crew']
@@ -554,6 +559,8 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             except:
                 self.tariff_id = None
                 self.subscription_id = None
+
+        #xbmc.log('+TARRIF+\n%s\n%s' % (self.tariff_id, self.subscription_id))
 
         data = megogo2xbmc.data_from_stream(self.data["id"])
         if data:
@@ -703,18 +710,30 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                 playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
                 playlist.clear()
                 for (position, episode) in enumerate(self.season[0]['episode_list']):
-                    link, audio, subtitle = megogo2xbmc.get_stream(episode["id"])
-                    if episode['title_original']:
-                        label = '%s (%s, %s)' % (self.data['title'], episode['title'], episode['title_original'])
-                    else:
-                        label = '%s (%s)' % (self.data['title'], episode['title'])
-                    episode_item = xbmcgui.ListItem(label, iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
-                    episode_item.setInfo('video', {'Title': label})
-                    playlist.add(url=link, listitem=episode_item, index=position)
+                    arr = megogo2xbmc.get_stream(episode["id"])
+                    if arr:
+                        link = arr['src']
+                        subtitle = arr['subtitle']
+                        if episode['title_original']:
+                            label = '%s (%s, %s)' % (self.data['title'], episode['title'], episode['title_original'])
+                        else:
+                            label = '%s (%s)' % (self.data['title'], episode['title'])
+                        episode_item = xbmcgui.ListItem(label, iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
+                        episode_item.setInfo('video', {'Title': label})
+                        try:
+                            episode_item.setSubtitles([subtitle])
+                        except:
+                            xbmc.log('Cannot set subtitle! NOT KODI!')
+                        playlist.add(url=link, listitem=episode_item, index=position)
                 # listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
                 # listitem.setInfo('video', {'Title': self.data['title']})
                 # self.movieplayer.play_item(playlist, listitem)
+                size = len(playlist)
                 xbmc.Player().play(playlist)
+                self.movieplayer.WaitForVideoEnd()
+                    #pos = playlist.getposition()
+                    #xbmc.log('POS - %s/SIZE - %s' % (pos, size))
+                    #playlist.clear()
             else:
                 data = megogo2xbmc.get_stream(self.data["id"])
                 link = data['src']
@@ -725,7 +744,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                 listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
                 listitem.setInfo('video', {'Title': self.data['title']})
                 self.movieplayer.play_item(link, listitem, subtitle)
-            self.movieplayer.WaitForVideoEnd()
+                self.movieplayer.WaitForVideoEnd()
             PopWindowStack(self)
 
         elif controlID in [33012]:
@@ -828,7 +847,10 @@ class Pay(xbmcgui.WindowXMLDialog):
                     for arr in data:
                         if ids == str(arr['subscription_id']):
                             tariffs_arr.append({'description': arr['title'], 'price': arr['tariffs'][0]['price'], 'tariff_id': arr['tariffs'][0]['tariff_id'], 'objects': arr['objects_count']})
-                self.title = ' %s '.join(str(x['description']) for x in tariffs_arr) % language(1085)
+                try:
+                    self.title = ' %s '.join(str(x['description']) for x in tariffs_arr) % language(1085)
+                except:
+                    self.title = ' / '.join(str(x['description']) for x in tariffs_arr)
                 for element in tariffs_arr:
                     num = abs(element['objects']) % 100     # To show right word ending
                     num_x = num % 10
@@ -1325,10 +1347,6 @@ def login():
                 return registration()
             else:
                 return False
-            # elif index == 2:    # FB
-                # App ID: 1566886233591702
-                # App Secret: f0d66dd5298ffc7b3a247efad7dec710
-
         else:
             return False
 
@@ -1475,7 +1493,7 @@ def menu_chooser(window, controlID, real_control=None):
     elif controlID == 7006:
         page_name = language(1014)
         link = 'tv/channels'
-        xml = u'SubscribeList.xml'
+        xml = u'TVList.xml'
 
     elif controlID == 7007:
         page_name = language(1015)

@@ -232,16 +232,28 @@ def logout():
     addon.setSetting('password', '')
 
 
-def HandleMainPage(responce, types = None):
+def HandleMainPage(responce, types=None):
     info = []
     if types:
         array = responce[types]
     else:
         array = responce
-
     for item in array:
         info.append(HandleVideoResult(item))
     return info
+
+
+def HandleTVPackeges(responce, types):
+    arrays = []
+
+    array = responce[types]
+    for dictionary in array:
+        info = []
+        for channel in dictionary['channels']:
+            # xbmc.log('!channel!\ntype - %s\n%s' % (type(channel), channel))
+            info.append(HandleVideoResult(channel))
+        arrays.append({'title': dictionary['title'], 'channels': info})
+    return arrays
 
 
 # Function that get information about video-file from json-answer
@@ -335,11 +347,11 @@ def HandleVideoResult(item):
     try: vote = item['vote']
     except: vote = ''
 
-    try:
-        screenshots = []
-        for picture in item['screenshots']:
-            screenshots.append(picture['big'])
-    except: screenshots = None
+    #try:
+    #    screenshots = []
+    #    for picture in item['screenshots']:
+    #        screenshots.append(picture['big'])
+    #except: screenshots = None
 
     try: quality = item['quality']
     except: quality = ''
@@ -370,10 +382,12 @@ def HandleVideoResult(item):
     try: promo = item["is_promocode"]
     except: promo = False
 
-    try: purchase = item["purchase_info"]
+    try: purchase = ', '.join(str(x) for x in item["tv_channel"]["purchase_info"]["svod"]["subscriptions"])
     except:
-        try: purchase = ', '.join(str(x) for x in item["tv_channel"]["purchase_info"]["svod"]["subscriptions"])
-        except: purchase = None
+        try: purchase = ', '.join(str(x) for x in item["purchase_info"]["svod"]["subscriptions"])
+        except:
+            try: purchase = item["purchase_info"]
+            except: purchase = None
 
     try:
         channel_title = item["tv_channel"]["title"]
@@ -409,7 +423,7 @@ def HandleVideoResult(item):
                 'crew'			: crew,
                 'favourite'		: favourite,
                 'vote'			: vote,
-                'screenshots'	: screenshots,
+                # 'screenshots'	: screenshots,
                 'quality'		: quality,
                 'season_list'	: season_list,
                 'available'		: available,

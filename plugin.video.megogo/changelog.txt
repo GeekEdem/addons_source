@@ -1,13 +1,17 @@
+v1.1.2
+- Added sort methods in TV-Programs
+- Fixed play full season
+
+TODO:
+- Add video type "DTO" - buy movie for forever use
+- Fix bug with ending video in playlist
+- Add bought films in Account Menu
+
 v1.1.1
 - Fixed bug with missing icons on Linux
 - Added buying TV-programs from plugin
 - Added TV-program on slider
-- New working TV program in menu
-
-TODO:
-- Add video type "DTO" - buy movie for forever use
-- Fixed bug with play full season
-- Add bought films in Account Menu
+- New TV program in menu
 
 v1.1.0
 - Fixed crash on Windows, when user name is with spaces and cyrillic symbols

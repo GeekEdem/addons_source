@@ -132,7 +132,10 @@ def CreateListItems(data=None):
                 #        listitem.setInfo('video', {key.lower(): "%1.1f" % float(value)})
                 #    except:
                 #        pass
-
+                #try:
+                #    xbmc.log('!DEBUG! %s' % value)
+                #except:
+                #    xbmc.log('!DEBUG ENCODE! %s' % value.encode('utf-8'))
                 listitem.setProperty('%s' % key, value)
 
             itemlist.append(listitem)
@@ -236,8 +239,12 @@ def CreateTiriffList(data, currency):
 
 def update_content(force=False, page=False, section=False, offset=0):
     listitems = fetch_data(force, page, section, offset)
-    if listitems:
+    if listitems and page != 'tv':
         return CreateListItems(listitems)
+    elif listitems and page == 'tv':
+        for item in listitems:
+            item['channels'] = CreateListItems(item['channels'])
+        return listitems
     else:
         return []
 
@@ -264,8 +271,10 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page.startswith('collections'):
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
-    elif page.startswith('tv'):
+    elif page.startswith('tv/channels'):
         return megogo2xbmc.HandleMainPage(response['data'], 'channels')
+    elif page == 'tv':
+        return megogo2xbmc.HandleTVPackeges(response['data'], 'packages')
     elif page.startswith('video/episodes'):
         return response['data']
     else:
@@ -428,5 +437,5 @@ class VideoPlayer(xbmc.Player):
 
     def WaitForVideoEnd(self):
         while not self.stopped:
-            xbmc.sleep(200)
+            xbmc.sleep(400)
         self.stopped = False
