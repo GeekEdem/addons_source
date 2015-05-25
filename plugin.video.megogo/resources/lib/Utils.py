@@ -119,23 +119,10 @@ def CreateListItems(data=None):
                 if key.lower() in ["delivery_rules"]:
                     if value.find('tvod') >= 0:
                         listitem.setProperty('Buy', 'True')
+                    if value.find('dto') >= 0:
+                        listitem.setProperty('Buy_Forever', 'True')
                     if value.find('svod') >= 0:
                         listitem.setProperty('Subscribe', 'True')
-                #if key.lower() in ["path"]:
-                #	itempath = value
-                #if key.lower() in Int_InfoLabels:
-                #    listitem.setInfo('video', {key.lower(): int(value)})
-                #if key.lower() in String_InfoLabels:
-                #    listitem.setInfo('video', {key.lower(): value})
-                #if key.lower() in Float_InfoLabels:
-                #    try:
-                #        listitem.setInfo('video', {key.lower(): "%1.1f" % float(value)})
-                #    except:
-                #        pass
-                #try:
-                #    xbmc.log('!DEBUG! %s' % value)
-                #except:
-                #    xbmc.log('!DEBUG ENCODE! %s' % value.encode('utf-8'))
                 listitem.setProperty('%s' % key, value)
 
             itemlist.append(listitem)
@@ -262,8 +249,13 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         response = megogo2xbmc.get_page(force, page, offset)
 
     if not response:
-        return None
-    elif page == 'Main' and section == 'recommended':
+        return []
+    try:
+        if len(response['data']['video_list']) == 0:
+            return []
+    except:
+        pass
+    if page == 'Main' and section == 'recommended':
         return megogo2xbmc.HandleMainPage(response['data'], 'recommended')
     elif page == 'Main' and section == 'slider':
         return megogo2xbmc.HandleMainPage(response['data'], 'sliders')
@@ -414,11 +406,23 @@ def getids():
 class VideoPlayer(xbmc.Player):
     def __init__(self, *args, **kwargs):
         xbmc.Player.__init__(self)
+        self.size = None
+        self.counter = 0
         self.stopped = False
         self.popstack = kwargs.get("popstack", True)
 
     def onPlayBackEnded(self):
-        self.stopped = True
+        if self.size:
+            self.counter += 1
+            if self.counter <= self.size:
+                self.stopped = False
+                xbmc.sleep(1200)
+                if not self.isPlaying():
+                    self.stopped = True
+            else:
+                self.stopped = True
+        else:
+            self.stopped = True
 
     def onPlayBackStopped(self):
         self.stopped = True
@@ -435,7 +439,11 @@ class VideoPlayer(xbmc.Player):
             xbmc.log('SUBTITILE - %s' % subtitle)
         self.play(stream_url, listitem)
 
+    def play_playlist(self, playlist, size, popstack=True):
+        self.size = size
+        self.play(playlist)
+
     def WaitForVideoEnd(self):
         while not self.stopped:
-            xbmc.sleep(400)
+            xbmc.sleep(800)
         self.stopped = False

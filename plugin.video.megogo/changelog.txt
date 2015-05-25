@@ -1,11 +1,17 @@
+v1.1.3
+- Changed requests to ssl-encrypted
+- Fix bug with opening addon, when video in playlist is still playing
+- Added video type "DTO" - buy movie for forever use
+- Added "Bought films" in Account Menu
+- Added "Play full season" button
+
+TODO:
+- Only numbers keyboard when entering card numbers
+- Esc bug, when video playing
+
 v1.1.2
 - Added sort methods in TV-Programs
 - Fixed play full season
-
-TODO:
-- Add video type "DTO" - buy movie for forever use
-- Fix bug with ending video in playlist
-- Add bought films in Account Menu
 
 v1.1.1
 - Fixed bug with missing icons on Linux

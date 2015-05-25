@@ -84,6 +84,7 @@
                 <aligny>center</aligny>
                 <font>font13</font>
                 <onright>33006</onright>
+                <ondown>33009</ondown>
                 <textcolor>FF999999</textcolor>
                 <texturefocus>buttons/On.png</texturefocus>
                 <texturenofocus>buttons/Off.png</texturenofocus>
@@ -91,9 +92,9 @@
             </control>
 
             <control type="radiobutton" id="33006">
-                <posx>1200</posx>
+                <posx>1000</posx>
                 <posy>200</posy>
-                <width>600</width>
+                <width>650</width>
                 <height>100</height>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -102,7 +103,7 @@
                 <textoffsetx>0</textoffsetx>
                 <textoffsety>0</textoffsety>
                 <font>font13</font>
-                <textwidth>600</textwidth>
+                <textwidth>650</textwidth>
                 <label>$ADDON[plugin.video.megogo 24]</label>
                 <textcolor>FF999999</textcolor>
                 <focusedcolor>FFFAFAFA</focusedcolor>
@@ -116,9 +117,9 @@
             </control>
 
             <control type="radiobutton" id="33007">
-                <posx>1200</posx>
+                <posx>1000</posx>
                 <posy>350</posy>
-                <width>600</width>
+                <width>650</width>
                 <height>100</height>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -128,7 +129,7 @@
                 <textoffsetx>0</textoffsetx>
                 <textoffsety>0</textoffsety>
                 <font>font13</font>
-                <textwidth>600</textwidth>
+                <textwidth>650</textwidth>
                 <label>$ADDON[plugin.video.megogo 25]</label>
                 <textcolor>FF999999</textcolor>
                 <focusedcolor>FFFAFAFA</focusedcolor>
@@ -142,9 +143,9 @@
             </control>
 
             <control type="radiobutton" id="33008">
-                <posx>1200</posx>
+                <posx>1000</posx>
                 <posy>500</posy>
-                <width>600</width>
+                <width>650</width>
                 <height>100</height>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -153,7 +154,7 @@
                 <textoffsetx>0</textoffsetx>
                 <textoffsety>0</textoffsety>
                 <font>font13</font>
-                <textwidth>600</textwidth>
+                <textwidth>650</textwidth>
                 <label>$ADDON[plugin.video.megogo 26]</label>
                 <textcolor>FF999999</textcolor>
                 <focusedcolor>FFFAFAFA</focusedcolor>
@@ -164,6 +165,27 @@
                 <textureradioofffocus></textureradioofffocus>
                 <textureradioonnofocus></textureradioonnofocus>
                 <textureradiooffnofocus></textureradiooffnofocus>
+            </control>
+
+            <control type="button" id="33009">
+                <description> BUYED BUTTON </description>
+                <posx>200</posx>
+                <posy>500</posy>
+                <width>400</width>
+                <height>80</height>
+                <textoffsetx>0</textoffsetx>
+                <textoffsety>0</textoffsety>
+                <textwidth>400</textwidth>
+                <align>center</align>
+                <aligny>center</aligny>
+                <font>font13</font>
+                <onright>33006</onright>
+                <onup>33005</onup>
+                <textcolor>FF999999</textcolor>
+                <texturefocus>buttons/On.png</texturefocus>
+                <texturenofocus>buttons/Off.png</texturenofocus>
+                <label>$ADDON[plugin.video.megogo 1093]</label>
+                <aspectratio>keep</aspectratio>
             </control>
 
             <control type="textbox">

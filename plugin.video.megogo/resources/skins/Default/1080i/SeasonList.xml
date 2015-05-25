@@ -86,7 +86,6 @@
                 <width>1800</width>
                 <height>800</height>
                 <onup>6000</onup>
-                <ondown>501</ondown>
                 <scrolltime>200</scrolltime>
                 <orientation>horizontal</orientation>
                 <animation type="WindowOpen" reversible="false">

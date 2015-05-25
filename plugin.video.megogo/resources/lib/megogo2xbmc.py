@@ -24,7 +24,7 @@ unknown_person	= os.path.join(addon_path, 'resources', 'skins', 'Default', 'medi
 
 API_Private_Key_MEGOGO  = '63ee38849d'
 API_Public_Key_MEGOGO   = '_kodi_j1'
-API_URL                 = 'http://api.megogo.net/v1'
+API_URL                 = 'https://api.megogo.net/v1'
 MEGOGO_URL              = 'http://megogo.net'
 PAY_URL                 = 'https://megogo.net/%s/billing/payu' % get_ui_language()
 PAY_VENDOR              = 'kodi-device'
@@ -362,14 +362,6 @@ def HandleVideoResult(item):
     try: available = item['is_available']
     except: available = False
 
-    try:
-        purchase = item["purchase_info"]
-        currency = purchase['tvod']['subscriptions'][0]['currency']
-        price = purchase['tvod']['subscriptions'][0]['tariffs'][0]['price']
-    except:
-        currency = None
-        price = None
-
     try: recommended_videos = item["recommended_videos"]
     except: recommended_videos = []
 
@@ -401,7 +393,7 @@ def HandleVideoResult(item):
     except:
         start_time = None
 
-    xbmc.log('PURCHASE INFO: %s' % purchase)
+    # xbmc.log('PURCHASE INFO: %s' % purchase)
 
     locInfo = { 'title'			: title,
                 'id'			: unicode(vid),
@@ -427,8 +419,6 @@ def HandleVideoResult(item):
                 'quality'		: quality,
                 'season_list'	: season_list,
                 'available'		: available,
-                'currency'		: currency,
-                'price'			: price,
                 'recommended'	: recommended_videos,
                 'exclusive'		: exclusive,
                 'series'		: series,
@@ -597,32 +587,22 @@ def data_from_stream(video_id):
 
 def get_stream(video_id):
     xbmc.log('[%s]: Try to get stream' % addon_name)
-    bitrate = None
+    preset_bitrate = get_quality(addon.getSetting('quality'))
     audio_lang = None
+    preset_language = get_language(addon.getSetting('audio_language'))
     subtitle_lang = None
+    preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
 
     p = re.compile(ur'(\d+)')		# REGEXP TO GET VIDEO QUALITY FROM SETTINGS
+    preset_bitrate = int(re.search(p, preset_bitrate).group(0))
+    preset_language = preset_language[-3:-1]
 
-    data = Get_JSON_response('stream?video_id=%s' % video_id, cache_days=0.5)
+    data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language), cache_days=1)
     if data['result'] == 'ok':
         if data['data']['is_wvdrm']:
             xbmc.log('[%s]: NEED TO DO DRM FOR THIS VIDEO (%s, %s)' % (addon_name, data['data']['title'], data['data']['id']))
 
         if not data['data']['is_tv']:
-            preset_bitrate = get_quality(addon.getSetting('quality'))
-            xbmc.log('[%s]: PRESET BITRATE - %s' % (addon_name, preset_bitrate.encode('utf-8')))
-            for bit in data['data']['bitrates']:
-                if bit['bitrate'] == int(re.search(p, preset_bitrate).group(0)):
-                    bitrate = bit['bitrate']
-                    break
-                else:
-                    bitrate = None
-            if not bitrate:
-                bitrate = data['data']['bitrates'][-1]['bitrate']
-            xbmc.log('[%s]: BITRATE IN MOVIE - %s' % (addon_name, bitrate))
-
-            preset_language = get_language(addon.getSetting('audio_language'))
-            xbmc.log('[%s]: PRESET LANGUAGE - %s' % (addon_name, preset_language.encode('utf-8')))
             for audio in data['data']['audio_tracks']:
                 if audio['lang'] == preset_language[-3:-1]:
                     audio_lang = audio['lang']
@@ -636,12 +616,10 @@ def get_stream(video_id):
                 except:
                     audio_lang = None
 
-            preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
-            xbmc.log('[%s]: PRESET SUBTITLE - %s' % (addon_name, preset_subtitle.encode('utf-8')))
             if preset_subtitle.endswith(')'):
                 try:
                     for subtitle in data['data']['subtitles']:
-                        if subtitle['lang'] == addon.getSetting('subtitle_language')[-3:-1]:
+                        if subtitle['lang'] == preset_subtitle[-3:-1]:
                             subtitle_lang = subtitle['url']
                             break
                         else:
@@ -653,12 +631,7 @@ def get_stream(video_id):
                     subtitle_lang = None
             else:
                 subtitle_lang = None
-
-            data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, bitrate, audio_lang), cache_days=0.5)
-            if data['result'] == 'ok':
-                return {'src': data['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
-            else:
-                return None
+            return {'src': data['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
         else:   # IF TV
             return {'src': data['data']['src']}
     else:
@@ -696,7 +669,7 @@ def delFav(vid):
 def send_certificate(certificate, vid, ptype, pay_id):
     if ptype == 'svod' or ptype == 'TV':
         link = 'payments/code?code=%s&video_id=%s&subscription_id=%s' % (certificate, vid, pay_id)
-    elif ptype == 'tvod':
+    elif ptype == 'tvod' or ptype == 'dto':
         link = 'payments/code?code=%s&video_id=%s&tariff_id=%s' % (certificate, vid, pay_id)
     else:
         return None

@@ -393,19 +393,15 @@
 
 			<control type="panel" id="501">
                 <posx>-2</posx>
-				<width>1865</width>
+				<width>1860</width>
 				<height>600</height>
-				<pagecontrol>72</pagecontrol>
-				<preloaditems>5</preloaditems>
-				<onleft>72</onleft>
-				<onright>72</onright>
 				<onup>500</onup>
 				<ondown>600</ondown>
 				<visible>true</visible>
 				<orientation>horizontal</orientation>
 				<scrolltime tween="sine" easing="out">200</scrolltime>
 
-				<itemlayout width="375" height="550">
+				<itemlayout width="377" height="550">
 					<control type="image">
 						<posx>6</posx>
 						<posy>8</posy>
@@ -471,7 +467,7 @@
 						<visible>!IsEmpty(ListItem.Property(Country))</visible>
 					</control>
 				</itemlayout>
-				<focusedlayout height="375" width="550">
+				<focusedlayout height="377" width="550">
 					<animation effect="zoom" center="176,340" start="100" end="127" time="280" tween="back" reversible="false">Focus</animation>
 					<animation effect="zoom" center="176,340" start="127" end="100" time="200" tween="cubic" reversible="false">UnFocus</animation>
 					<control type="image">

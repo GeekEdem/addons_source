@@ -26,6 +26,7 @@ LibFolder		        = os.path.join(addon_path, 'resources', 'lib')
 quality_logo	        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'FullHD_logo.png')
 icon_svod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_plus.png')
 icon_tvod		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_payment.png')
+icon_dto		        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_payment.png')
 icon_TV                 = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'icons', 'megogo_tv.png')
 unknown_person	        = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'unknown_person.png')
 credit_card             = os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'dialogs', 'Credit_card.png')
@@ -218,16 +219,16 @@ class VideoList(xbmcgui.WindowXMLDialog):
     def onInit(self):
         self.windowid = xbmcgui.getCurrentWindowDialogId()
         self.window = xbmcgui.Window(self.windowid)
-        # xbmc.log('PAGE! %s' % self.page)
-        if not (self.page.startswith('video/collection') or self.page == 'tv/channels' or self.page.startswith('collection')):
-            self.window.setProperty("NAME", "%s (%s %d)" % (self.name, language(1042), self.offset/100+1))
-        else:
-            self.window.setProperty("NAME", self.name)
 
         xbmc.executebuiltin("ActivateWindow(busydialog)")
         self.listitems = update_content(force=True, page=self.newpage, offset=self.offset)
         self.items_len = len(self.listitems)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
+
+        if not (self.page.startswith('video/collection') or self.page == 'tv/channels' or self.page.startswith('collection') or self.page.startswith('user/tvod')) or (self.items_len == 100 and self.offset == 0):
+            self.window.setProperty("NAME", "%s (%s %d)" % (self.name, language(1042), self.offset/100+1))
+        else:
+            self.window.setProperty("NAME", self.name)
 
         items = []
         if self.programs:
@@ -237,11 +238,9 @@ class VideoList(xbmcgui.WindowXMLDialog):
                 items.append({'title': array['title']})
         else:
             items.append({'title': language(1091)})
-        try:
+        if self.page.startswith('tv'):
             self.getControl(7014).reset()
             self.getControl(7014).addItems(CreateListItems(items))
-        except:
-            pass
 
         # xbmc.log('[%s]: offset - %s, len - %s' % (addon_name, self.offset, self.items_len))
         if self.items_len == 0:
@@ -475,14 +474,6 @@ class SeasonList(xbmcgui.WindowXMLDialog):
         elif action in ACTION_EXIT_SCRIPT:
             exit_to_main(self)
 
-        # listitems = language(1030)
-        # xbmc.executebuiltin("ActivateWindow(contextmenu)")
-        # context_menu = ContextMenu.ContextMenu(u'script-globalsearch-contextmenu.xml', addon_path, labels=listitems)
-        # context_menu.doModal()
-        # if context_menu.selection == 0:
-        # Notify(list_id)
-        # selection = xbmcgui.Dialog().select(__addon__.getLocalizedString(32151), listitems)
-
     def onClick(self, controlID):
         if controlID in [500]:
             pos = self.getControl(500).getSelectedPosition()
@@ -503,7 +494,9 @@ class SeasonList(xbmcgui.WindowXMLDialog):
             pos = self.getControl(501).getSelectedPosition()
             sid = self.getControl(501).getListItem(pos).getProperty("id")
             label = self.getControl(501).getListItem(pos).getLabel()
-            link, audio, subtitle = megogo2xbmc.get_stream(sid)
+            data = megogo2xbmc.get_stream(sid)
+            link = data['src']
+            subtitle = data['subtitle']
             listitem = xbmcgui.ListItem(label, iconImage=self.thumb, thumbnailImage=self.thumb)
             listitem.setInfo('video', {'Title': '%s, %s)' % (self.name[:-1], label.decode('utf-8'))})
             AddToWindowStack(self, "%d, %d" % (controlID, pos))
@@ -520,6 +513,35 @@ class SeasonList(xbmcgui.WindowXMLDialog):
 
         elif controlID in MENU_IDS and controlID != self.old_id:
             menu_chooser(self, controlID)
+
+        elif (controlID in [502]) and self.episode_list:
+            # Play full season
+            AddToWindowStack(self, controlID)
+            self.close()
+            xbmc.executebuiltin("ActivateWindow(busydialog)")
+            playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
+            playlist.clear()
+            for episode in self.episode_list:
+                arr = megogo2xbmc.get_stream(episode["id"])
+                if arr:
+                    link = arr['src']
+                    subtitle = arr['subtitle']
+                    if episode['title_original']:
+                        label = '%s (%s, %s)' % (self.name, episode['title'], episode['title_original'])
+                    else:
+                        label = '%s (%s)' % (self.name, episode['title'])
+                    episode_item = xbmcgui.ListItem(label, iconImage=self.thumb, thumbnailImage=self.thumb)
+                    episode_item.setInfo('video', {'Title': label})
+                    try:
+                        episode_item.setSubtitles([subtitle])
+                    except:
+                        xbmc.log('Cannot set subtitle! NOT KODI!')
+                    playlist.add(url=link, listitem=episode_item)
+            xbmc.executebuiltin("Dialog.Close(busydialog)")
+            self.movieplayer.play_playlist(playlist, playlist.size())
+            self.movieplayer.WaitForVideoEnd()
+            playlist.clear()
+            PopWindowStack(self)
 
 
 #####################################################################################################
@@ -551,7 +573,6 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
         try:  # if 'tvod'
             self.tariff_id = self.data['purchase_info']['tvod']['subscriptions'][0]['tariffs'][0]['tariff_id']
             self.subscription_id = self.data['purchase_info']['tvod']['subscriptions'][0]['subscription_id']
-            del self.data['purchase_info']
         except:
             try:  # if 'svod'
                 self.tariff_id = None
@@ -609,8 +630,10 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                 for delivery in self.data["delivery_rules"].split(', '):
                     if delivery == 'svod':
                         self.window.setProperty("Price", language(1047))
-                    elif delivery == 'tvod':
-                        self.window.setProperty("Price", "%s %s %s" % (language(1001), self.data['price'], self.data['currency']))
+                    elif delivery == 'tvod' or (not self.window.getProperty('TVOD') and delivery == 'dto'):
+                        self.window.setProperty("Price", "%s %s %s" % (language(1001),
+                                                                       self.data["purchase_info"][delivery]["subscriptions"][0]['tariffs'][0]['price'],
+                                                                       self.data["purchase_info"][delivery]['subscriptions'][0]['currency']))
                     try:
                         self.window.setProperty("%s" % delivery.upper(), globals()['icon_%s' % delivery])
                     except:
@@ -672,33 +695,26 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             if focusid in [17050, 17051, 17000, 17001, 17002, 17003]:
                 xbmc.executebuiltin("Control.SetFocus(33012)")
 
-        # item_id = self.getControl(focusid).getSelectedItem().getProperty("id")
-        # xbmc.log('[%s]: VideoInfo ACTION_CONTEXT_MENU item id - %s' % (addon_name, item_id))
-        # elif action in ACTION_MOUSE_RIGHT_CLICK:
-        #    # xbmc.log('[%s]: HomeScreen ACTION_MOUSE_RIGHT_CLICK' % addon_name)
-        #    if focusid in [17050, 17051, 17000, 17001, 17002, 17003]:
-        #        xbmc.executebuiltin("Control.SetFocus(33012)")
-        #    elif focusid in [5000]:
-        #        xbmc.executebuiltin("Control.SetFocus(17001)")
-        #    elif focusid in [5001]:
-        #        xbmc.executebuiltin("Control.SetFocus(17002)")
-        #    elif focusid in [5002]:
-        #        xbmc.executebuiltin("Control.SetFocus(17003)")
-        #    else:
-        #        self.close()
-        #        PopWindowStack(self)
-
     def onClick(self, controlID):
-        if (self.window.getProperty('SVOD') or self.window.getProperty('TVOD')) and controlID in [33003]:
+        if (self.window.getProperty('SVOD') or self.window.getProperty('TVOD') or self.window.getProperty('DTO')) and controlID in [33003]:
             AddToWindowStack(self, controlID)
             self.close()
-            if self.window.getProperty('SVOD'):
-                pay = 'svod'
-                price = megogo2xbmc.get_price('svod')
-            else:
-                pay = 'tvod'
-                price = "%s %s" % (self.data['price'], self.data['currency'])
-            dialog = Pay(u'Pay.xml', addon_path, type=pay, title=self.data["title"], price=price, promo=self.data["is_promocode"], object_id=self.data['id'], tariff_id=self.tariff_id, subscription_id=self.subscription_id)
+            price = []
+            title = []
+            tariff_id = []
+            subscription_id = []
+            for delivery in self.data["delivery_rules"].split(', '):
+                if delivery == 'svod':
+                    price.append(megogo2xbmc.get_price('svod'))
+                    tariff_id.append('')
+                    subscription_id.append(str(self.data["purchase_info"]))
+                else:
+                    price.append("%s %s" % (self.data["purchase_info"][delivery]["subscriptions"][0]['tariffs'][0]['price'],
+                                            self.data["purchase_info"][delivery]["subscriptions"][0]['currency']))
+                    tariff_id.append(str(self.data["purchase_info"][delivery]["subscriptions"][0]['tariffs'][0]['tariff_id']))
+                    subscription_id.append(str(self.data['purchase_info'][delivery]["subscriptions"][0]['subscription_id']))
+                title.append(delivery)
+            dialog = Pay(u'Pay.xml', addon_path, type=', '.join(title), title=self.data["title"], price=', '.join(price), promo=self.data["is_promocode"], object_id=self.data['id'], tariff_id=', '.join(tariff_id), subscription_id=', '.join(subscription_id))
             dialog.doModal()
             del dialog
 
@@ -725,15 +741,10 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                         except:
                             xbmc.log('Cannot set subtitle! NOT KODI!')
                         playlist.add(url=link, listitem=episode_item, index=position)
-                # listitem = xbmcgui.ListItem(self.data['title'], iconImage=self.data["poster"], thumbnailImage=self.data["poster"])
-                # listitem.setInfo('video', {'Title': self.data['title']})
-                # self.movieplayer.play_item(playlist, listitem)
-                size = len(playlist)
-                xbmc.Player().play(playlist)
+                xbmc.executebuiltin("Dialog.Close(busydialog)")
+                self.movieplayer.play_playlist(playlist, playlist.size())
                 self.movieplayer.WaitForVideoEnd()
-                    #pos = playlist.getposition()
-                    #xbmc.log('POS - %s/SIZE - %s' % (pos, size))
-                    #playlist.clear()
+                playlist.clear()
             else:
                 data = megogo2xbmc.get_stream(self.data["id"])
                 link = data['src']
@@ -773,7 +784,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
             del dialog
 
         elif controlID in [5002]:
-            # xbmc.log('[%s]: Selected related video - %s' % (addon_name, self.getControl(controlID).getSelectedItem().getProperty("Label")))
+            # Select related videos
             video_id = self.getControl(controlID).getSelectedItem().getProperty("id")
             video_type = self.getControl(controlID).getSelectedItem().getProperty("type")
             if video_type == 'video':
@@ -825,13 +836,41 @@ class Pay(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
         xbmc.executebuiltin("ActivateWindow(busydialog)")
         self.ptype = kwargs.get('type')
+        xbmc.log('TYPES! %s' % self.ptype)
+        if self.ptype.find(', ') > 0:
+            types = self.ptype.split(', ')
+            self.ptype = types[0]
+            self.second_type = types[1]
+        else:
+            self.second_type = None
+        self.price = kwargs.get('price', '')
+        if self.price.find(', ') > 0:
+            types = self.price.split(', ')
+            self.price = types[0]
+            self.second_price = types[1]
+        else:
+            self.second_price = None
+        self.tariff_id = kwargs.get('tariff_id', '')
+        if self.tariff_id.find(', ') > 0:
+            types = self.tariff_id.split(', ')
+            self.tariff_id = types[0]
+            self.second_tariff_id = types[1]
+        else:
+            self.second_tariff_id = None
+        self.subscription_id = kwargs.get('subscription_id', '')
+        try:
+            if self.subscription_id.find(', ') > 0:
+                types = self.subscription_id.split(', ')
+                self.subscription_id = types[0]
+                self.second_subscription_id = types[1]
+            else:
+                self.second_subscription_id = None
+        except:
+            self.second_subscription_id = None
         self.func = kwargs.get('func', None)
         self.promo = kwargs.get('promo', None)
         self.id = kwargs.get('object_id')
-        self.tariff_id = kwargs.get('tariff_id')
-        self.subscription_id = kwargs.get('subscription_id')
         if not self.func:
-            self.price = kwargs.get('price')
             self.title = kwargs.get('title')
             self.objects = kwargs.get('objects', None)
         elif self.func == 'subscribe_variants':
@@ -885,11 +924,20 @@ class Pay(xbmcgui.WindowXMLDialog):
                 self.window.setProperty("Button1", language(1050))
                 self.window.setProperty("Button2", language(1051))
                 self.window.setProperty("Button3", language(1053))
-            elif self.ptype == 'tvod':
+            elif (self.ptype == 'tvod' or self.ptype == 'dto') and not self.second_type:
                 self.window.setProperty("Inf", language(1048))
                 self.window.setProperty("Button1", "%s %s" % (language(1001), self.price))
                 if self.promo:
                     self.window.setProperty("Button2", language(1051))
+            elif self.ptype == 'tvod' and self.second_type == 'dto':
+                self.window.setProperty("Inf", language(1048))
+                self.window.setProperty("Button1", "%s %s" % (language(1001), self.price))
+                if self.promo:
+                    self.window.setProperty("Button2", language(1051))
+                    self.window.setProperty("Button3", "%s %s" % (language(1092), self.second_price))
+                else:
+                    self.window.setProperty("Button2", "%s %s" % (language(1092), self.second_price))
+
             elif self.ptype == 'TV':
                 self.window.setProperty("Inf", "%s %s %s" % (language(1089), self.objects.decode('utf-8'), language(1090)))
                 self.window.setProperty("Button1", language(1050))
@@ -988,6 +1036,21 @@ class Pay(xbmcgui.WindowXMLDialog):
                     dialog = xbmcgui.Dialog()
                     dialog.ok(language(1059), language(1032))
                 del dialog
+
+            elif controlID in [503]:
+                # Buy forever ('DTO')
+                if not card_num and not card_type:
+                    AddToWindowStack(self, controlID)
+                    self.close()
+                    dialog = CARD(u'Card.xml', addon_path, object_id=self.id, tariff_id=self.second_tariff_id, name=self.title, price=self.second_price, ptype=self.second_type)
+                    dialog.doModal()
+                    del dialog
+                else:
+                    AddToWindowStack(self, controlID)
+                    self.close()
+                    dialog = CARD(u'ExistedCard.xml', addon_path, object_id=self.id, tariff_id=self.second_tariff_id, name=self.title, price=self.second_price, card_type=card_type, card_num=card_num, ptype=self.second_type)
+                    dialog.doModal()
+                    del dialog
 
             elif controlID in [504] and self.ptype == 'svod':
                 # Buy subscribtion
@@ -1326,6 +1389,15 @@ class Account(xbmcgui.WindowXMLDialog):
                 __addon__.setSetting(id='subtitle_language', value="9")
             elif index == 10:
                 __addon__.setSetting(id='subtitle_language', value="10")
+
+        elif controlID in [33009]:
+            # Open bought videos
+            AddToWindowStack(self, controlID)
+            self.close()
+            link = 'user/tvod'
+            dialog = VideoList(u'SubscribeList.xml', addon_path, page=link, name=language(1093))
+            dialog.doModal()
+            del dialog
 
 
 #####################################################################################################

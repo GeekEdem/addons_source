@@ -102,7 +102,7 @@
                 <posy>100</posy>
                 <posx>400</posx>
                 <width>1700</width>
-                <height>930</height>
+                <height>921</height>
                 <onright>6002</onright>
                 <onleft>6001</onleft>
                 <scrolltime>200</scrolltime>
@@ -111,7 +111,7 @@
                     <effect type="slide" start="0,1080" end="0,0" delay="0" tween="sine" time="1300" />
                 </animation>
 
-                <itemlayout width="390" height="465">
+                <itemlayout width="390" height="460">
                     <control type="image">
                         <posx>-2</posx>
                         <posy>-2</posy>
@@ -197,7 +197,7 @@
                         </control>
                     </control>
                 </itemlayout>
-                <focusedlayout width="390" height="465" >
+                <focusedlayout width="390" height="460" >
                     <control type="image">
                         <posx>-2</posx>
                         <posy>-2</posy>
