@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<window id="13004">
+<window>
     <defaultcontrol always="true">33005</defaultcontrol>
     <controls>
         <control type="group">

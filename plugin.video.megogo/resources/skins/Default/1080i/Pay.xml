@@ -70,7 +70,7 @@
 				<posx>740</posx>
 				<posy>660</posy>
 				<width>440</width>
-				<height>91</height>
+				<height>95</height>
 				<textoffsetx>0</textoffsetx>
 				<textoffsety>0</textoffsety>
 				<textwidth>440</textwidth>
@@ -89,9 +89,9 @@
 				<description> BUTTON 2 </description>
                 <visible>!IsEmpty(Window.Property(Button2))</visible>
 				<posx>740</posx>
-				<posy>760</posy>
+				<posy>765</posy>
 				<width>440</width>
-				<height>91</height>
+				<height>95</height>
 				<textoffsetx>0</textoffsetx>
 				<textoffsety>0</textoffsety>
 				<textwidth>440</textwidth>
@@ -110,12 +110,12 @@
 				<description> BUTTON 3 </description>
                 <visible>!IsEmpty(Window.Property(Button3))</visible>
 				<posx>740</posx>
-				<posy>860</posy>
+				<posy>865</posy>
 				<width>440</width>
-				<height>91</height>
+				<height>95</height>
 				<textoffsetx>0</textoffsetx>
 				<textoffsety>0</textoffsety>
-				<textwidth>440</textwidth>
+				<textwidth>430</textwidth>
 				<align>center</align>
 				<aligny>center</aligny>
 				<font>font13</font>

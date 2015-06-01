@@ -28,7 +28,12 @@ API_URL                 = 'https://api.megogo.net/v1'
 MEGOGO_URL              = 'http://megogo.net'
 PAY_URL                 = 'https://megogo.net/%s/billing/payu' % get_ui_language()
 PAY_VENDOR              = 'kodi-device'
-UA                      = 'Kodi-%s' % platform.platform(aliased=0, terse=0)[:45]
+try:
+    UA                  = 'Kodi-%s' % platform.platform(aliased=0, terse=0)[:45]
+except:
+    data                = os.uname()
+    UA                  = 'XBMC-%s-%s-%s' % (data[0], data[2], data[-1])
+    UA                  = UA[:45]
 
 slider_images_resolution = ['image_1920x300', 'image_1600x520', 'image_1350x510']
 
@@ -597,43 +602,48 @@ def get_stream(video_id):
     preset_bitrate = int(re.search(p, preset_bitrate).group(0))
     preset_language = preset_language[-3:-1]
 
-    data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language), cache_days=1)
-    if data['result'] == 'ok':
-        if data['data']['is_wvdrm']:
-            xbmc.log('[%s]: NEED TO DO DRM FOR THIS VIDEO (%s, %s)' % (addon_name, data['data']['title'], data['data']['id']))
+    #data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language), cache_days=1)
+    data = GET('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language))
+    if data:
+        result = simplejson.loads(data)
+        if result['result'] == 'ok':
+            if result['data']['is_wvdrm']:
+                xbmc.log('[%s]: NEED TO DO DRM FOR THIS VIDEO (%s, %s)' % (addon_name, result['data']['title'], result['data']['id']))
 
-        if not data['data']['is_tv']:
-            for audio in data['data']['audio_tracks']:
-                if audio['lang'] == preset_language[-3:-1]:
-                    audio_lang = audio['lang']
-                    break
+            if not result['data']['is_tv']:
+                for audio in result['data']['audio_tracks']:
+                    if audio['lang'] == preset_language[-3:-1]:
+                        audio_lang = audio['lang']
+                        break
+                    else:
+                        audio_lang = None
+                if not audio_lang:
+                    try:
+                        audio_lang = result['data']['audio_tracks'][0]['lang']
+                        xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
+                    except:
+                        audio_lang = None
+
+                if preset_subtitle.endswith(')'):
+                    try:
+                        for subtitle in result['data']['subtitles']:
+                            if subtitle['lang'] == preset_subtitle[-3:-1]:
+                                subtitle_lang = subtitle['url']
+                                break
+                            else:
+                                subtitle_lang = None
+                        if not subtitle_lang:
+                            subtitle_lang = result['data']['subtitles'][0]['url']
+                        xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
+                    except:
+                        subtitle_lang = None
                 else:
-                    audio_lang = None
-            if not audio_lang:
-                try:
-                    audio_lang = data['data']['audio_tracks'][0]['lang']
-                    xbmc.log('[%s]: LANGUAGE IN MOVIE - %s' % (addon_name, audio_lang.encode('utf-8')))
-                except:
-                    audio_lang = None
-
-            if preset_subtitle.endswith(')'):
-                try:
-                    for subtitle in data['data']['subtitles']:
-                        if subtitle['lang'] == preset_subtitle[-3:-1]:
-                            subtitle_lang = subtitle['url']
-                            break
-                        else:
-                            subtitle_lang = None
-                    if not subtitle_lang:
-                        subtitle_lang = data['data']['subtitles'][0]['url']
-                    xbmc.log('[%s]: SUBTITLE IN MOVIE - %s' % (addon_name, subtitle_lang.encode('utf-8')))
-                except:
                     subtitle_lang = None
-            else:
-                subtitle_lang = None
-            return {'src': data['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
-        else:   # IF TV
-            return {'src': data['data']['src']}
+                return {'src': result['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
+            else:   # IF TV
+                return {'src': result['data']['src']}
+        else:
+            return None
     else:
         return None
 

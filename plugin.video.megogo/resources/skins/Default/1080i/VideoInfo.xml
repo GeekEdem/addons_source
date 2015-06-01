@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<window id="13003">
+<window>
 	<!--onload>Control.SetFocus(33003)</onload>
 	<onunload>UnloadSkin()</onunload-->
 	<defaultcontrol always="true">33003</defaultcontrol>
@@ -28,7 +28,7 @@
 				<label>$INFO[Text]</label>
 				<font>font30_title</font>
 				<shadowcolor>black</shadowcolor>
-                 <autoscroll delay="5000" time="4000" repeat="2000">true</autoscroll>
+                <autoscroll delay="5000" time="4000" repeat="2000">true</autoscroll>
 			</control>
 
 			<control type="image" id="33001">
@@ -1241,9 +1241,19 @@
                                     <posx>112</posx>
                                     <posy>2</posy>
                                     <width>1000</width>
+                                    <height>165</height>
                                     <align>left</align>
                                     <font>font12</font>
-                                    <label>$INFO[ListItem.Label][CR][COLOR FF999999]$INFO[ListItem.Property(text)][/COLOR]</label>
+                                    <label>[COLOR FFFFFFFF]$INFO[ListItem.Label][/COLOR]</label>
+                                </control>
+                                <control type="textbox">
+                                    <posx>112</posx>
+                                    <posy>37</posy>
+                                    <width>1000</width>
+                                    <height>126</height>
+                                    <align>left</align>
+                                    <font>font12</font>
+                                    <label>[COLOR FF999999]$INFO[ListItem.Property(text)][/COLOR]</label>
                                 </control>
                                 <control type="textbox">
                                     <posx>112</posx>
@@ -1251,7 +1261,7 @@
                                     <width>1100</width>
                                     <align>right</align>
                                     <font>font12</font>
-                                    <label>$INFO[ListItem.Property(date)]</label>
+                                    <label>[COLOR FFFFFFFF]$INFO[ListItem.Property(date)][/COLOR]</label>
                                 </control>
                             </control>
 						</control>
@@ -1287,9 +1297,20 @@
                                     <posx>112</posx>
                                     <posy>2</posy>
                                     <width>1000</width>
+                                    <height>165</height>
                                     <align>left</align>
                                     <font>font12</font>
-                                    <label>$INFO[ListItem.Label][CR][COLOR FF999999]$INFO[ListItem.Property(text)][/COLOR]</label>
+                                    <label>[COLOR FFFFFFFF]$INFO[ListItem.Label][/COLOR]</label>
+                                </control>
+                                <control type="textbox">
+                                    <posx>112</posx>
+                                    <posy>37</posy>
+                                    <width>1000</width>
+                                    <height>126</height>
+                                    <align>left</align>
+                                    <font>font12</font>
+                                    <label>[COLOR FF999999]$INFO[ListItem.Property(text)][/COLOR]</label>
+                                    <autoscroll delay="2000" time="4000" repeat="2000">true</autoscroll>
                                 </control>
                                 <control type="textbox">
                                     <posx>112</posx>
@@ -1297,7 +1318,7 @@
                                     <width>1100</width>
                                     <align>right</align>
                                     <font>font12</font>
-                                    <label>$INFO[ListItem.Property(date)]</label>
+                                    <label>[COLOR FFFFFFFF]$INFO[ListItem.Property(date)][/COLOR]</label>
                                 </control>
                             </control>
 						</control>

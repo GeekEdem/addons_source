@@ -226,9 +226,9 @@ def CreateTiriffList(data, currency):
 
 def update_content(force=False, page=False, section=False, offset=0):
     listitems = fetch_data(force, page, section, offset)
-    if listitems and page != 'tv':
+    if listitems and page != 'tv?limit=200':
         return CreateListItems(listitems)
-    elif listitems and page == 'tv':
+    elif listitems and page == 'tv?limit=200':
         for item in listitems:
             item['channels'] = CreateListItems(item['channels'])
         return listitems
@@ -259,13 +259,13 @@ def fetch_data(force=False, page=False, section=False, offset=0):
         return megogo2xbmc.HandleMainPage(response['data'], 'recommended')
     elif page == 'Main' and section == 'slider':
         return megogo2xbmc.HandleMainPage(response['data'], 'sliders')
-    elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/favorites') or page.startswith('video/collection') or page.startswith('search'):
+    elif page.startswith('subscription') or page.startswith('premieres') or page.startswith('video?category_id=') or page.startswith('user/') or page.startswith('video/collection') or page.startswith('search'):
         return megogo2xbmc.HandleMainPage(response['data'], 'video_list')
     elif page.startswith('collections'):
         return megogo2xbmc.HandleMainPage(response['data'], 'collections')
     elif page.startswith('tv/channels'):
         return megogo2xbmc.HandleMainPage(response['data'], 'channels')
-    elif page == 'tv':
+    elif page == 'tv?limit=200':
         return megogo2xbmc.HandleTVPackeges(response['data'], 'packages')
     elif page.startswith('video/episodes'):
         return response['data']

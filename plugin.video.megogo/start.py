@@ -70,15 +70,19 @@ except Exception as e:
 # ##################################        START UI        ####################################### #
 if getconfiguration():    # Get config from MEGOGO
     import Screens
-    Screens.Main(splash=splash)
+    home = Screens.Homescreen('HomeScreen.xml', addon_path, win=splash)
+    home.doModal()
+    # xbmc.log('!!! RETURN !!!')
+    del home
 else:
     dialog = xbmcgui.Dialog()
     dialog.ok(language(1025), language(1031), language(1032))
     del dialog
+    splash.close()
 
+xbmc.log('[%s]: TRY CLOSE APP!!!' % addon_name)
 # ##################################        CLOSE APP        ####################################### #
 back.close()
-splash.close()
 
 dic = db.get_login_from_db()
 db.close_db()

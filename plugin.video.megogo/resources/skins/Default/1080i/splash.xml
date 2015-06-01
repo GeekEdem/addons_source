@@ -1,4 +1,4 @@
-<window id="13000">
+<window>
     <animation effect="fade" time="200">WindowOpen</animation>
     <coordinates>
         <system>1</system>

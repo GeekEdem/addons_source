@@ -296,9 +296,9 @@ class DataBase:
             var = self.cu.fetchall()[0]
         except:
             var = None
-        if var:
+        try:
             return {'login': var[1], 'password': base64.b64decode(var[2]), 'cookie': var[3], 'user_id': var[4], 'card_num': var[5], 'card_type': var[6]}
-        else:
+        except:
             return {'login': '', 'password': '', 'cookie': '', 'user_id': '', 'card_num': '', 'card_type': ''}
 
     # Create Table
