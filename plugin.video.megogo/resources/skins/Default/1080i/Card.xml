@@ -206,8 +206,8 @@
 			</control>
 
             <control type="image">
-				<description> UNCHECK FOCUS </description>
-                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED))</visible>
+				<description> UNCHECK FOCUS SAVECARD </description>
+                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED_savecard)) + IsEmpty(Window.Property(Prolongation))</visible>
 				<posx>800</posx>
 				<posy>912</posy>
                 <width>60</width>
@@ -217,8 +217,8 @@
 			</control>
 
             <control type="image">
-				<description> UNCHECK NOFOCUS </description>
-                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED))</visible>
+				<description> UNCHECK NOFOCUS SAVECARD </description>
+                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED_savecard)) + IsEmpty(Window.Property(Prolongation))</visible>
 				<posx>800</posx>
 				<posy>912</posy>
                 <width>60</width>
@@ -228,8 +228,8 @@
 			</control>
 
             <control type="image">
-				<description> CHECK FOCUS </description>
-                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED))</visible>
+				<description> CHECK FOCUS SAVECARD </description>
+                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED_savecard)) + IsEmpty(Window.Property(Prolongation))</visible>
 				<posx>800</posx>
 				<posy>912</posy>
                 <width>60</width>
@@ -239,8 +239,8 @@
 			</control>
 
             <control type="image">
-				<description> CHECK NOFOCUS </description>
-                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED))</visible>
+				<description> CHECK NOFOCUS SAVECARD </description>
+                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED_savecard)) + IsEmpty(Window.Property(Prolongation))</visible>
 				<posx>800</posx>
 				<posy>912</posy>
                 <width>60</width>
@@ -250,6 +250,7 @@
 			</control>
 
             <control type="button" id="608">
+                <visible>IsEmpty(Window.Property(Prolongation))</visible>
                 <description> CARD REMEMBER CHECKBOX </description>
                 <posx>850</posx>
                 <posy>890</posy>
@@ -269,6 +270,144 @@
                 <textoffsety>0</textoffsety>
                 <pulseonselect>false</pulseonselect>
                 <onup>605</onup>
+                <ondown>609</ondown>
+            </control>
+
+            <control type="image">
+				<description> UNCHECK FOCUS SAVECARD </description>
+                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED_savecard)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>500</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/unchecked-black.png</texture>
+			</control>
+
+            <control type="image">
+				<description> UNCHECK NOFOCUS SAVECARD </description>
+                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(UNCHECKED_savecard)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>500</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/unchecked-gray.png</texture>
+			</control>
+
+            <control type="image">
+				<description> CHECK FOCUS SAVECARD </description>
+                <visible>Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED_savecard)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>500</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/checked-black.png</texture>
+			</control>
+
+            <control type="image">
+				<description> CHECK NOFOCUS SAVECARD </description>
+                <visible>!Control.HasFocus(608) + !IsEmpty(Window.Property(CHECKED_savecard)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>500</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/checked-gray.png</texture>
+			</control>
+
+            <control type="button" id="608">
+                <visible>!IsEmpty(Window.Property(Prolongation))</visible>
+                <description> CARD REMEMBER CHECKBOX </description>
+                <posx>550</posx>
+                <posy>890</posy>
+                <width>300</width>
+                <height>100</height>
+                <colordiffuse>FFFFFFFF</colordiffuse>
+                <texturefocus></texturefocus>
+                <texturenofocus></texturenofocus>
+                <label>$ADDON[plugin.video.megogo 1063]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <focusedcolor>FFFFFFFF</focusedcolor>
+                <disabledcolor>80FFFFFF</disabledcolor>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textoffsetx>0</textoffsetx>
+                <textoffsety>0</textoffsety>
+                <pulseonselect>false</pulseonselect>
+                <onup>605</onup>
+                <onright>611</onright>
+                <ondown>609</ondown>
+            </control>
+
+            <control type="image">
+				<description> UNCHECK FOCUS PROLOGATION </description>
+                <visible>Control.HasFocus(611) + !IsEmpty(Window.Property(UNCHECKED_Prolongation)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>1030</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/unchecked-black.png</texture>
+			</control>
+
+            <control type="image">
+				<description> UNCHECK NOFOCUS PROLOGATION </description>
+                <visible>!Control.HasFocus(611) + !IsEmpty(Window.Property(UNCHECKED_Prolongation)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>1030</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/unchecked-gray.png</texture>
+			</control>
+
+            <control type="image">
+				<description> CHECK FOCUS PROLOGATION </description>
+                <visible>Control.HasFocus(611) + !IsEmpty(Window.Property(CHECKED_Prolongation)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>1030</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/checked-black.png</texture>
+			</control>
+
+            <control type="image">
+				<description> CHECK NOFOCUS PROLOGATION </description>
+                <visible>!Control.HasFocus(611) + !IsEmpty(Window.Property(CHECKED_Prolongation)) + !IsEmpty(Window.Property(Prolongation))</visible>
+				<posx>1030</posx>
+				<posy>912</posy>
+                <width>60</width>
+                <height>60</height>
+				<aspectratio align="center">scale</aspectratio>
+				<texture>dialogs/checked-gray.png</texture>
+			</control>
+
+            <control type="button" id="611">
+                <visible>!IsEmpty(Window.Property(Prolongation))</visible>
+                <description> PROLONGATION CHECKBOX </description>
+                <posx>1100</posx>
+                <posy>890</posy>
+                <width>405</width>
+                <height>100</height>
+                <colordiffuse>FFFFFFFF</colordiffuse>
+                <texturefocus></texturefocus>
+                <texturenofocus></texturenofocus>
+                <label>$ADDON[plugin.video.megogo 1095]</label>
+                <font>font13</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <focusedcolor>FFFFFFFF</focusedcolor>
+                <disabledcolor>80FFFFFF</disabledcolor>
+                <align>center</align>
+                <aligny>center</aligny>
+                <textoffsetx>0</textoffsetx>
+                <textoffsety>0</textoffsety>
+                <pulseonselect>false</pulseonselect>
+                <onup>605</onup>
+                <onleft>608</onleft>
                 <ondown>609</ondown>
             </control>
 

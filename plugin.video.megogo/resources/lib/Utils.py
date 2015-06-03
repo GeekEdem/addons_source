@@ -109,7 +109,6 @@ def CreateListItems(data=None):
                                     image_requests.append(new_pic.decode('utf-8'))
                     if key.lower() in ["poster"]:
                         listitem.setThumbnailImage(value)
-                        continue
                 if key.lower() in ["title"]:
                     listitem.setLabel(value)
                 if key.lower() in ["exclusive"]:
@@ -416,7 +415,7 @@ class VideoPlayer(xbmc.Player):
             self.counter += 1
             if self.counter <= self.size:
                 self.stopped = False
-                xbmc.sleep(1200)
+                xbmc.sleep(1500)
                 if not self.isPlaying():
                     self.stopped = True
             else:
@@ -445,5 +444,5 @@ class VideoPlayer(xbmc.Player):
 
     def WaitForVideoEnd(self):
         while not self.stopped:
-            xbmc.sleep(800)
+            xbmc.sleep(200)
         self.stopped = False

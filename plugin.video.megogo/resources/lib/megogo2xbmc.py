@@ -641,7 +641,7 @@ def get_stream(video_id):
                     subtitle_lang = None
                 return {'src': result['data']['src'], 'audio': audio_lang, 'subtitle': subtitle_lang}
             else:   # IF TV
-                return {'src': result['data']['src']}
+                return {'src': result['data']['src'], 'title': result['data']['title']}
         else:
             return None
     else:
