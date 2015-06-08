@@ -44,29 +44,30 @@ if not db.table_exist('account'):
     db.create_login_table()
 if not usr and not pwd:
     db.clear_table('account')
+    db.login_data_to_db('', '', __addon__.getSetting('quality'), __addon__.getSetting('audio_language'), __addon__.getSetting('subtitle_language'))
 else:
-    db.login_data_to_db(usr, pwd)
-    db.cookie_to_db("")
+    db.login_data_to_db(usr, pwd, __addon__.getSetting('quality'), __addon__.getSetting('audio_language'), __addon__.getSetting('subtitle_language'))
+db.cookie_to_db("")
 
 # ##################################    CHECK NEW VERSION   ####################################### #
-xbmc.log('[%s]: Trying to get new version...' % addon_name)
-try:
-    request = urllib2.Request(url=source, headers={'s-Agent': 'MEGOGO Addon for XBMC/Kodi'})
-    request = urllib2.urlopen(request)
-    http = request.read()
-    request.close()
-
-    p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
-    branch_release = re.search(p, http).group(1)
-    xbmc.log('[%s]: Branch version - %s' % (addon_name, branch_release))
-
-    if addon_version != branch_release:
-        dialog = xbmcgui.Dialog()
-        dialog.ok(language(1033), language(1034))
-        del dialog
-except Exception as e:
-    xbmc.log('[%s]: ERROR getting branch version! %s' % (addon_name, e))
-
+# xbmc.log('[%s]: Trying to get new version...' % addon_name)
+# try:
+#     request = urllib2.Request(url=source, headers={'s-Agent': 'MEGOGO Addon for XBMC/Kodi'})
+#     request = urllib2.urlopen(request)
+#     http = request.read()
+#     request.close()
+#
+#     p = re.compile('name="MEGOGO\WNET"\W.*?version="([^"]*?)"')
+#     branch_release = re.search(p, http).group(1)
+#     xbmc.log('[%s]: Branch version - %s' % (addon_name, branch_release))
+#
+#     if addon_version != branch_release:
+#         dialog = xbmcgui.Dialog()
+#         dialog.ok(language(1033), language(1034))
+#         del dialog
+# except Exception as e:
+#     xbmc.log('[%s]: ERROR getting branch version! %s' % (addon_name, e))
+#
 # ##################################        START UI        ####################################### #
 if getconfiguration():    # Get config from MEGOGO
     import Screens

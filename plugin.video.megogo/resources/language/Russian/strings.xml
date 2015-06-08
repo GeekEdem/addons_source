@@ -18,32 +18,6 @@
 	<string id="00092">Аккаунт</string>
 	<string id="00093">Настройки видео</string>
 
-	<!-- Цвета -->
-	<string id="00101">[COLOR ff00ff00]Зеленый[/COLOR]</string>
-	<string id="00102">[COLOR ff0000ff]Синий[/COLOR]</string>
-	<string id="00103">[COLOR ffff0000]Красный[/COLOR]</string>
-	<string id="00104">[COLOR ff800080]Фиолетовый[/COLOR]</string>
-	<string id="00105">[COLOR ffffa500]Оранжевый[/COLOR]</string>
-	<string id="00106">[COLOR ffffff00]Жёлтый[/COLOR]</string>
-	<string id="00107">[COLOR ffffd700]Золотой[/COLOR]</string>
-	<string id="00108">[COLOR fff5deb3]Wheat[/COLOR]</string>
-	<string id="00109">[COLOR ffe6e6fa]Lavender[/COLOR]</string>
-	<string id="00110">[COLOR ff800000]Maroon[/COLOR]</string>
-	<string id="00111">[COLOR ffb22222]Красный кирпич[/COLOR]</string>
-	<string id="00112">[COLOR ff696969]Dim Gray[/COLOR]</string>
-	<string id="00113">[COLOR fffaebd7]Antique White[/COLOR]</string>
-	<string id="00114">[COLOR ff8a2be2]Blue Violet[/COLOR]</string>
-	<string id="00115">[COLOR ffdc143c]Crimson[/COLOR]</string>
-	<string id="00116">[COLOR ff6495ed]Corn Flower Blue[/COLOR]</string>
-	<string id="00117">[COLOR ffff7f50]Coral[/COLOR]</string>
-	<string id="00118">[COLOR ffd2b48c]Tan[/COLOR]</string>
-	<string id="00119">[COLOR ff9370d8]Medium Purple[/COLOR]</string>
-	<string id="00120">[COLOR ffffc0cb]Розовый[/COLOR]</string>
-	<string id="00121">[COLOR ffff1493]Deep Pink[/COLOR]</string>
-	<string id="00122">[COLOR ffdeb887]Burly Wood[/COLOR]</string>
-	<string id="00123">[COLOR ffffffff]Белый[/COLOR]</string>
-	<string id="00124">[COLOR ff000000]Чёрный[/COLOR]</string>
-
 	<!-- Качество видео -->
 	<string id="00200">Автоматическое</string>
 	<string id="00201">Низкое 240p (448x252)</string>

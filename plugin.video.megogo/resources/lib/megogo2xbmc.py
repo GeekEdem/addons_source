@@ -592,17 +592,17 @@ def data_from_stream(video_id):
 
 def get_stream(video_id):
     xbmc.log('[%s]: Try to get stream' % addon_name)
-    preset_bitrate = get_quality(addon.getSetting('quality'))
+    account = a.get_login_from_db()
+    preset_bitrate = get_quality(account['quality'])
     audio_lang = None
-    preset_language = get_language(addon.getSetting('audio_language'))
+    preset_language = get_language(account['audio_language'])
     subtitle_lang = None
-    preset_subtitle = get_subtitle(addon.getSetting('subtitle_language'))
+    preset_subtitle = get_subtitle(account['subtitle'])
 
     p = re.compile(ur'(\d+)')		# REGEXP TO GET VIDEO QUALITY FROM SETTINGS
     preset_bitrate = int(re.search(p, preset_bitrate).group(0))
     preset_language = preset_language[-3:-1]
 
-    #data = Get_JSON_response('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language), cache_days=1)
     data = GET('stream?video_id=%s&bitrate=%s&lang=%s' % (video_id, preset_bitrate, preset_language))
     if data:
         result = simplejson.loads(data)
@@ -624,6 +624,7 @@ def get_stream(video_id):
                     except:
                         audio_lang = None
 
+                xbmc.log('PRESET SUBTITLE! %s' % preset_subtitle.encode('utf-8'))
                 if preset_subtitle.endswith(')'):
                     try:
                         for subtitle in result['data']['subtitles']:
@@ -650,7 +651,7 @@ def get_stream(video_id):
 
 # Get comments to video
 def getcomments(video_id):
-    data = Get_JSON_response('comment/list?video_id=%s' % video_id, cache_days=1)
+    data = Get_JSON_response('comment/list?video_id=%s' % video_id, cache_days=0.5)
     if data['result'] == 'ok':
         return data['data']['comments']
     else:

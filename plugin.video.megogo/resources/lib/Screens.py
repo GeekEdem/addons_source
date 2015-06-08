@@ -1234,18 +1234,30 @@ class CARD(xbmcgui.WindowXMLDialog):
             if not self.card_num and not self.card_type:
                 try:
                     if self.digit_array[601] != '' and self.digit_array[602] != '' and self.digit_array[603] != '' and self.digit_array[604] != '' and self.digit_array[607] != '':
-                        res = megogo2xbmc.send_payrequest({'form[card_number]': '%s%s%s%s' % (self.digit_array[601], self.digit_array[602], self.digit_array[603], self.digit_array[604]),
-                                                           'form[cvv]': self.digit_array[607],
-                                                           'form[month]': self.digit_array[605],
-                                                           'form[year]': self.digit_array[606],
-                                                           'form[savecard]': str(self.remember),
-                                                           'form[autoprolong]': str(self.autoprolongation),
-                                                           'form[cardholder]': 'MEGOGO',
-                                                           'amount': self.price.encode('utf-8'),
-                                                           'service_id': self.tariff_id,
-                                                           'pay_obj_id': self.id,
-                                                           'user_id': self.UID},
-                                                          False)
+                        if self.ptype == 'svod' or self.ptype == 'TV':
+                            dic = {'form[card_number]': '%s%s%s%s' % (self.digit_array[601], self.digit_array[602], self.digit_array[603], self.digit_array[604]),
+                                   'form[cvv]': self.digit_array[607],
+                                   'form[month]': self.digit_array[605],
+                                   'form[year]': self.digit_array[606],
+                                   'form[savecard]': str(self.remember),
+                                   'form[autoprolong]': str(self.autoprolongation),
+                                   'form[cardholder]': 'MEGOGO',
+                                   'amount': self.price.encode('utf-8'),
+                                   'service_id': self.tariff_id,
+                                   'pay_obj_id': self.id,
+                                   'user_id': self.UID}
+                        else:
+                            dic = {'form[card_number]': '%s%s%s%s' % (self.digit_array[601], self.digit_array[602], self.digit_array[603], self.digit_array[604]),
+                                   'form[cvv]': self.digit_array[607],
+                                   'form[month]': self.digit_array[605],
+                                   'form[year]': self.digit_array[606],
+                                   'form[savecard]': str(self.remember),
+                                   'form[cardholder]': 'MEGOGO',
+                                   'amount': self.price.encode('utf-8'),
+                                   'service_id': self.tariff_id,
+                                   'pay_obj_id': self.id,
+                                   'user_id': self.UID}
+                        res = megogo2xbmc.send_payrequest(dic, False)
                     else:
                         dialog = xbmcgui.Dialog()
                         dialog.ok(language(1059), language(1067))
@@ -1258,11 +1270,18 @@ class CARD(xbmcgui.WindowXMLDialog):
                     # del dialog
                     return
             else:
-                res = megogo2xbmc.send_payrequest({'amount': self.price.encode('utf-8'),
-                                                   'service_id': self.tariff_id,
-                                                   'pay_obj_id': self.id,
-                                                   'user_id': self.UID},
-                                                  True)
+                if self.ptype == 'svod' or self.ptype == 'TV':
+                    dic = {'form[autoprolong]': str(self.autoprolongation),
+                           'amount': self.price.encode('utf-8'),
+                           'service_id': self.tariff_id,
+                           'pay_obj_id': self.id,
+                           'user_id': self.UID}
+                else:
+                    dic = {'amount': self.price.encode('utf-8'),
+                           'service_id': self.tariff_id,
+                           'pay_obj_id': self.id,
+                           'user_id': self.UID}
+                res = megogo2xbmc.send_payrequest(dic, True)
             if res:
                 if res['answer'] == 'success':
                     dialog = xbmcgui.Dialog()
@@ -1362,18 +1381,9 @@ class Account(xbmcgui.WindowXMLDialog):
             index = xbmcgui.Dialog().select(language(24), listitems)
             if index == -1:
                 pass
-            elif index == 0:
-                __addon__.setSetting(id='quality', value="0")
-            elif index == 1:
-                __addon__.setSetting(id='quality', value="1")
-            elif index == 2:
-                __addon__.setSetting(id='quality', value="2")
-            elif index == 3:
-                __addon__.setSetting(id='quality', value="3")
-            elif index == 4:
-                __addon__.setSetting(id='quality', value="4")
-            elif index == 5:
-                __addon__.setSetting(id='quality', value="5")
+            else:
+                __addon__.setSetting(id='quality', value=str(index))
+                db.update_account_in_db(field='quality', data=str(index))
 
         elif controlID in [33007]:
             listitems = [language(300), language(301), language(302), language(303), language(304), language(305),
@@ -1381,26 +1391,9 @@ class Account(xbmcgui.WindowXMLDialog):
             index = xbmcgui.Dialog().select(language(25), listitems)
             if index == -1:
                 pass
-            elif index == 0:
-                __addon__.setSetting(id='audio_language', value="0")
-            elif index == 1:
-                __addon__.setSetting(id='audio_language', value="1")
-            elif index == 2:
-                __addon__.setSetting(id='audio_language', value="2")
-            elif index == 3:
-                __addon__.setSetting(id='audio_language', value="3")
-            elif index == 4:
-                __addon__.setSetting(id='audio_language', value="4")
-            elif index == 5:
-                __addon__.setSetting(id='audio_language', value="5")
-            elif index == 6:
-                __addon__.setSetting(id='audio_language', value="6")
-            elif index == 7:
-                __addon__.setSetting(id='audio_language', value="7")
-            elif index == 8:
-                __addon__.setSetting(id='audio_language', value="8")
-            elif index == 9:
-                __addon__.setSetting(id='audio_language', value="9")
+            else:
+                __addon__.setSetting(id='audio_language', value=str(index))
+                db.update_account_in_db(field='audio_language', data=str(index))
 
         elif controlID in [33008]:
             listitems = [language(400), language(300), language(301), language(302), language(303), language(304),
@@ -1408,28 +1401,9 @@ class Account(xbmcgui.WindowXMLDialog):
             index = xbmcgui.Dialog().select(language(26), listitems)
             if index == -1:
                 pass
-            elif index == 0:
-                __addon__.setSetting(id='subtitle_language', value="0")
-            elif index == 1:
-                __addon__.setSetting(id='subtitle_language', value="1")
-            elif index == 2:
-                __addon__.setSetting(id='subtitle_language', value="2")
-            elif index == 3:
-                __addon__.setSetting(id='subtitle_language', value="3")
-            elif index == 4:
-                __addon__.setSetting(id='subtitle_language', value="4")
-            elif index == 5:
-                __addon__.setSetting(id='subtitle_language', value="5")
-            elif index == 6:
-                __addon__.setSetting(id='subtitle_language', value="6")
-            elif index == 7:
-                __addon__.setSetting(id='subtitle_language', value="7")
-            elif index == 8:
-                __addon__.setSetting(id='subtitle_language', value="8")
-            elif index == 9:
-                __addon__.setSetting(id='subtitle_language', value="9")
-            elif index == 10:
-                __addon__.setSetting(id='subtitle_language', value="10")
+            else:
+                __addon__.setSetting(id='subtitle_language', value=str(index))
+                db.update_account_in_db(field='subtitle', data=str(index))
 
         elif controlID in [33009]:
             # Open bought videos
@@ -1550,7 +1524,7 @@ def open_keyboard(name, default_value=''):
 
     kbd = xbmc.Keyboard()
     kbd.setHeading(header)
-    xbmc.log('DEFAULT!\ntype - %s\nvalue - %s' % (type(default_value), default_value))
+    # xbmc.log('DEFAULT!\ntype - %s\nvalue - %s' % (type(default_value), default_value))
     if default_value:               # For xbmc 11, when None - Error!
         kbd.setDefault(default_value)
     if name == 'password':
@@ -1569,7 +1543,7 @@ def open_keyboard(name, default_value=''):
                 dialog = xbmcgui.Dialog()
                 dialog.ok(language(1059), language(1058))
                 return open_keyboard(name)
-        elif name != 'search' and name != 'certificate' and name != 'nickname':
+        elif name == 'login' or name == 'password':
             db.update_account_in_db(field=name, data=text)
 
         return text

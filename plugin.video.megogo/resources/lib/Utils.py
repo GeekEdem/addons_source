@@ -354,10 +354,10 @@ def get_language(value):
 
 
 def get_subtitle(value):
-    if value == 0:
+    if int(value) == 0:
         return language(400)
     else:
-        return language(int(value)+300)
+        return language((int(value)-1)+300)
 
 
 def get_ui_language():

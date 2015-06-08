@@ -258,13 +258,13 @@ class DataBase:
         return info
 
     # Write login and password to DB
-    def login_data_to_db(self, usr, pwd):
+    def login_data_to_db(self, usr, pwd, qual, lang, subt):
         if self.table_exist('account'):
             self.clear_table('account')
         else:
             self.create_login_table()
 
-        self.cu.execute("INSERT INTO account(id, login, password) VALUES (1, ?, ?)", (usr, base64.b64encode(pwd)))
+        self.cu.execute("INSERT INTO account(id, login, password, quality, audio_language, subtitle) VALUES (1, ?, ?, ?, ?, ?)", (usr, base64.b64encode(pwd), qual, lang, subt))
         self.c.commit()
         xbmc.log('[%s]: account was writen to db' % addon_name)
 
@@ -297,13 +297,14 @@ class DataBase:
         except:
             var = None
         try:
-            return {'login': var[1], 'password': base64.b64decode(var[2]), 'cookie': var[3], 'user_id': var[4], 'card_num': var[5], 'card_type': var[6]}
+            return {'login': var[1], 'password': base64.b64decode(var[2]), 'cookie': var[3], 'user_id': var[4],
+                    'card_num': var[5], 'card_type': var[6], 'quality': var[7], 'audio_language': var[8], 'subtitle': var[9]}
         except:
-            return {'login': '', 'password': '', 'cookie': '', 'user_id': '', 'card_num': '', 'card_type': ''}
+            return {'login': '', 'password': '', 'cookie': '', 'user_id': '', 'card_num': '', 'card_type': '', 'quality':'', 'audio_language': '', 'subtitle': ''}
 
     # Create Table
     def create_login_table(self):
-        self.cu.execute("CREATE TABLE account (id, login, password, cookie, user_id, card_num, card_type)")
+        self.cu.execute("CREATE TABLE account (id, login, password, cookie, user_id, card_num, card_type, quality, audio_language, subtitle)")
         self.c.commit()
         self.cu.execute("INSERT INTO account(id) VALUES (1)")
         self.c.commit()
