@@ -73,7 +73,7 @@ if getconfiguration():    # Get config from MEGOGO
     import Screens
     home = Screens.Homescreen('HomeScreen.xml', addon_path, win=splash)
     home.doModal()
-    # xbmc.log('!!! RETURN !!!')
+    xbmc.log('!!! RETURN TO START !!!')
     del home
 else:
     dialog = xbmcgui.Dialog()

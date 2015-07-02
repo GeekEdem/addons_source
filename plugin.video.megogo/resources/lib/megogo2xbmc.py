@@ -13,6 +13,12 @@ import urllib, time, urllib2, hashlib, os, re, base64, platform, datetime
 from sqlite import DataBase as DB
 from Utils import get_quality, get_language, get_subtitle, get_ui_language
 
+try:
+    import requests.packages.urllib3 as urllib3
+    urllib3.disable_warnings()
+except:
+    pass
+
 addon 			= xbmcaddon.Addon()
 language		= addon.getLocalizedString
 addon_path		= addon.getAddonInfo('path').decode('utf-8')
@@ -21,6 +27,11 @@ addon_author	= addon.getAddonInfo('author')
 addon_name		= addon.getAddonInfo('name')
 addon_version	= addon.getAddonInfo('version')
 unknown_person	= os.path.join(addon_path, 'resources', 'skins', 'Default', 'media', 'unknown_person.png')
+platform_version    = xbmc.getInfoLabel('System.BuildVersion').split(" ")[0]
+if int(platform_version.split(".")[0]) >= 14:
+    name = 'Kodi'
+else:
+    name = 'Xbmc'
 
 API_Private_Key_MEGOGO  = '63ee38849d'
 API_Public_Key_MEGOGO   = '_kodi_j1'
@@ -29,11 +40,13 @@ MEGOGO_URL              = 'http://megogo.net'
 PAY_URL                 = 'https://megogo.net/%s/billing/payu' % get_ui_language()
 PAY_VENDOR              = 'kodi-device'
 try:
-    UA                  = 'Kodi-%s' % platform.platform(aliased=0, terse=0)[:45]
+    UA                  = '%s/%s-%s' % (name, platform_version, platform.platform(aliased=0, terse=0)[:40])
 except:
     data                = os.uname()
-    UA                  = 'XBMC-%s-%s-%s' % (data[0], data[2], data[-1])
-    UA                  = UA[:45]
+    UA                  = '%s/%s-%s-%s-%s' % (name, platform_version, data[0], data[2], data[-1])
+    UA                  = UA[:50]
+
+xbmc.log('[%s]: UA - %s' % (addon_name, UA))
 
 slider_images_resolution = ['image_1920x300', 'image_1600x520', 'image_1350x510']
 
@@ -77,7 +90,7 @@ def Get_JSON_response(url, cache_days=7):
 # req_p1 used for keeping urlencoded parameters
 # req_p2 used for keeping md5-sign of parameters+API_Public_Key_MEGOGO, that send in end of each request 
 def GET(url, old_url=None, login=False, post=False, post_data=None):
-    #try:
+    try:
         dicParams = {}
         linkParams = []
         hashParams = []
@@ -125,7 +138,7 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
         # xbmc.log('[%s]: GET\nUSR - %s\nPASS - %s\nCookie - %s\nTarget - %s' % (addon_name, usr, pwd, cookie, target))
 
         if cookie and not old_url and not post:
-            request = requests.get(target, cookies=cookie)
+            request = requests.get(target, cookies=cookie, headers={'User-Agent': UA}, timeout=8)
             # xbmc.log('[%s]: GET cookie and not old_url, request - %s' % (addon_name, request))
             http = request.text
             # xbmc.log('[%s]: GET cookie and not old_url, http - %s' % (addon_name, http.encode('utf-8')))
@@ -138,7 +151,7 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
                 GET('auth/login?login=%s&password=%s&remember=1' % (usr, pwd), old_url=url, login=True)
             else:
                 session = requests.session()
-                request = session.get(target)
+                request = session.get(target, headers={'User-Agent': UA}, timeout=8)
                 http = request.text
                 if http.startswith('{"result":"ok"'):
                     cookies = requests.utils.dict_from_cookiejar(session.cookies)
@@ -154,26 +167,23 @@ def GET(url, old_url=None, login=False, post=False, post_data=None):
                     return None
 
         else:
-            try:
-                if post_data:
-                    post_data = urllib.urlencode(post_data)
-                request = urllib2.Request(url=target, data=post_data, headers={'User-Agent': UA})
-                request = urllib2.urlopen(request)
-                http = request.read()
-                request.close()
-                # xbmc.log('[%s]: GET else, http - %s' % (addon_name, http))
-                return http
-            except Exception as e:
-                xbmc.log('[%s]: Cannot get data from %s.\n%s' % (addon_name, target, e))
-                return None
-    #except Exception as e:
-    #    xbmc.log('[%s]: GET ERROR! %s' % (addon_name, e))
-    #    return None
+            if post_data:
+                post_data = urllib.urlencode(post_data)
+            request = urllib2.Request(url=target, data=post_data, headers={'User-Agent': UA})
+            request = urllib2.urlopen(request)
+            http = request.read()
+            request.close()
+            # xbmc.log('[%s]: GET else, http - %s' % (addon_name, http))
+            return http
+
+    except Exception as e:
+        xbmc.log('[%s]: Cannot get data from %s.\n%s' % (addon_name, target, e))
+        return None
 
 
-def checkLogin():
+def checkLogin(update=False):
     dic = a.get_login_from_db()
-    if dic['cookie'] and dic['card_num']:
+    if dic['cookie'] and not update:
         xbmc.log('[%s]: Log in success!' % (addon_name))
         return True
     else:
@@ -352,12 +362,6 @@ def HandleVideoResult(item):
     try: vote = item['vote']
     except: vote = ''
 
-    #try:
-    #    screenshots = []
-    #    for picture in item['screenshots']:
-    #        screenshots.append(picture['big'])
-    #except: screenshots = None
-
     try: quality = item['quality']
     except: quality = ''
 
@@ -420,7 +424,6 @@ def HandleVideoResult(item):
                 'crew'			: crew,
                 'favourite'		: favourite,
                 'vote'			: vote,
-                # 'screenshots'	: screenshots,
                 'quality'		: quality,
                 'season_list'	: season_list,
                 'available'		: available,
@@ -478,7 +481,6 @@ def get_price(tarif):
     month_price = None
     if tarif == 'svod':
         title = 'M+'
-    #if tarif == ''
 
     data = gettarification()
     if data:
@@ -508,7 +510,6 @@ def main_page(force):
         return None
 
 
-
 # Get video data
 def getvideodata(force, page, section):
     xbmc.log('[%s]: Try to get videodata' % addon_name)
@@ -518,7 +519,7 @@ def getvideodata(force, page, section):
         cache = 1
     if section == 'collection':
         data = Get_JSON_response('collection?id=%s' % page, cache_days=cache)
-    elif section == 'video':
+    else:
         data = Get_JSON_response('video/info?id=%s' % page, cache_days=cache)
     if data['result'] == 'ok':
         return data
@@ -540,6 +541,8 @@ def get_page(force, page, offset=0):
         data = GET(page)
         if data:
             data = simplejson.loads(data)
+        else:
+            return None
     else:
         data = Get_JSON_response(url, cache_days=cache)
     if data['result'] == 'ok':
@@ -558,6 +561,7 @@ def data_from_stream(video_id):
 
     data = GET('stream?video_id=%s' % video_id)
     if data:
+        # xbmc.log('DATA from stream!\n %s' % data)
         data = simplejson.loads(data)
         if data['result'] == 'ok':
             try:
@@ -660,7 +664,7 @@ def getcomments(video_id):
 
 # Add video to favorites
 def addFav(vid):
-    data = simplejson.loads(GET('user/favorite/add?video_id=%s' % vid))
+    data = Get_JSON_response('user/favorite/add?video_id=%s' % vid, cache_days=0)
     if data['result'] == 'ok':
         return True
     else:
@@ -669,7 +673,7 @@ def addFav(vid):
 
 # Delete video from favorites
 def delFav(vid):
-    data = simplejson.loads(GET('user/favorite/delete?video_id=%s' % vid))
+    data = Get_JSON_response('user/favorite/delete?video_id=%s' % vid, cache_days=0)
     if data['result'] == 'ok':
         return True
     else:
@@ -685,16 +689,13 @@ def send_certificate(certificate, vid, ptype, pay_id):
     else:
         return None
 
-    data = GET(link)
-    if data:
-        result = simplejson.loads(data)
-        # xbmc.log('CERTIFICATE RESULT! %s' % result)
-        if result['result'] == 'ok':
-            return {'message': result['data']['message'], 'code': result['data']['status_code']}
-        else:
-            return None
+    data = Get_JSON_response(link, cache_days=0)
+    # xbmc.log('CERTIFICATE RESULT! %s' % result)
+    if data['result'] == 'ok':
+        return {'message': data['data']['message'], 'code': data['data']['status_code']}
     else:
         return None
+
 
 
 # PAY functions
@@ -713,6 +714,8 @@ def send_payrequest(card_data, token):
         result = simplejson.loads(data)
         if result['result'] == 'done':
             # xbmc.log('SUCCESS PAYMENT! %s' % data)
+            if card_data['form[savecard]']:
+                checkLogin(True)
             return {'answer': 'success', 'message': result['message']}
         elif result['result'] == 'error':
             errors = [result['message']]

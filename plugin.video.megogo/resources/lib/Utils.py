@@ -362,7 +362,6 @@ def get_subtitle(value):
 
 def get_ui_language():
     index = get_language(addon.getSetting('language'))[-3:-1]
-    xbmc.log("[%s]: UI LANGUAGE - %s" % (addon_name, index))
     return index
 
 
@@ -391,8 +390,11 @@ def DelFromWindowStack(amount):
     if amount:
         inc = 0
         while inc < amount:
-            del windowstack[-1]
-            inc += 1
+            if len(windowstack) > 0:
+                del windowstack[-1]
+                inc += 1
+            else:
+                break
 
 
 def getids():

@@ -1,13 +1,21 @@
-v1.1.6
-- Fixed bug with Autoprolongation
-- Added Ukrainian localization
-- Fixed bug with changing quality, audio language or subtitle
+v1.1.7
+- Fixed bug with buy by certificate
+- All configuration is on DB
+- Changed login functions
+- Add support cards, what expired +10 years from now
+- Added real version and name of platform in requests headers
+- Fixed some bug when connection to internet is lost
+- Little bug fixes
 
 TODO:
 - Esc bug, when video playing
 - Closing addon on XBMC 11
 - TV view!
 
+v1.1.6
+- Fixed bug with Autoprolongation
+- Added Ukrainian localization
+- Fixed bug with changing quality, audio language or subtitle
 
 v1.1.5
 - Fixed bug with TV-payment
