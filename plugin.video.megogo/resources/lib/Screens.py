@@ -56,6 +56,28 @@ ProgramsID = db.get_category_from_db_by_name("'%s'" % language(1017))
 
 
 #####################################################################################################
+# ##################################	  BACK   SCREEN		####################################### #
+#####################################################################################################
+class Back(xbmcgui.WindowXMLDialog):
+
+    def __init__(self, *args, **kwargs):
+        self.splash = kwargs.get('splash', None)
+        xbmcgui.WindowXMLDialog.__init__(self)
+
+    def onInit(self):
+        if self.splash:
+            dialog = Homescreen('HomeScreen.xml', addon_path, win=self.splash)
+            dialog.doModal()
+            del dialog
+            self.close()
+        elif CountWindowStack > 0:
+            PopWindowStack(self)
+            self.close()
+        else:
+            self.close()
+
+
+#####################################################################################################
 # ##################################	  HOME   SCREEN		####################################### #
 #####################################################################################################
 class Homescreen(xbmcgui.WindowXMLDialog):
@@ -139,7 +161,7 @@ class Homescreen(xbmcgui.WindowXMLDialog):
                     dialog = xbmcgui.Dialog()
                     dialog.ok(language(1031), language(1032))
                     del dialog
-                PopWindowStack(self)
+                OpenAfterVideoEnd()
             return
 
         elif controlID in [501]:
@@ -274,16 +296,28 @@ class VideoList(xbmcgui.WindowXMLDialog):
             items = self.listitems
             self.getControl(500).reset()
             self.getControl(500).addItems(items)
+            if len(items) != 0:
+                self.window.setProperty("EMPTY", '')
+            else:
+                self.window.setProperty("EMPTY", 'True')
         elif control == 7012 and self.newpage.find('sort=add') == -1:
             self.newpage = "%s&sort=add" % self.page
             items = update_content(force=False, page=self.newpage, offset=self.offset)
             self.getControl(500).reset()
             self.getControl(500).addItems(items)
+            if len(items) != 0:
+                self.window.setProperty("EMPTY", '')
+            else:
+                self.window.setProperty("EMPTY", 'True')
         elif control == 7013 and self.newpage.find('sort=popular') == -1:
             self.newpage = "%s&sort=popular" % self.page
             items = update_content(force=False, page=self.newpage, offset=self.offset)
             self.getControl(500).reset()
             self.getControl(500).addItems(items)
+            if len(items) != 0:
+                self.window.setProperty("EMPTY", '')
+            else:
+                self.window.setProperty("EMPTY", 'True')
         # ###### TVList.xml ###### #
         elif control == 7014:
             pos = self.getControl(7014).getSelectedPosition()
@@ -293,6 +327,10 @@ class VideoList(xbmcgui.WindowXMLDialog):
                     if items['title'].encode('utf-8') == label:
                         self.getControl(500).reset()
                         self.getControl(500).addItems(items['channels'])
+                        if len(items['channels']) != 0:
+                            self.window.setProperty("EMPTY", '')
+                        else:
+                            self.window.setProperty("EMPTY", 'True')
                 self.newlabel = label
 
     def onAction(self, action):
@@ -334,7 +372,7 @@ class VideoList(xbmcgui.WindowXMLDialog):
                 purchase = self.getControl(controlID).getListItem(pos).getProperty("purchase_info")
                 poster = self.getControl(controlID).getListItem(pos).getProperty("poster")
                 open_tv_stream(video_id, purchase, poster)
-                PopWindowStack(self)
+                OpenAfterVideoEnd()
 
             elif video_type == 'video' and not self.page.startswith('collections'):
                 dialog = VideoInfo(u'VideoInfo.xml', addon_path, id=video_id)
@@ -494,7 +532,7 @@ class SeasonList(xbmcgui.WindowXMLDialog):
                 self.close()
                 self.movieplayer.play_item(link, listitem, subtitle)
                 self.movieplayer.WaitForVideoEnd()
-                PopWindowStack(self)
+                OpenAfterVideoEnd()
             else:
                 dialog = xbmcgui.Dialog()
                 dialog.ok(language(1031), language(1032))
@@ -544,7 +582,7 @@ class SeasonList(xbmcgui.WindowXMLDialog):
                 self.movieplayer.play_playlist(playlist, playlist.size())
                 self.movieplayer.WaitForVideoEnd()
             playlist.clear()
-            PopWindowStack(self)
+            OpenAfterVideoEnd()
 
 
 #####################################################################################################
@@ -781,7 +819,7 @@ class VideoInfo(xbmcgui.WindowXMLDialog):
                     xbmc.executebuiltin("Dialog.Close(busydialog)")
                     dialog = xbmcgui.Dialog()
                     dialog.ok(language(1031), language(1032))
-            PopWindowStack(self)
+            OpenAfterVideoEnd()
 
         elif controlID in [33012]:
             # ADDITIONAL INFO
@@ -1754,6 +1792,12 @@ def exit_to_main(window):
     window.close()
     DelWindowStack()
     home = Homescreen('HomeScreen.xml', addon_path)
+    home.doModal()
+    del home
+
+
+def OpenAfterVideoEnd():
+    home = Back('back.xml', addon_path)
     home.doModal()
     del home
 

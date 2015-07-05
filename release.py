@@ -37,5 +37,5 @@ def replace_version(version):
 		file_handle.close()
 	
 if __name__ == '__main__':
-	#make_release('2.0')
+	# make_release('2.0')
 	make_release('2.1.0')

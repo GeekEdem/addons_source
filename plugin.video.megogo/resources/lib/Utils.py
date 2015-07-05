@@ -397,6 +397,11 @@ def DelFromWindowStack(amount):
                 break
 
 
+def CountWindowStack():
+    global windowstack
+    return len(windowstack)
+
+
 def getids():
     if ids:
         return ids.pop()
@@ -438,10 +443,12 @@ class VideoPlayer(xbmc.Player):
             except Exception as e:
                 xbmc.log('[%s]: NOT KODI. SUBTITLE EXCEPTION: %s' % (addon_name, e))
             xbmc.log('SUBTITILE - %s' % subtitle)
+        xbmc.executebuiltin("Dialog.Close(all, true)")
         self.play(stream_url, listitem)
 
     def play_playlist(self, playlist, size, popstack=True):
         self.size = size
+        xbmc.executebuiltin("Dialog.Close(all, true)")
         self.play(playlist)
 
     def WaitForVideoEnd(self):

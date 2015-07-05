@@ -18,13 +18,8 @@ db = DataBase()
 
 xbmc.log('[%s]: Start plugin! Version: %s' % (addon_name, addon_version))
 
-# ##################################	  Start BACK	    ####################################### #
-back = xbmcgui.WindowXML('back.xml', addon_path)
-
 # ##################################	  Start Splash	    ####################################### #
 splash = xbmcgui.WindowXML('splash.xml', addon_path)
-back.show()
-time.sleep(0.01)
 splash.show()
 xbmc.executebuiltin("ActivateWindow(busydialog)")
 
@@ -48,6 +43,7 @@ if not usr and not pwd:
 else:
     db.login_data_to_db(usr, pwd, __addon__.getSetting('quality'), __addon__.getSetting('audio_language'), __addon__.getSetting('subtitle_language'))
 db.cookie_to_db("")
+xbmc.executebuiltin("Dialog.Close(busydialog)")
 
 # ##################################    CHECK NEW VERSION   ####################################### #
 # xbmc.log('[%s]: Trying to get new version...' % addon_name)
@@ -71,7 +67,7 @@ db.cookie_to_db("")
 # ##################################        START UI        ####################################### #
 if getconfiguration():    # Get config from MEGOGO
     import Screens
-    home = Screens.Homescreen('HomeScreen.xml', addon_path, win=splash)
+    home = Screens.Back('back.xml', addon_path, splash=splash)
     home.doModal()
     xbmc.log('!!! RETURN TO START !!!')
     del home
@@ -81,16 +77,10 @@ else:
     del dialog
     splash.close()
 
-xbmc.log('[%s]: TRY CLOSE APP!!!' % addon_name)
 # ##################################        CLOSE APP        ####################################### #
-back.close()
-
+xbmc.log('[%s]: TRY CLOSE APP!!!' % addon_name)
 dic = db.get_login_from_db()
 db.close_db()
 __addon__.setSetting(id='login', value=dic['login'])
 __addon__.setSetting(id='password', value=dic['password'])
-try:
-    xbmc.executebuiltin("Dialog.Close(busydialog)")
-except Exception as e:
-    xbmc.log('[%s]: ERROR closing busydialog! %s' % (addon_name, e))
 xbmc.log('[%s]: Close plugin. Version: %s' % (addon_name, addon_version))

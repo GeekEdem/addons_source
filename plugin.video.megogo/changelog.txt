@@ -1,3 +1,12 @@
+v1.1.8
+- Fixed minimize bug, when video is playing
+- Fixed bug with VideoList screens, when connection lost and found
+
+TODO:
+- Closing addon on XBMC 11
+- TV view!
+
+
 v1.1.7
 - Fixed bug with buy by certificate
 - All configuration is on DB
@@ -6,11 +15,6 @@ v1.1.7
 - Added real version and name of platform in requests headers
 - Fixed some bug when connection to internet is lost
 - Little bug fixes
-
-TODO:
-- Esc bug, when video playing
-- Closing addon on XBMC 11
-- TV view!
 
 v1.1.6
 - Fixed bug with Autoprolongation

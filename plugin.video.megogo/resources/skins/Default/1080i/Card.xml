@@ -252,7 +252,7 @@
             <control type="button" id="608">
                 <visible>IsEmpty(Window.Property(Prolongation))</visible>
                 <description> CARD REMEMBER CHECKBOX </description>
-                <posx>850</posx>
+                <posx>855</posx>
                 <posy>890</posy>
                 <width>300</width>
                 <height>100</height>
@@ -320,7 +320,7 @@
             <control type="button" id="608">
                 <visible>!IsEmpty(Window.Property(Prolongation))</visible>
                 <description> CARD REMEMBER CHECKBOX </description>
-                <posx>550</posx>
+                <posx>555</posx>
                 <posy>890</posy>
                 <width>300</width>
                 <height>100</height>
